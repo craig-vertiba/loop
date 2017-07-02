@@ -82,7 +82,7 @@
     // script in the list will be skipped.
 
     var scripts = [
-        {"name": "jQuery", "src": "https://code.jquery.com/jquery-3.2.1.slim.min.js", "custom_load": JQueryCustomLoad },
+        {"name": "jQuery", "src": "https://code.jquery.com/jquery-3.2.1.min.js", "custom_load": JQueryCustomLoad },
         // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
         // are loaded and that would otherwise refer to "jQuery" need to be modified to 
         // refer to "jQnroll".
