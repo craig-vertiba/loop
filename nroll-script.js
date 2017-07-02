@@ -86,7 +86,8 @@
         // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
         // are loaded and that would otherwise refer to "jQuery" need to be modified to 
         // refer to "jQnroll".
-        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
+//        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
+        {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
         // {"name": "Select2", "src": base_url + "select2.js"},
     ];
 
@@ -110,8 +111,8 @@
         // then load new copy and assign new copy to jQnroll namespace, then move existing
         // version back to jQuery namespace.  Otherwise, other page elements that depend
         // on the existing copy won't work.
-//        jQnroll = window.jQuery.noConflict();
-        jQuery = window.jQuery.noConflict();
+        jQnroll = window.jQuery.noConflict();
+//        jQuery = window.jQuery.noConflict();
 
         // Load starting with the second script (skip jQuery)
         CreateScriptTag(scripts[1].name, scripts[1].src);
@@ -257,8 +258,8 @@
         // we load jQuery in the CustomLoad function below and how we access it in the
         // document.ready call in main().
         // jQuery = window.jQuery.noConflict(true);
-//        jQnroll = window.jQuery.noConflict();
-        jQuery = window.jQuery.noConflict(true);
+        jQnroll = window.jQuery.noConflict();
+//        jQuery = window.jQuery.noConflict(true);
     }
     
     /* ---------------------------------------------------------------------------------
