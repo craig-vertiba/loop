@@ -8,7 +8,7 @@
 
 (function() {
     var all_scripts = document.getElementsByTagName('script');
-    var script_url;
+    var script_url = "https://craig-vertiba.github.io/nroll/";
     var scripts_counter;
     var base_url;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
