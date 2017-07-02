@@ -110,7 +110,8 @@
         // then load new copy and assign new copy to jQnroll namespace, then move existing
         // version back to jQuery namespace.  Otherwise, other page elements that depend
         // on the existing copy won't work.
-        jQnroll = window.jQuery.noConflict();
+//        jQnroll = window.jQuery.noConflict();
+        jQuery = window.jQuery.noConflict();
 
         // Load starting with the second script (skip jQuery)
         CreateScriptTag(scripts[1].name, scripts[1].src);
@@ -256,7 +257,8 @@
         // we load jQuery in the CustomLoad function below and how we access it in the
         // document.ready call in main().
         // jQuery = window.jQuery.noConflict(true);
-        jQnroll = window.jQuery.noConflict(true);
+//        jQnroll = window.jQuery.noConflict();
+        jQuery = window.jQuery.noConflict(true);
     }
     
     /* ---------------------------------------------------------------------------------
