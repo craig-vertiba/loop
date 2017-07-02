@@ -86,7 +86,7 @@
         // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
         // are loaded and that would otherwise refer to "jQuery" need to be modified to 
         // refer to "jQnroll".
-        // {"name": "Select2", "src": base_url + "select2.min.js"},
+        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
         // {"name": "Select2", "src": base_url + "select2.js"},
     ];
 
