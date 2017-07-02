@@ -8,7 +8,7 @@
 
 (function() {
     var all_scripts = document.getElementsByTagName('script');
-    var script_url;  // = "https://craig-vertiba.github.io/nroll/";
+    var script_url;
     var scripts_counter;
     var base_url;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
@@ -206,7 +206,7 @@
     function PreMain() {
         // Dynamically load the pre-requisite and local stylesheets
 
-        //AddStylesheet('cbw-reset', base_url + "cbwreset.css");
+        // AddStylesheet('cbw-reset', base_url + "cbwreset.css");
         // added reset styles to cbwidget.css
         // AddStylesheet('cbw-css-sel2', base_url + "select2.css");
         // AddStylesheet('cbw-css', base_url + "cbwidget.css");
@@ -215,7 +215,7 @@
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, as part of the process of determining the landing page or promotion id
-        // var params = getUrlVars();
+        var params = getUrlVars();
 
         // set the ReferringPath variable equal to blank.  This will be updated with a real param in
         // GetReferringPathAndCause if one exists, otherwise it ensures the param will be passed
@@ -368,25 +368,25 @@
 
     } // end main()
 
-    // // Get the query string parameters passed into this page
-    // function getUrlVars() {
+    // Get the query string parameters passed into this page
+    function getUrlVars() {
 
-    //     var vars = [], hash;
+        var vars = [], hash;
 
-    //     if (window.location.href.indexOf('?') >= 0) {
+        if (window.location.href.indexOf('?') >= 0) {
 
-    //         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 
-    //         for (var i=0; i < hashes.length; i++) {
+            for (var i=0; i < hashes.length; i++) {
 
-    //             hash = hashes[i].split('=');
-    //             vars.push(hash[0]);
-    //             vars[hash[0]] = hash[1];
-    //         }
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
 
-    //     }
-    //     return vars;
-    // }
+        }
+        return vars;
+    }
 
     /* ---------------------------------------------------------------------------------
      * AddStylesheet(id, href)
@@ -397,19 +397,19 @@
      * @id   = id attribute to use on the generated link tag
      * @href = href (source of css file) to use for generated link tag
      * --------------------------------------------------------------------------------- */
-    // function AddStylesheet(id, href) {
+    function AddStylesheet(id, href) {
 
-    //     var head = document.getElementsByTagName('head')[0];
-    //     var link = document.createElement('link');
+        var head = document.getElementsByTagName('head')[0];
+        var link = document.createElement('link');
 
-    //     link.id = id;
-    //     link.rel = 'stylesheet';
-    //     link.type = 'text/css';
-    //     link.href = href;
-    //     link.media = 'all';
+        link.id = id;
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = href;
+        link.media = 'all';
         
-    //     head.appendChild(link);
-    // }
+        head.appendChild(link);
+    }
 
     // function GetCookie(check_name) {
       
@@ -514,5 +514,7 @@
     //         FilteredParamString = "";
     //     }
     // }
+
+})(); // immediately call our anonymous function here...
 
 })(); // immediately call our anonymous function here...
