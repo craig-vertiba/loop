@@ -209,6 +209,7 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         // AddStylesheet('cbw-reset', base_url + "cbwreset.css");
+        AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
         // added reset styles to cbwidget.css
         // AddStylesheet('cbw-css-sel2', base_url + "select2.css");
         // AddStylesheet('cbw-css', base_url + "cbwidget.css");
