@@ -215,7 +215,7 @@
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, as part of the process of determining the landing page or promotion id
-        var params = getUrlVars();
+        // var params = getUrlVars();
 
         // set the ReferringPath variable equal to blank.  This will be updated with a real param in
         // GetReferringPathAndCause if one exists, otherwise it ensures the param will be passed
