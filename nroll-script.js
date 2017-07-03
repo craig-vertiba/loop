@@ -209,8 +209,8 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         // AddStylesheet('cbw-reset', base_url + "cbwreset.css");
-        AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        AddStylesheet('bootstrap', base_url + "custom.css");
+        // AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
+        AddStylesheet('custom', base_url + "custom.css");
         // added reset styles to cbwidget.css
         // AddStylesheet('cbw-css-sel2', base_url + "select2.css");
         // AddStylesheet('cbw-css', base_url + "cbwidget.css");
@@ -365,6 +365,26 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html');
+            var surveyJSON = { title: "Tell us, what technologies do you use?", pages: [
+              { name:"page1", questions: [ 
+                  { type: "radiogroup", choices: [ "Yes", "No" ], isRequired: true, name: "frameworkUsing",title: "Do you use any front-end framework like Bootstrap?" },
+                  { type: "checkbox", choices: ["Bootstrap","Foundation"], hasOther: true, isRequired: true, name: "framework", title: "What front-end framework do you use?", visibleIf: "{frameworkUsing} = 'Yes'" }
+               ]},
+              { name: "page2", questions: [
+                { type: "radiogroup", choices: ["Yes","No"],isRequired: true, name: "mvvmUsing", title: "Do you use any MVVM framework?" },
+                { type: "checkbox", choices: [ "AngularJS", "KnockoutJS", "React" ], hasOther: true, isRequired: true, name: "mvvm", title: "What MVVM framework do you use?", visibleIf: "{mvvmUsing} = 'Yes'" } ] },
+              { name: "page3",questions: [
+                { type: "comment", name: "about", title: "Please tell us about your main requirements for Survey library" } ] }
+             ]
+            };
+            Survey.Survey.cssType = "bootstrap";
+            var survey = new Survey.Model(surveyJSON);
+            $("#surveyContainer").SurveyWindow({
+                model:survey,
+                onComplete:sendDataToServer
+            });
+
+
 
        }); // end jquery.documentready
 
