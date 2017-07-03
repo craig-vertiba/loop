@@ -372,7 +372,7 @@
             $.get(base_url + "survey.json", function(surveyJSON) {
 
             },'json');
-            console(surveyJSON);
+            console.log(surveyJSON);
 
 
 
