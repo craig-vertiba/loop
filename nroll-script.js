@@ -382,7 +382,7 @@
             };
             Survey.Survey.cssType = "bootstrap";
             var survey = new Survey.Model(surveyJSON);
-            $("#surveyContainer").SurveyWindow({
+            $("#surveyElement").SurveyWindow({
                 model:survey
             });
 
