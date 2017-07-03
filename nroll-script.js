@@ -369,9 +369,9 @@
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html');
             var surveyJSON;
-            $.get(base_url + "survey.json", function(surveyJSON) {
+            $.get(base_url + "surveyjson.html", function(surveyJSON) {
 
-            },'json');
+            });
             console.log(surveyJSON);
 
 
