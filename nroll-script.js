@@ -371,7 +371,7 @@
             // var surveydiv = $("#surveyScript");
             // surveydiv.load(base_url+'survey.js');
 
-            $.when(div.load(base_url+'content.html')).done(function(a,b){
+            $.when(div.load(base_url+'content.html')).done(function(a){
                 var surveydiv = $("#surveyScript");
                 surveydiv.load(base_url+'survey.js.html');
             })
