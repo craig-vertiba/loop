@@ -380,8 +380,7 @@
             Survey.Survey.cssType = "bootstrap";
             var survey = new Survey.Model(surveyJSON);
             $("#surveyContainer").SurveyWindow({
-                model:survey,
-                onComplete:sendDataToServer
+                model:survey
             });
 
 
