@@ -18,11 +18,11 @@
     // var param4;  // fourth parameter from script_url;
  
     /*
-     * iterate through the loaded scripts looking for the current one (must specify id on the tag for this to work)
+     * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
      * Once we find the current script we get its source and use the source as the base for finding other assets
-     * This only matters if other assets (css, html, etc) are hosted in the same place as this script
+     * This only matters if other assets (css, html, etc.) are hosted in the same place as this script
      * if not, need to identify the source of the other assets in a different way.
-     * an alternative implementation would be to look for the scripts filename in the title which would fail if we were to
+     * an alternative implementation would be to look for this script's filename in the title which would fail if we were to
      * change the name of the script
     **/
 
@@ -86,7 +86,7 @@
         // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
         // are loaded and that would otherwise refer to "jQuery" need to be modified to 
         // refer to "jQnroll".
-//        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
+        // Note that the following SurveyJS script has been customized to use jQnroll
         {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
         // {"name": "Select2", "src": base_url + "select2.js"},
     ];
@@ -112,7 +112,6 @@
         // version back to jQuery namespace.  Otherwise, other page elements that depend
         // on the existing copy won't work.
         jQnroll = window.jQuery.noConflict();
-//        jQuery = window.jQuery.noConflict();
 
         // Load starting with the second script (skip jQuery)
         CreateScriptTag(scripts[1].name, scripts[1].src);
@@ -253,14 +252,13 @@
      * in the scripts array.
      *************************************************************************/
     function JQueryCustomLoad(params) {
-        // IMPORTANT: the Select2 js files (select2.js and select2.min.js) have been modified
+        // IMPORTANT: Some JS files may have been modified
         // from thier original versions.  Instead of looking for the alias "jQuery", they
         // look for an instance of jQuery loaded under the alias "jQnroll", which is how
         // we load jQuery in the CustomLoad function below and how we access it in the
         // document.ready call in main().
         // jQuery = window.jQuery.noConflict(true);
         jQnroll = window.jQuery.noConflict();
-//        jQuery = window.jQuery.noConflict(true);
     }
     
     /* ---------------------------------------------------------------------------------
@@ -341,7 +339,7 @@
     /* --------------------------------------------------------------------------------------------------------
      * main()
      * --------------------------------------------------------------------------------------------------------
-     * This is the main function that will perform most of the functionality of the cause widget creation
+     * This is the main function that will perform most of the functionality of the nroll plugin.
      * It will *only* be called after the necessary scripts have been loaded in the prescribed order in the
      * main anonymous function. It is called by the PreMain script which is called by the load handler 
      * after the last script is loaded
@@ -354,7 +352,7 @@
          * This is the equivalent of the typical $(document).ready(function() {}) call that is called when 
          * jQuery indicates that the page is 'ready'. Put all code that requires jQuery in here!
          * -------------------------------------------------------------------------------------------------------- */
-        // IMPORTANT: the Select2 js files (select2.js and select2.min.js) have been modified
+        // IMPORTANT: JS files that depend on jQuery have been modified
         // from thier original versions.  Instead of looking for the alias "jQuery", they
         // look for an instance of jQuery loaded under the alias "jQnroll", which is how
         // we load jQuery in the CustomLoad function above and how we access it in the
@@ -415,74 +413,74 @@
         head.appendChild(link);
     }
 
-    // function GetCookie(check_name) {
+    function GetCookie(check_name) {
       
-    //   // first we'll split this cookie up into name/value pairs
-    //   // note: document.cookie only returns name=value, not the other components
-    //   var a_all_cookies = document.cookie.split( ';' );
-    //   var a_temp_cookie = '';
-    //   var cookie_name = '';
-    //   var cookie_value = '';
-    //   var b_cookie_found = false; // set boolean t/f default f
+      // first we'll split this cookie up into name/value pairs
+      // note: document.cookie only returns name=value, not the other components
+      var a_all_cookies = document.cookie.split( ';' );
+      var a_temp_cookie = '';
+      var cookie_name = '';
+      var cookie_value = '';
+      var b_cookie_found = false; // set boolean t/f default f
 
-    //   for ( i = 0; i < a_all_cookies.length; i++ )
-    //   {
-    //     // now we'll split apart each name=value pair
-    //     a_temp_cookie = a_all_cookies[i].split( '=' );
+      for ( i = 0; i < a_all_cookies.length; i++ )
+      {
+        // now we'll split apart each name=value pair
+        a_temp_cookie = a_all_cookies[i].split( '=' );
 
-    //     // and trim left/right whitespace while we're at it
-    //     cookie_name = a_temp_cookie[0].replace(/^\s+|\s+$/g, '');
+        // and trim left/right whitespace while we're at it
+        cookie_name = a_temp_cookie[0].replace(/^\s+|\s+$/g, '');
 
-    //     // if the extracted name matches passed check_name
-    //     if ( cookie_name == check_name )
-    //     {
-    //       b_cookie_found = true;
-    //       // we need to handle case where cookie has no value but exists (no = sign, that is):
-    //       if ( a_temp_cookie.length > 1 )
-    //       {
-    //         cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
-    //       }
-    //       // note that in cases where cookie is initialized but no value, null is returned
-    //       return cookie_value;
-    //       break;
-    //     }
-    //     a_temp_cookie = null;
-    //     cookie_name = '';
-    //   }
-    //   if ( !b_cookie_found )
-    //   {
-    //     return null;
-    //   }
-    // }
+        // if the extracted name matches passed check_name
+        if ( cookie_name == check_name )
+        {
+          b_cookie_found = true;
+          // we need to handle case where cookie has no value but exists (no = sign, that is):
+          if ( a_temp_cookie.length > 1 )
+          {
+            cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
+          }
+          // note that in cases where cookie is initialized but no value, null is returned
+          return cookie_value;
+          break;
+        }
+        a_temp_cookie = null;
+        cookie_name = '';
+      }
+      if ( !b_cookie_found )
+      {
+        return null;
+      }
+    }
 
-    // function SetCookie(name, value, expires, path, domain, secure )
-    // {
-    //   // set time, it's in milliseconds
-    //   var today = new Date();
+    function SetCookie(name, value, expires, path, domain, secure )
+    {
+      // set time, it's in milliseconds
+      var today = new Date();
 
-    //   today.setTime(today.getTime());
+      today.setTime(today.getTime());
 
-    //   /* expires in 'expires' minutes */
-    //   if (expires) {
-    //     expires = expires * 1000 * 60;
-    //   }
+      /* expires in 'expires' minutes */
+      if (expires) {
+        expires = expires * 1000 * 60;
+      }
       
-    //   var expires_date = new Date(today.getTime() + (expires));
+      var expires_date = new Date(today.getTime() + (expires));
 
-    //   document.cookie = name + "=" + escape(value) +
-    //   ((expires) ? ";expires=" + expires_date.toGMTString() : "") +
-    //   ((path) ? ";path=" + path : "") +
-    //   ((domain) ? ";domain=" + domain : "") +
-    //   ((secure) ? ";secure" : "");
-    // }
+      document.cookie = name + "=" + escape(value) +
+      ((expires) ? ";expires=" + expires_date.toGMTString() : "") +
+      ((path) ? ";path=" + path : "") +
+      ((domain) ? ";domain=" + domain : "") +
+      ((secure) ? ";secure" : "");
+    }
 
-    // // this deletes the cookie when called
-    // function DeleteCookie( name, path, domain ) {
-    //   if ( Get_Cookie( name ) ) document.cookie = name + "=" +
-    //   ( ( path ) ? ";path=" + path : "") +
-    //   ( ( domain ) ? ";domain=" + domain : "" ) +
-    //   ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
-    // }
+    // this deletes the cookie when called
+    function DeleteCookie( name, path, domain ) {
+      if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+      ( ( path ) ? ";path=" + path : "") +
+      ( ( domain ) ? ";domain=" + domain : "" ) +
+      ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+    }
 
     /* ---------------------------------------------------------------------------------
      * GetReferringPathAndCause(params)
