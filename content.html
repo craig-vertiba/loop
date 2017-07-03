@@ -9,23 +9,26 @@
     </style>
   </head>
   <body>
-    <div id="surveyElement"></div>
+    <div id="surveyContainer"></div>
     <div id="surveyResult"></div>
     <script>
+      var surveyJSON = { title: "Tell us, what technologies do you use?", pages: [
+  { name:"page1", questions: [ 
+      { type: "radiogroup", choices: [ "Yes", "No" ], isRequired: true, name: "frameworkUsing",title: "Do you use any front-end framework like Bootstrap?" },
+      { type: "checkbox", choices: ["Bootstrap","Foundation"], hasOther: true, isRequired: true, name: "framework", title: "What front-end framework do you use?", visibleIf: "{frameworkUsing} = 'Yes'" }
+   ]},
+  { name: "page2", questions: [
+    { type: "radiogroup", choices: ["Yes","No"],isRequired: true, name: "mvvmUsing", title: "Do you use any MVVM framework?" },
+    { type: "checkbox", choices: [ "AngularJS", "KnockoutJS", "React" ], hasOther: true, isRequired: true, name: "mvvm", title: "What MVVM framework do you use?", visibleIf: "{mvvmUsing} = 'Yes'" } ] },
+  { name: "page3",questions: [
+    { type: "comment", name: "about", title: "Please tell us about your main requirements for Survey library" } ] }
+ ]
+}
       Survey.Survey.cssType = "bootstrap";
-      Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-
-      window.survey = new Survey.Model( { questions: [
-           {name:"name", type:"text", title: "Please enter your name:", placeHolder:"Jon Snow", isRequired: true},
-           {name:"birthdate", type:"text", inputType:"date", title: "Your birthdate:", isRequired: true},
-           {name:"color", type:"text", inputType:"color", title: "Your favorite color:"},
-           {name:"email", type:"text", inputType:"email", title: "Your e-mail:", placeHolder:"jon.snow@nightwatch.org", isRequired: true, validators: [{type:"email"}]}
-      ]});
-      survey.onComplete.add(function(result) {
-	      document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
+      var survey = new Survey.Model(surveyJSON);
+      $("#surveyContainer").Survey({
+          model:survey
       });
-
-      $("#surveyElement").Survey({model:survey});
     </script>
     <h3>My Google Maps Demo</h3>
     <div id="map"></div>
