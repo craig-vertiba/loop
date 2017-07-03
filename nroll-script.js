@@ -88,7 +88,8 @@
         // refer to "jQnroll".
         // Note that the following SurveyJS script has been customized to use jQnroll
         {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
-        // {"name": "Select2", "src": base_url + "select2.js"},
+        {"name": "Custom", "src": base_url + "custom.js"},
+        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&callback=initMap"},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
