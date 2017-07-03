@@ -373,7 +373,7 @@
             $.getJSON( base_url + "surveyjson.html",function(data) {
                 console.log("Success");
                 console.log(data);
-            })
+            });
 
 
 
