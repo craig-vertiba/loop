@@ -82,12 +82,14 @@
     // script in the list will be skipped.
 
     var scripts = [
-        {"name": "jQuery", "src": "https://code.jquery.com/jquery-3.2.1.min.js", "custom_load": JQueryCustomLoad },
+        // {"name": "jQuery", "src": "https://code.jquery.com/jquery-3.2.1.min.js", "custom_load": JQueryCustomLoad },
+        {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
         // are loaded and that would otherwise refer to "jQuery" need to be modified to 
         // refer to "jQnroll".
         // Note that the following SurveyJS script has been customized to use jQnroll
-        {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
+//        {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
+        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
         {"name": "Custom", "src": base_url + "custom.js"},
         //{"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc"},
     ];
@@ -112,7 +114,8 @@
         // then load new copy and assign new copy to jQnroll namespace, then move existing
         // version back to jQuery namespace.  Otherwise, other page elements that depend
         // on the existing copy won't work.
-        jQnroll = window.jQuery.noConflict();
+//         jQnroll = window.jQuery.noConflict();
+        jQuery = window.jQuery.noConflict();
 
         // Load starting with the second script (skip jQuery)
         CreateScriptTag(scripts[1].name, scripts[1].src);
@@ -209,7 +212,7 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         // AddStylesheet('cbw-reset', base_url + "cbwreset.css");
-        // AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
+        AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
         AddStylesheet('custom', base_url + "custom.css");
         // added reset styles to cbwidget.css
         // AddStylesheet('cbw-css-sel2', base_url + "select2.css");
@@ -259,8 +262,8 @@
         // look for an instance of jQuery loaded under the alias "jQnroll", which is how
         // we load jQuery in the CustomLoad function below and how we access it in the
         // document.ready call in main().
-        // jQuery = window.jQuery.noConflict(true);
-        jQnroll = window.jQuery.noConflict();
+        jQuery = window.jQuery.noConflict(true);
+//         jQnroll = window.jQuery.noConflict();
     }
     
     /* ---------------------------------------------------------------------------------
@@ -359,29 +362,29 @@
         // look for an instance of jQuery loaded under the alias "jQnroll", which is how
         // we load jQuery in the CustomLoad function above and how we access it in the
         // document.ready call in main() that follows.
-        jQnroll(document).ready(function($) {
-        //jQuery(document).ready(function($) {
+//         jQnroll(document).ready(function($) {
+        jQuery(document).ready(function($) {
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html');
-            // var surveyJSON = { title: "Tell us, what technologies do you use?", pages: [
-            //   { name:"page1", questions: [ 
-            //       { type: "radiogroup", choices: [ "Yes", "No" ], isRequired: true, name: "frameworkUsing",title: "Do you use any front-end framework like Bootstrap?" },
-            //       { type: "checkbox", choices: ["Bootstrap","Foundation"], hasOther: true, isRequired: true, name: "framework", title: "What front-end framework do you use?", visibleIf: "{frameworkUsing} = 'Yes'" }
-            //    ]},
-            //   { name: "page2", questions: [
-            //     { type: "radiogroup", choices: ["Yes","No"],isRequired: true, name: "mvvmUsing", title: "Do you use any MVVM framework?" },
-            //     { type: "checkbox", choices: [ "AngularJS", "KnockoutJS", "React" ], hasOther: true, isRequired: true, name: "mvvm", title: "What MVVM framework do you use?", visibleIf: "{mvvmUsing} = 'Yes'" } ] },
-            //   { name: "page3",questions: [
-            //     { type: "comment", name: "about", title: "Please tell us about your main requirements for Survey library" } ] }
-            //  ]
-            // };
-            // Survey.Survey.cssType = "bootstrap";
-            // var survey = new Survey.Model(surveyJSON);
-            // $("#surveyContainer").SurveyWindow({
-            //     model:survey
-            // });
+            var surveyJSON = { title: "Tell us, what technologies do you use?", pages: [
+              { name:"page1", questions: [ 
+                  { type: "radiogroup", choices: [ "Yes", "No" ], isRequired: true, name: "frameworkUsing",title: "Do you use any front-end framework like Bootstrap?" },
+                  { type: "checkbox", choices: ["Bootstrap","Foundation"], hasOther: true, isRequired: true, name: "framework", title: "What front-end framework do you use?", visibleIf: "{frameworkUsing} = 'Yes'" }
+               ]},
+              { name: "page2", questions: [
+                { type: "radiogroup", choices: ["Yes","No"],isRequired: true, name: "mvvmUsing", title: "Do you use any MVVM framework?" },
+                { type: "checkbox", choices: [ "AngularJS", "KnockoutJS", "React" ], hasOther: true, isRequired: true, name: "mvvm", title: "What MVVM framework do you use?", visibleIf: "{mvvmUsing} = 'Yes'" } ] },
+              { name: "page3",questions: [
+                { type: "comment", name: "about", title: "Please tell us about your main requirements for Survey library" } ] }
+             ]
+            };
+            Survey.Survey.cssType = "bootstrap";
+            var survey = new Survey.Model(surveyJSON);
+            $("#surveyContainer").SurveyWindow({
+                model:survey
+            });
 
 
 
