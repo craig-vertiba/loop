@@ -24,7 +24,3 @@ window.survey = new Survey.Model( { questions: [
 survey.onComplete.add(function(result) {
 	document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
 });
-
-
-$("#surveyElement").Survey({model:survey});
-
