@@ -89,7 +89,7 @@
         // Note that the following SurveyJS script has been customized to use jQnroll
         {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
         {"name": "Custom", "src": base_url + "custom.js"},
-        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&callback=initMap"},
+        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc"},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
@@ -364,6 +364,7 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html');
+            initMap();
 
        }); // end jquery.documentready
 
