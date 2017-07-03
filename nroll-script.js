@@ -367,9 +367,14 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            div.load(base_url+'content.html');
-            var surveydiv = $("#surveyScript");
-            surveydiv.load(base_url+'survey.js');
+            // div.load(base_url+'content.html');
+            // var surveydiv = $("#surveyScript");
+            // surveydiv.load(base_url+'survey.js');
+
+            $.when(div.load(base_url+'content.html')).done(function(a,b){
+                var surveydiv = $("#surveyScript");
+                surveydiv.load(base_url+'survey.js');
+            })
 
        }); // end jquery.documentready
 
