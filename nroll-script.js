@@ -369,10 +369,13 @@
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html');
             var surveyJSON;
-            $.get(base_url + "surveyjson.html", function(surveyJSON) {
 
-            });
-            console.log(surveyJSON);
+            $.getJSON( base_url + "surveyjson.html",function(data) {
+                console.log("Success");
+                console.log(data);
+            })
+
+
 
 
 
