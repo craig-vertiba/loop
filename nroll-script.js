@@ -373,7 +373,7 @@
 
             $.when(div.load(base_url+'content.html')).done(function(a,b){
                 var surveydiv = $("#surveyScript");
-                surveydiv.load(base_url+'survey.js');
+                surveydiv.load(base_url+'survey.js.html');
             })
 
        }); // end jquery.documentready
