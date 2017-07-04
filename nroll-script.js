@@ -369,7 +369,12 @@
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html', function() {
                 var surveydiv = $("#surveyScript");
-                surveydiv.load(base_url+'survey.js.html');
+                surveydiv.append('<script>var surveyJSON = ');
+                $.get(base_url+'surveyJSON.html', function(data) {
+                    surveydiv.html(data);
+                    surveydiv.load(base_url+'survey.js1.html');
+                });
+//                surveydiv.load(base_url+'survey.js.html');
             });
             
        }); // end jquery.documentready
