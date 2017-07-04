@@ -374,12 +374,13 @@
 
                 $.get(base_url+'surveyJSON.html', function(data) {
                     var surveyJSON = data;
+                    Survey.Survey.cssType = "bootstrap";
+                    var survey = new Survey.Model(surveyJSON);
+                    $("#surveyElement").Survey({
+                        model: survey
+                    });
                 });
-  Survey.Survey.cssType = "bootstrap";
-  var survey = new Survey.Model(surveyJSON);
-  $("#surveyElement").Survey({
-    model: survey
-  });
+
             });
             
        }); // end jquery.documentready
