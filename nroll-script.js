@@ -378,7 +378,7 @@
                     document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                 });
                 $("#surveyElement").Survey({
-                    model: survey
+                    model: survey,
                     data: data
                 });
 
