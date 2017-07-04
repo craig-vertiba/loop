@@ -374,6 +374,7 @@
 
                 $.get(base_url+'surveyJSON.html', function(data) {
                     var surveyJSON = data;
+                    console.log(surveyJSON);
                     Survey.Survey.cssType = "bootstrap";
                     var survey = new Survey.Model(surveyJSON);
                     $("#surveyElement").Survey({
