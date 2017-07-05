@@ -9,7 +9,19 @@
     color: #fff;
 }
 
-/*.panel-footer {
+.panel-footer {
     text-align: right;
     background-color: #fff;
-}*/
+}
+
+.form-inline .checkbox input[type="checkbox"], .form-inline .radio input[type="radio"] {
+    display: none;
+}
+
+.form-inline .checkbox label, .form-inline .radio label {
+    background-color: #6b62bd;
+    color: white;
+    padding: 5px 20px 5px 15px;
+    line-height: 2;
+    border-radius: 30px;
+}
