@@ -25,3 +25,13 @@
     line-height: 2;
     border-radius: 30px;
 }
+
+.panel-body {
+    text-align: center;
+    width: 60%;
+    padding-left: 40%;
+}
+
+.panel-body h5 {
+    font-size: 20px;
+}
