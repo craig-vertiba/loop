@@ -109,12 +109,12 @@
 
     //Start Loading Scripts
 
-    if (window.jQuery === undefined || window.jQuery.fn.jquery != '3.2.1') {
+//    if (window.jQuery === undefined || window.jQuery.fn.jquery != '3.2.1') {
 
         // Load our version of jQuery and start chain here...
         CreateScriptTag(scripts[0].name, scripts[0].src);   
 
-    } else {
+//    } else {
 
         // Version of jQuery already loaded is fine
         // Change alias to jQnroll as that is what main() and other scripts now need.
@@ -123,11 +123,11 @@
         // version back to jQuery namespace.  Otherwise, other page elements that depend
         // on the existing copy won't work.
 //         jQnroll = window.jQuery.noConflict();
-        jQuery = window.jQuery.noConflict();
+//        jQuery = window.jQuery.noConflict();
 
         // Load starting with the second script (skip jQuery)
-        CreateScriptTag(scripts[1].name, scripts[1].src);
-    }
+//        CreateScriptTag(scripts[1].name, scripts[1].src);
+//    }
 
 
     /* ----------------------------------------------------------------------- 
@@ -182,10 +182,10 @@
         // At the moment, this is only used to change the namespace and set the no-conflict property
         // for jQuery.
 
-        if (scr.custom_load) {
+//        if (scr.custom_load) {
             
-            scr.custom_load.call(params);
-        }
+//            scr.custom_load.call(params);
+//        }
 
         // Now advance the scripts_counter
 
@@ -264,15 +264,15 @@
      * ScriptLoadHandler due to the custom_load action on the script object
      * in the scripts array.
      *************************************************************************/
-    function JQueryCustomLoad(params) {
+//    function JQueryCustomLoad(params) {
         // IMPORTANT: Some JS files may have been modified
         // from thier original versions.  Instead of looking for the alias "jQuery", they
         // look for an instance of jQuery loaded under the alias "jQnroll", which is how
         // we load jQuery in the CustomLoad function below and how we access it in the
         // document.ready call in main().
-        jQuery = window.jQuery.noConflict(true);
+//        jQuery = window.jQuery.noConflict(true);
 //         jQnroll = window.jQuery.noConflict();
-    }
+//    }
     
     /* ---------------------------------------------------------------------------------
      * ValidateParam1(position)
