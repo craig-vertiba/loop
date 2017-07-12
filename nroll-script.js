@@ -1,4 +1,19 @@
 /*
+ * Here is the script that gets added to the body of the page calling this plugin:
+    <script>
+        (function() {
+            var param1 = 'param1_value';
+            var param2 = 'param2_value';
+            var param3 = 'param3_value';
+            var param4 = 'param4_value';
+            var params = '?param1=' + param1 + '&param2=' + param2 + '&param3=' + param3 + '&param4=' + param4;
+            var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
+            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
+        }) ();
+    </script>
+ **/
+/*
  * nRoll plugin Scripts
  * ---------------------------
  * Scripts here are responsible for loading and controlling the nRoll plugin
@@ -36,9 +51,9 @@
     // For the moment, this is the prefix used for retrieving all plugin assets
     base_url  = script_url.substring(0,script_url.lastIndexOf("/") + 1);
 
-    // Following gets the url to the assets.  May need to use this if assets are in a different location
-    // than the nroll script
-    // This is the prefix used for all api calls
+    // Following gets the  base url of this script's hosting location.  May need to use this if other assets
+    // are hosted at the same place.
+    //
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
@@ -77,21 +92,14 @@
 
     // Chain load the scripts here in the order listed below...
     // when the last script in the chain is loaded, main() will be called
-    // IMPORTANT: jQuery must be the first script in the list!!!!  If it is not
-    // and there is a copy of jQuery 3.2.1 already loaded, the first
-    // script in the list will be skipped.
 
     var scripts = [
-        // {"name": "jQuery", "src": "https://code.jquery.com/jquery-3.2.1.min.js", "custom_load": JQueryCustomLoad },
+        // Loads the most current version of jQuery.  If this plugin is to be used in third party websites
+        // where older versions of jQuery are already loaded and are required, will need to modify this
+        // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
-        // IMPORTANT: jQuery will be loaded into the custom alias "jQnroll" below.  All scripts that
-        // are loaded and that would otherwise refer to "jQuery" need to be modified to 
-        // refer to "jQnroll".
-        // Note that the following SurveyJS script has been customized to use jQnroll
-//        {"name": "SurveyJS", "src": base_url + "survey-0.12.18-custom.jquery.js"},
-        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.18/survey.jquery.js"},
+        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
         {"name": "Custom", "src": base_url + "custom.js"},
-        //{"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc"},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
