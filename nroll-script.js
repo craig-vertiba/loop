@@ -109,26 +109,7 @@
 
     //Start Loading Scripts
 
-//    if (window.jQuery === undefined || window.jQuery.fn.jquery != '3.2.1') {
-
-        // Load our version of jQuery and start chain here...
-        CreateScriptTag(scripts[0].name, scripts[0].src);   
-
-//    } else {
-
-        // Version of jQuery already loaded is fine
-        // Change alias to jQnroll as that is what main() and other scripts now need.
-        // This needs to be fixed - need to move existing copy of jQuery to a new namespace,
-        // then load new copy and assign new copy to jQnroll namespace, then move existing
-        // version back to jQuery namespace.  Otherwise, other page elements that depend
-        // on the existing copy won't work.
-//         jQnroll = window.jQuery.noConflict();
-//        jQuery = window.jQuery.noConflict();
-
-        // Load starting with the second script (skip jQuery)
-//        CreateScriptTag(scripts[1].name, scripts[1].src);
-//    }
-
+    CreateScriptTag(scripts[0].name, scripts[0].src);   
 
     /* ----------------------------------------------------------------------- 
      * CreateScriptTag
@@ -177,17 +158,7 @@
 
         var scr = scripts[scripts_counter];
 
-        // Check to see if the custom_load attribute was set on the last script
-        // to be loaded, and if it was, call the function that is passed in.
-        // At the moment, this is only used to change the namespace and set the no-conflict property
-        // for jQuery.
-
-//        if (scr.custom_load) {
-            
-//            scr.custom_load.call(params);
-//        }
-
-        // Now advance the scripts_counter
+        // Advance the scripts_counter
 
         scripts_counter++;
 
@@ -219,61 +190,16 @@
     function PreMain() {
         // Dynamically load the pre-requisite and local stylesheets
 
-        // AddStylesheet('cbw-reset', base_url + "cbwreset.css");
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
         AddStylesheet('custom', base_url + "custom.css");
-        // added reset styles to cbwidget.css
-        // AddStylesheet('cbw-css-sel2', base_url + "select2.css");
-        // AddStylesheet('cbw-css', base_url + "cbwidget.css");
-        // AddStylesheet('cbw-googlefonts', "https://fonts.googleapis.com/css?family=Montserrat:400,700");
-        // AddStylesheet('font-awesome', "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 
         // get the parameters passed into the page so that we can carry these forward if necessary
-        // for example, as part of the process of determining the landing page or promotion id
-        var params = getUrlVars();
-
-        // set the ReferringPath variable equal to blank.  This will be updated with a real param in
-        // GetReferringPathAndCause if one exists, otherwise it ensures the param will be passed
-        // with the api call.
-        // ReferringPath = "";
-
-        // set the CBCauseID variable equal to blank.  Ensures the param will be passed with the api call.
-        // This will be updated with a real param in GetReferringPathAndCause if one exists.
-        // CBCauseID = "";
-
-        // set the FilteredParamString variable equal to blank.  This will only change if the params.length
-        // is > 0, which will result in a call to GetReferringPathAndCause(params).
-        // FilteredParamString = "";
-
-        // now check to see if the page url params contains a referral path or a cause ID.  If it does,
-        // the FilteredParamString variable will be populated with all the params except the referral 
-        // path params and/or the cause ID, and the ReferringPath and CBCauseID variables will be set 
-        // to the correct values.
-        // if (params.length > 0) {
-        //     GetReferringPathAndCause(params);
-        // }
+        // for example, to determine the country or language
+        // var params = getUrlVars();
 
         main();  
     }
 
-    /* ----------------------------------------------------------------------- 
-     * JQueryCustomLoad
-     * ----------------------------------------------------------------------- 
-     * JQuery custom load handler action, right now this just sets the 
-     * noConflict option of jQuery to true. This is called from the generic
-     * ScriptLoadHandler due to the custom_load action on the script object
-     * in the scripts array.
-     *************************************************************************/
-//    function JQueryCustomLoad(params) {
-        // IMPORTANT: Some JS files may have been modified
-        // from thier original versions.  Instead of looking for the alias "jQuery", they
-        // look for an instance of jQuery loaded under the alias "jQnroll", which is how
-        // we load jQuery in the CustomLoad function below and how we access it in the
-        // document.ready call in main().
-//        jQuery = window.jQuery.noConflict(true);
-//         jQnroll = window.jQuery.noConflict();
-//    }
-    
     /* ---------------------------------------------------------------------------------
      * ValidateParam1(position)
      * ---------------------------------------------------------------------------------
@@ -365,21 +291,12 @@
          * This is the equivalent of the typical $(document).ready(function() {}) call that is called when 
          * jQuery indicates that the page is 'ready'. Put all code that requires jQuery in here!
          * -------------------------------------------------------------------------------------------------------- */
-        // IMPORTANT: JS files that depend on jQuery have been modified
-        // from thier original versions.  Instead of looking for the alias "jQuery", they
-        // look for an instance of jQuery loaded under the alias "jQnroll", which is how
-        // we load jQuery in the CustomLoad function above and how we access it in the
-        // document.ready call in main() that follows.
-//         jQnroll(document).ready(function($) {
         jQuery(document).ready(function($) {
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html', function() {
-                // var surveydiv = $("#surveyScript");
-                // surveydiv.load(base_url+'survey.js.html');
                 var surveyJSON = {completeText:"What is this",pages:[{name:"country",elements:[{type:"dropdown",name:"country",title:"What is your country of residence?",isRequired:true,choices:["Afghanistan","Aland Islands","Albania","Algeria","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia, Plurinational State of","Bonaire, Sint Eustatius and Saba","Bosnia and Herzegovina","Botswana","Bouvet Island","Brazil","British Indian Ocean Territory","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos (Keeling) Islands","Colombia","Comoros","Congo","Congo, the Democratic Republic of the","Cook Islands","Costa Rica","Cote d’Ivoire","Croatia","Cuba","Curaçao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands (Malvinas)","Faroe Islands","Fiji","Finland","France","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guatemala","Guernsey","Guinea","Guinea-Bissau","Guyana","Haiti","Heard Island and McDonald Islands","Holy See (Vatican City State)","Honduras","Hungary","Iceland","India","Indonesia","Iran, Islamic Republic of","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People’s Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People’s Democratic Republic","Latvia","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Lithuania","Luxembourg","Macao","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Moldova, Republic of","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saint Barthélemy","Saint Helena, Ascension and Tristan da Cunha","Saint Kitts and Nevis","Saint Lucia","Saint Martin (French part)","Saint Pierre and Miquelon","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Sint Maarten (Dutch part)","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Georgia and the South Sandwich Islands","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Svalbard and Jan Mayen","Swaziland","Sweden","Switzerland","Syrian Arab Republic","Taiwan","Tajikistan","Tanzania, United Republic of","Thailand","Timor-Leste","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela, Bolivarian Republic of","Vietnam","Virgin Islands, British","Wallis and Futuna","Western Sahara","Yemen","Zambia","Zimbabwe"]}],navigationButtonsVisibility:"show"},{name:"age",elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"asthma",elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,navigationButtonsVisibility:"show"},{name:"inhaler",elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"exercise",elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"bmi",elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"}],showProgressBar:"top",showQuestionNumbers:"off",title:"Title of the survey"}
-//                var data = {country:["Albania"]}; 
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var survey = new Survey.Model(surveyJSON);
@@ -391,12 +308,6 @@
                     data: data
                 });
 
-                // $.get(base_url+'surveyJSON.html')
-                //     .done(function(data) {
-                //         var surveyJSON = data;
-                //         console.log(surveyJSON);
-                // });
-
             });
             
        }); // end jquery.documentready
@@ -406,6 +317,7 @@
     } // end main()
 
     // Get the query string parameters passed into this page
+    // not used at the moment
     function getUrlVars() {
 
         var vars = [], hash;
@@ -516,40 +428,5 @@
       ( ( domain ) ? ";domain=" + domain : "" ) +
       ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
     }
-
-    /* ---------------------------------------------------------------------------------
-     * GetReferringPathAndCause(params)
-     * ---------------------------------------------------------------------------------
-     * Searches through the params array for referral path values with names that
-     * match the sources of paths.  Currently supporting two variations of Awe.sm links
-     * and 'cblink' links.
-     * --------------------------------------------------------------------------------- */
-    // function GetReferringPathAndCause (params) {
-
-    //     var h1, h2;
-    //     FilteredParamString = '?';
-    //     for (var i = 0, l = params.length; i < l; i++) {
-    //         h1 = params[i];
-    //         h2 = params[h1];
-    //         if (h1 == 'awesm' && h2 && h2.indexOf('awe.sm_') == 0) {
-    //             ReferringPath = h2.substring(7);
-    //         } else if (h1 == 'fb_ref' && h2 && h2.indexOf('awesm') == 0) {
-    //             ReferringPath = decodeURIComponent(h2).substring(13);
-    //         } else if (h1 == 'cblink') {
-    //             ReferringPath = h2;
-    //         } else if (h1 == 'cbcause') {
-    //             CBCauseID = h2;
-    //         } else {
-    //             if (FilteredParamString != '?') {
-    //                 FilteredParamString += "&";
-    //             }
-    //             FilteredParamString += h1 + "=" + h2
-    //         }
-    //     }
-    //     // If the Filtered Param String still just contains ?, reset it to a blank string
-    //     if (FilteredParamString == '?') {
-    //         FilteredParamString = "";
-    //     }
-    // }
 
 })(); // immediately call our anonymous function here...
