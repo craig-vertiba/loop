@@ -200,7 +200,7 @@
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language or get utm parameters
-        var params = getUrlVars();
+        // var params = getUrlVars();
 
         // getUTMParameters(params);
 
