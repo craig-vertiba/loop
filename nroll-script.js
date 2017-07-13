@@ -224,6 +224,8 @@
                 }
             }
         }
+        
+        console.log(utm_source);
 
         main();  
     }
