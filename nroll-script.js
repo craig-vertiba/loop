@@ -26,6 +26,11 @@
     var script_url;
     var scripts_counter;
     var base_url;
+    var utm_source;
+    var utm_medium;
+    var utm_campaign;
+    var utm_term;
+    var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     // var param1;  // first parameter from script_url;
     // var param2;  // second parameter from script_url;
