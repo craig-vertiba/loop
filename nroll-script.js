@@ -202,8 +202,8 @@
         // for example, to determine the country or language
         // var params = getUrlVars();
         
-        // Following parses the param string of script_url and assigns values to
-        // param1, param2, param3, and param4.
+        // Parse the param string of url of the page that called this script looking for UTM parameters.
+        // If found, assign them to the utm parameter variables.
         if (window.location.href.indexOf('?') >= 0) {
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i=0; i < hashes.length; i++) {
@@ -228,8 +228,6 @@
             }
         }
         
-        console.log(utm_source,utm_medium,utm_campaign,utm_term,utm_content);
-
         main();  
     }
 
