@@ -358,24 +358,24 @@
 
     // Get the query string parameters passed into this page
     // not used at the moment
-    function getUrlVars() {
+    // function getUrlVars() {
 
-        var vars = [], hash;
+    //     var vars = [], hash;
 
-        if (window.location.href.indexOf('?') >= 0) {
+    //     if (window.location.href.indexOf('?') >= 0) {
 
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    //         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 
-            for (var i=0; i < hashes.length; i++) {
+    //         for (var i=0; i < hashes.length; i++) {
 
-                hash = hashes[i].split('=');
-                vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
-            }
+    //             hash = hashes[i].split('=');
+    //             vars.push(hash[0]);
+    //             vars[hash[0]] = hash[1];
+    //         }
 
-        }
-        return vars;
-    }
+    //     }
+    //     return vars;
+    // }
 
     /* ---------------------------------------------------------------------------------
      * AddStylesheet(id, href)
