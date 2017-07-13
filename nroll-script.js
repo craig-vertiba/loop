@@ -204,8 +204,6 @@
         
         // Following parses the param string of script_url and assigns values to
         // param1, param2, param3, and param4.
-        console.log(window.location.href.indexOf('?'));
-        console.log("hello");
         if (window.location.href.indexOf('?') >= 0) {
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i=0; i < hashes.length; i++) {
