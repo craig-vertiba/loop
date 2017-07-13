@@ -202,9 +202,9 @@
         // for example, to determine the country or language or get utm parameters
         var params = getUrlVars();
 
-        getUTMParameters(params);
+        // getUTMParameters(params);
 
-        console.log(utm_source,utm_campaign,utm_content,utm_term,utm_medium);
+        // console.log(utm_source,utm_campaign,utm_content,utm_term,utm_medium);
 
         main();  
     }
@@ -215,29 +215,29 @@
      * Searches through the params array for UTM Parameters and assigns their values to
      * utm parameter variables
      * --------------------------------------------------------------------------------- */
-    function getUTMParameters (params) {
+    // function getUTMParameters (params) {
 
-        var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-        for (var i=0; i < hashes.length; i++) {
-            hash = hashes[i].split('=');
-            switch (hash[0]) {
-                case 'utm_campaign':  
-                    utm_campaign = hash[1];
-                    break;
-                case 'utm_content':
-                    utm_content = hash[1];
-                    break;
-                case 'utm_term':
-                    utm_term = hash[1];
-                    break;
-                case 'utm_medium':
-                    utm_medium = hash[1];
-                    break;
-                case 'utm_source':
-                    utm_source = hash[1];
-                    break;
-        }
-    }
+    //     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+    //     for (var i=0; i < hashes.length; i++) {
+    //         hash = hashes[i].split('=');
+    //         switch (hash[0]) {
+    //             case 'utm_campaign':  
+    //                 utm_campaign = hash[1];
+    //                 break;
+    //             case 'utm_content':
+    //                 utm_content = hash[1];
+    //                 break;
+    //             case 'utm_term':
+    //                 utm_term = hash[1];
+    //                 break;
+    //             case 'utm_medium':
+    //                 utm_medium = hash[1];
+    //                 break;
+    //             case 'utm_source':
+    //                 utm_source = hash[1];
+    //                 break;
+    //     }
+    // }
 
 
     /* ---------------------------------------------------------------------------------
