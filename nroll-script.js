@@ -60,33 +60,27 @@
     // are hosted at the same place.
     //
     // asset_url = base_url + "something here";
-    console.log(script_url);
 
     // Following parses the param string of script_url and assigns values to
     // the five utm parameter variables.
-    var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-       for (var i=0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        switch (hash[0]) {
-            case 'utm_source':  
-                utm_source = hash[1];
-                break;
-            case 'utm_medium':
-                utm_medium = hash[1];
-                break;
-            case 'utm_campaign':
-                utm_campaign = hash[1];
-                break;
-            case 'utm_term':
-                utm_term = hash[1];
-                break;
-            case 'utm_content':
-                utm_content = hash[1];
-                break;
-        }
-    }
-
-    console.log(utm_source,utm_medium,utm_campaign,utm_term,utm_content);
+    // var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+    //    for (var i=0; i < hashes.length; i++) {
+    //     hash = hashes[i].split('=');
+    //     switch (hash[0]) {
+    //         case 'param1':  
+    //             param1 = hash[1];
+    //             break;
+    //         case 'param2':
+    //             param2 = hash[1];
+    //             break;
+    //         case 'param3':
+    //             param3 = hash[1];
+    //             break;
+    //         case 'param4':
+    //             param4 = hash[1];
+    //             break;
+    //     }
+    // }
 
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
@@ -205,11 +199,46 @@
         AddStylesheet('custom', base_url + "custom.css");
 
         // get the parameters passed into the page so that we can carry these forward if necessary
-        // for example, to determine the country or language
-        // var params = getUrlVars();
+        // for example, to determine the country or language or get utm parameters
+        var params = getUrlVars();
+
+        getUTMParameters(params);
+
+        console.log(utm_source,utm_campaign,utm_content,utm_term,utm_medium);
 
         main();  
     }
+
+    /* ---------------------------------------------------------------------------------
+     * getUTMParameters(params)
+     * ---------------------------------------------------------------------------------
+     * Searches through the params array for UTM Parameters and assigns their values to
+     * utm parameter variables
+     * --------------------------------------------------------------------------------- */
+    function getUTMParameters (params) {
+
+        var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+        for (var i=0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            switch (hash[0]) {
+                case 'utm_campaign':  
+                    utm_campaign = hash[1];
+                    break;
+                case 'utm_content':
+                    utm_content = hash[1];
+                    break;
+                case 'utm_term':
+                    utm_term = hash[1];
+                    break;
+                case 'utm_medium':
+                    utm_medium = hash[1];
+                    break;
+                case 'utm_source':
+                    utm_source = hash[1];
+                    break;
+        }
+    }
+
 
     /* ---------------------------------------------------------------------------------
      * ValidateParam1(position)
