@@ -201,6 +201,29 @@
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language
         // var params = getUrlVars();
+        
+        // Following parses the param string of script_url and assigns values to
+        // param1, param2, param3, and param4.
+        if (window.location.href.indexOf('?') >= 0) {
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i=0; i < hashes.length; i++) {
+               hash = hashes[i].split('=');
+                 switch (hash[0]) {
+                     case 'utm_source':  
+                        utm_source = hash[1];
+                        break;
+    //         case 'param2_name':
+    //             param2 = hash[1];
+    //             break;
+    //         case 'param3_name':
+    //             param3 = hash[1];
+    //             break;
+    //         case 'param4_name':
+    //             param4 = hash[1];
+    //             break;
+                }
+            }
+        }
 
         main();  
     }
