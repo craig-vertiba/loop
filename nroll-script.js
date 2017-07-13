@@ -207,25 +207,28 @@
         if (window.location.href.indexOf('?') >= 0) {
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
             for (var i=0; i < hashes.length; i++) {
-               hash = hashes[i].split('=');
-                 switch (hash[0]) {
-                     case 'utm_source':  
+                hash = hashes[i].split('=');
+                switch (hash[0]) {
+                    case 'utm_source':  
                         utm_source = hash[1];
                         break;
-    //         case 'param2_name':
-    //             param2 = hash[1];
-    //             break;
-    //         case 'param3_name':
-    //             param3 = hash[1];
-    //             break;
-    //         case 'param4_name':
-    //             param4 = hash[1];
-    //             break;
+                    case 'utm_content':
+                        utm_content = hash[1];
+                        break;
+                    case 'utm_term':
+                        utm_term = hash[1];
+                        break;
+                    case 'utm_campaign':
+                        utm_campaign = hash[1];
+                        break;
+                    case 'utm_medium':
+                        utm_medium = hash[1];
+                        break;
                 }
             }
         }
         
-        console.log(utm_source);
+        console.log(utm_source,utm_medium,utm_campaign,utm_term,utm_content);
 
         main();  
     }
