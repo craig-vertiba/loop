@@ -60,6 +60,7 @@
     // are hosted at the same place.
     //
     // asset_url = base_url + "something here";
+    console.log(script_url);
 
     // Following parses the param string of script_url and assigns values to
     // the five utm parameter variables.
