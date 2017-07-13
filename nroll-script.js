@@ -26,11 +26,6 @@
     var script_url;
     var scripts_counter;
     var base_url;
-    var utm_source;
-    var utm_medium;
-    var utm_campaign;
-    var utm_term;
-    var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     // var param1;  // first parameter from script_url;
     // var param2;  // second parameter from script_url;
@@ -62,21 +57,21 @@
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
-    // the five utm parameter variables.
+    // param1, param2, param3, and param4.
     // var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-    //    for (var i=0; i < hashes.length; i++) {
+    // for (var i=0; i < hashes.length; i++) {
     //     hash = hashes[i].split('=');
     //     switch (hash[0]) {
-    //         case 'param1':  
+    //         case 'param1_name':  
     //             param1 = hash[1];
     //             break;
-    //         case 'param2':
+    //         case 'param2_name':
     //             param2 = hash[1];
     //             break;
-    //         case 'param3':
+    //         case 'param3_name':
     //             param3 = hash[1];
     //             break;
-    //         case 'param4':
+    //         case 'param4_name':
     //             param4 = hash[1];
     //             break;
     //     }
@@ -199,46 +194,11 @@
         AddStylesheet('custom', base_url + "custom.css");
 
         // get the parameters passed into the page so that we can carry these forward if necessary
-        // for example, to determine the country or language or get utm parameters
+        // for example, to determine the country or language
         // var params = getUrlVars();
-
-        // getUTMParameters(params);
-
-        // console.log(utm_source,utm_campaign,utm_content,utm_term,utm_medium);
 
         main();  
     }
-
-    /* ---------------------------------------------------------------------------------
-     * getUTMParameters(params)
-     * ---------------------------------------------------------------------------------
-     * Searches through the params array for UTM Parameters and assigns their values to
-     * utm parameter variables
-     * --------------------------------------------------------------------------------- */
-    // function getUTMParameters (params) {
-
-    //     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-    //     for (var i=0; i < hashes.length; i++) {
-    //         hash = hashes[i].split('=');
-    //         switch (hash[0]) {
-    //             case 'utm_campaign':  
-    //                 utm_campaign = hash[1];
-    //                 break;
-    //             case 'utm_content':
-    //                 utm_content = hash[1];
-    //                 break;
-    //             case 'utm_term':
-    //                 utm_term = hash[1];
-    //                 break;
-    //             case 'utm_medium':
-    //                 utm_medium = hash[1];
-    //                 break;
-    //             case 'utm_source':
-    //                 utm_source = hash[1];
-    //                 break;
-    //     }
-    // }
-
 
     /* ---------------------------------------------------------------------------------
      * ValidateParam1(position)
@@ -337,6 +297,7 @@
             var div = $("#nroll-plugin");
             div.load(base_url+'content.html', function() {
                 var surveyJSON = {completeText:"What is this",pages:[{name:"country",elements:[{type:"dropdown",name:"country",title:"What is your country of residence?",isRequired:true,choices:["Afghanistan","Aland Islands","Albania","Algeria","Andorra","Angola","Anguilla","Antarctica","Antigua and Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia, Plurinational State of","Bonaire, Sint Eustatius and Saba","Bosnia and Herzegovina","Botswana","Bouvet Island","Brazil","British Indian Ocean Territory","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central African Republic","Chad","Chile","China","Christmas Island","Cocos (Keeling) Islands","Colombia","Comoros","Congo","Congo, the Democratic Republic of the","Cook Islands","Costa Rica","Cote d’Ivoire","Croatia","Cuba","Curaçao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands (Malvinas)","Faroe Islands","Fiji","Finland","France","French Guiana","French Polynesia","French Southern Territories","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guatemala","Guernsey","Guinea","Guinea-Bissau","Guyana","Haiti","Heard Island and McDonald Islands","Holy See (Vatican City State)","Honduras","Hungary","Iceland","India","Indonesia","Iran, Islamic Republic of","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Democratic People’s Republic of","Korea, Republic of","Kuwait","Kyrgyzstan","Lao People’s Democratic Republic","Latvia","Lebanon","Lesotho","Liberia","Libyan Arab Jamahiriya","Liechtenstein","Lithuania","Luxembourg","Macao","Macedonia, the former Yugoslav Republic of","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Moldova, Republic of","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Niue","Norfolk Island","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Qatar","Reunion","Romania","Russian Federation","Rwanda","Saint Barthélemy","Saint Helena, Ascension and Tristan da Cunha","Saint Kitts and Nevis","Saint Lucia","Saint Martin (French part)","Saint Pierre and Miquelon","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Sint Maarten (Dutch part)","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Georgia and the South Sandwich Islands","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Svalbard and Jan Mayen","Swaziland","Sweden","Switzerland","Syrian Arab Republic","Taiwan","Tajikistan","Tanzania, United Republic of","Thailand","Timor-Leste","Togo","Tokelau","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Turks and Caicos Islands","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela, Bolivarian Republic of","Vietnam","Virgin Islands, British","Wallis and Futuna","Western Sahara","Yemen","Zambia","Zimbabwe"]}],navigationButtonsVisibility:"show"},{name:"age",elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"asthma",elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,navigationButtonsVisibility:"show"},{name:"inhaler",elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"exercise",elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"},{name:"bmi",elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],navigationButtonsVisibility:"show"}],showProgressBar:"top",showQuestionNumbers:"off",title:"Title of the survey"}
+                surveyJSON = prompt("Enter survey json");
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var survey = new Survey.Model(surveyJSON);
@@ -358,24 +319,24 @@
 
     // Get the query string parameters passed into this page
     // not used at the moment
-    // function getUrlVars() {
+    function getUrlVars() {
 
-    //     var vars = [], hash;
+        var vars = [], hash;
 
-    //     if (window.location.href.indexOf('?') >= 0) {
+        if (window.location.href.indexOf('?') >= 0) {
 
-    //         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 
-    //         for (var i=0; i < hashes.length; i++) {
+            for (var i=0; i < hashes.length; i++) {
 
-    //             hash = hashes[i].split('=');
-    //             vars.push(hash[0]);
-    //             vars[hash[0]] = hash[1];
-    //         }
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
 
-    //     }
-    //     return vars;
-    // }
+        }
+        return vars;
+    }
 
     /* ---------------------------------------------------------------------------------
      * AddStylesheet(id, href)
