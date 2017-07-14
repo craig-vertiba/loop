@@ -34,7 +34,7 @@
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     var param1 = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // first parameter from script_url;
     var param2 = "https://craig-vertiba.github.io/nroll/content.html";  // second parameter from script_url;
-    var param3 = 'c';  // third parameter from script_url;
+    var param3 = "https://craig-vertiba.github.io/nroll/custom.css";  // third parameter from script_url;
     var param4 = 'd';  // fourth parameter from script_url;
  
     /*
@@ -198,7 +198,8 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        AddStylesheet('custom', base_url + "custom.css");
+        // AddStylesheet('custom', base_url + "custom.css");
+        AddStylesheet('custom', param3);
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language
