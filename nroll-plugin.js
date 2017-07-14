@@ -32,10 +32,10 @@
     // var utm_term;
     // var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
-    // var param1;  // first parameter from script_url;
-    // var param2;  // second parameter from script_url;
-    // var param3;  // third parameter from script_url;
-    // var param4;  // fourth parameter from script_url;
+    var param1;  // first parameter from script_url;
+    var param2;  // second parameter from script_url;
+    var param3;  // third parameter from script_url;
+    var param4;  // fourth parameter from script_url;
  
     /*
      * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
@@ -63,24 +63,24 @@
 
     // Following parses the param string of script_url and assigns values to
     // param1, param2, param3, and param4.
-    // var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-    // for (var i=0; i < hashes.length; i++) {
-    //     hash = hashes[i].split('=');
-    //     switch (hash[0]) {
-    //         case 'param1_name':  
-    //             param1 = hash[1];
-    //             break;
-    //         case 'param2_name':
-    //             param2 = hash[1];
-    //             break;
-    //         case 'param3_name':
-    //             param3 = hash[1];
-    //             break;
-    //         case 'param4_name':
-    //             param4 = hash[1];
-    //             break;
-    //     }
-    // }
+    var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+    for (var i=0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        switch (hash[0]) {
+            case 'param1_name':  
+                param1 = hash[1];
+                break;
+            case 'param2_name':
+                param2 = hash[1];
+                break;
+            case 'param3_name':
+                param3 = hash[1];
+                break;
+            case 'param4_name':
+                param4 = hash[1];
+                break;
+        }
+    }
 
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
