@@ -3,10 +3,10 @@
     <script>
         (function() {
             var param1 = 'param1_value';
-            var param2 = 'param2_value';
+            var html_content_url = 'html_content_url_value';
             var param3 = 'param3_value';
             var param4 = 'param4_value';
-            var params = '?param1=' + param1 + '&param2=' + param2 + '&param3=' + param3 + '&param4=' + param4;
+            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&param3=' + param3 + '&param4=' + param4;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
@@ -33,7 +33,7 @@
     // var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
-    var param2 = "https://craig-vertiba.github.io/nroll/content.html";  // second parameter from script_url;
+    var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var param3 = "https://craig-vertiba.github.io/nroll/custom.css";  // third parameter from script_url;
     var param4 = "https://craig-vertiba.github.io/nroll/custom.js";  // fourth parameter from script_url;
  
@@ -62,7 +62,7 @@
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
-    // param1, param2, param3, and param4.
+    // param1, html_content_url, param3, and param4.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -72,8 +72,8 @@
                 console.log("surveyjs_url updated");
                 break;
             case 'b':
-                param2 = hash[1];
-                console.log("param2 updated");
+                html_content_url = hash[1];
+                console.log("html_content_url updated");
                 break;
             case 'c':
                 param3 = hash[1];
@@ -86,12 +86,12 @@
         }
     }
 
-    console.log(surveyjs_url,param2,param3,param4);
+    console.log(surveyjs_url,html_content_url,param3,param4);
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
 
-    // // following validates param2.  Returns the input if valid or an empty string if not.
-    // param2 = ValidateParam2(param2);
+    // // following validates html_content_url.  Returns the input if valid or an empty string if not.
+    // html_content_url = Validatehtml_content_url(html_content_url);
 
     // // following validates param3.  Returns the input if valid or an empty string if not.
     // param3 = ValidateParam3(param3);
@@ -263,7 +263,7 @@
     // }
 
     /* ---------------------------------------------------------------------------------
-     * ValidateParam2(target)
+     * Validatehtml_content_url(target)
      * ---------------------------------------------------------------------------------
      * This function is called to validate a widget url target input.  If the target
      * input is valid, it is returned, otherwise null is returned.  At the moment, the
@@ -271,7 +271,7 @@
      * specific urls to be passed in, in which case we'll have to test for a valid url
      * pattern here.
      * --------------------------------------------------------------------------------- */
-    // function ValidateParam2(target) {
+    // function Validatehtml_content_url(target) {
 
     //     var widget_target_valid = false;
     //     var arr = [ "local", "default" ];
@@ -335,7 +335,7 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             // div.load(base_url+'content.html', function() {
-            div.load(param2, function() {
+            div.load(html_content_url, function() {
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
