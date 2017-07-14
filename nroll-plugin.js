@@ -97,6 +97,7 @@
     // following validates param1.  Returns the input if valid or an empty string if not.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
+console.log(study_website_status);
     // // following validates html_content_url.  Returns the input if valid or an empty string if not.
     // html_content_url = Validatehtml_content_url(html_content_url);
 
