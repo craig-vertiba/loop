@@ -104,7 +104,7 @@
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
-//        {"name": "Custom", "src": base_url + "custom.js"},
+        {"name": "Custom", "src": base_url + "custom.js"},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
