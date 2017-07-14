@@ -67,19 +67,19 @@
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
         switch (hash[0]) {
-            case 'param1':  
+            case 'a':  
                 param1 = hash[1];
                 console.log("param1 updated");
                 break;
-            case 'param2':
+            case 'b':
                 param2 = hash[1];
                 console.log("param2 updated");
                 break;
-            case 'param3':
+            case 'c':
                 param3 = hash[1];
                 console.log("param3 updated");
                 break;
-            case 'param4':
+            case 'd':
                 param4 = hash[1];
                 console.log("param4 updated");
                 break;
