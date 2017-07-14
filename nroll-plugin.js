@@ -71,14 +71,17 @@
                 param1 = hash[1];
                 console.log("param1 updated");
                 break;
-            case 'param2_name':
+            case 'param2':
                 param2 = hash[1];
+                console.log("param2 updated");
                 break;
             case 'param3_name':
                 param3 = hash[1];
+                console.log("param3 updated");
                 break;
             case 'param4_name':
                 param4 = hash[1];
+                console.log("param4 updated");
                 break;
         }
     }
