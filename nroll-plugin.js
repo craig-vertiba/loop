@@ -69,7 +69,7 @@
         switch (hash[0]) {
             case 'a':  
                 surveyjs_url = hash[1];
-                console.log("param1 updated");
+                console.log("surveyjs_url updated");
                 break;
             case 'b':
                 param2 = hash[1];
