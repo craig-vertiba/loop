@@ -337,7 +337,8 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            div.load(html_content_url, function() {
+            // div.load(html_content_url, function() {
+            div.load('https://craig-vertiba.github.io/nroll/content.html', function() {
                 console.log("here");
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var data = {};   
@@ -361,24 +362,24 @@
 
     // Get the query string parameters passed into this page
     // not used at the moment
-    function getUrlVars() {
+    // function getUrlVars() {
 
-        var vars = [], hash;
+    //     var vars = [], hash;
 
-        if (window.location.href.indexOf('?') >= 0) {
+    //     if (window.location.href.indexOf('?') >= 0) {
 
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    //         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
 
-            for (var i=0; i < hashes.length; i++) {
+    //         for (var i=0; i < hashes.length; i++) {
 
-                hash = hashes[i].split('=');
-                vars.push(hash[0]);
-                vars[hash[0]] = hash[1];
-            }
+    //             hash = hashes[i].split('=');
+    //             vars.push(hash[0]);
+    //             vars[hash[0]] = hash[1];
+    //         }
 
-        }
-        return vars;
-    }
+    //     }
+    //     return vars;
+    // }
 
     /* ---------------------------------------------------------------------------------
      * AddStylesheet(id, href)
