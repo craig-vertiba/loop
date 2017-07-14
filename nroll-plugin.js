@@ -300,7 +300,7 @@
      * additional values.  Note that the values "none" and "test", when passed in via
      * the load script url, will supercede values from the api response.
      * --------------------------------------------------------------------------------- */
-    function Validateparam4(param4) {
+    function ValidateParam4(param4) {
 
         var param4_valid = false;
         var arr = [ "preview", "live" ];
