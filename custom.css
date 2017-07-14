@@ -12,6 +12,7 @@ r.btn-green {
 .panel-footer {
     text-align: center;
     background-color: #fff;
+    border-top: none;
 }
 
 .form-inline .checkbox input[type="checkbox"], .form-inline .radio input[type="radio"] {
