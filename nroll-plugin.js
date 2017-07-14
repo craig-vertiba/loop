@@ -69,27 +69,27 @@
 
     // Following parses the param string of script_url and assigns values to
     // surveyjs_url, customCSS_url, customJS_url, and study_website_status.
-    var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-    for (var i=0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        switch (hash[0]) {
-            case 'a':  
-                surveyjs_url = hash[1];
-                break;
-            case 'b':
-                html_content_url = hash[1];
-                break;
-            case 'c':
-                customCSS_url = hash[1];
-                break;
-            case 'd':
-                customJS_url = hash[1];
-                break;
-            case 'e':
-                study_website_status = hash[1];
-                break;
-        }
-    }
+    // var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+    // for (var i=0; i < hashes.length; i++) {
+    //     hash = hashes[i].split('=');
+    //     switch (hash[0]) {
+    //         case 'a':  
+    //             surveyjs_url = hash[1];
+    //             break;
+    //         case 'b':
+    //             html_content_url = hash[1];
+    //             break;
+    //         case 'c':
+    //             customCSS_url = hash[1];
+    //             break;
+    //         case 'd':
+    //             customJS_url = hash[1];
+    //             break;
+    //         case 'e':
+    //             study_website_status = hash[1];
+    //             break;
+    //     }
+    // }
 
     console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url,study_website_status);
 
@@ -103,7 +103,7 @@
     // customJS_url = ValidateParam3(customJS_url);
 
     // following validates param4.  Returns the input if valid or the default if blank or invalid.
-    study_website_status = ValidateParam4(study_website_status);
+    // study_website_status = ValidateParam4(study_website_status);
 
 
     // Chain load the scripts here in the order listed below...
@@ -114,8 +114,8 @@
         // where older versions of jQuery are already loaded and are required, will need to modify this
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
-        {"name": "SurveyJS", "src": surveyjs_url},
-        {"name": "Custom", "src": customJS_url},
+        {"name": "SurveyJS", "src": 'https://surveyjs.azureedge.net/0.12.19/survey.jquery.js'},
+        {"name": "Custom", "src": 'https://craig-vertiba.github.io/nroll/custom.js'},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
