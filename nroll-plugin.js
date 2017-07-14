@@ -26,13 +26,11 @@
     var all_scripts = document.getElementsByTagName('script');
     var script_url;
     var scripts_counter;
-    // var base_url; // not used as all resource urls are being passed in as parameters now
     var utm_source;
     var utm_medium;
     var utm_campaign;
     var utm_term;
     var utm_content;
-    // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
@@ -40,12 +38,8 @@
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
  
     /*
-     * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
-     * Once we find the current script we get its source and use the source as the base for finding other assets
-     * This only matters if other assets (css, html, etc.) are hosted in the same place as this script
-     * if not, need to identify the source of the other assets in a different way.
-     * an alternative implementation would be to look for this script's filename in the title which would fail if we were to
-     * change the name of the script
+     * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
+     * We need the script url to retrieve the parameters that were included in the url.
     **/
 
     for (var i=0; i < all_scripts.length; i++) {
@@ -54,17 +48,8 @@
         }
     }
 
-    // following gets the base url of the plugin  
-    // For the moment, this is the prefix used for retrieving all plugin assets
-    // base_url  = script_url.substring(0,script_url.lastIndexOf("/") + 1);
-
-    // Following gets the  base url of this script's hosting location.  May need to use this if other assets
-    // are hosted at the same place.
-    //
-    // asset_url = base_url + "something here";
-
     // Following parses the param string of script_url and assigns values to
-    // param1, html_content_url, customCSS_url, and customJS_url.
+    // surveyjs_url, html_content_url, customCSS_url, customJS_url and study_website_status.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -95,15 +80,14 @@
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
-console.log(study_website_status);
     // // following validates html_content_url.  Returns the input if valid or an empty string if not.
-    // html_content_url = Validatehtml_content_url(html_content_url);
+    // html_content_url = ValidateHTMLContentUrl(html_content_url);
 
     // // following validates customCSS_url.  Returns the input if valid or an empty string if not.
-    // customCSS_url = ValidatecustomCSS_url(customCSS_url);
+    // customCSS_url = ValidateCustomCSSUrl(customCSS_url);
 
     // // following validates customJS_url.  Returns the input if valid or an empty string if not.
-    // customJS_url = ValidatecustomJS_url(customJS_url);
+    // customJS_url = ValidateCustomJSUrl(customJS_url);
 
 
     // Chain load the scripts here in the order listed below...
@@ -114,9 +98,7 @@ console.log(study_website_status);
         // where older versions of jQuery are already loaded and are required, will need to modify this
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
-        // {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
         {"name": "SurveyJS", "src": surveyjs_url},
-        // {"name": "Custom", "src": base_url + "custom.js"},
         {"name": "Custom", "src": customJS_url},
     ];
 
@@ -209,13 +191,8 @@ console.log(study_website_status);
         // Dynamically load the pre-requisite and local stylesheets
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        // AddStylesheet('custom', base_url + "custom.css");
         AddStylesheet('custom', customCSS_url);
 
-        // get the parameters passed into the page so that we can carry these forward if necessary
-        // for example, to determine the country or language
-        // var params = getUrlVars();
-        
         // Parse the param string of url of the page that called this script looking for UTM parameters.
         // If found, assign them to the utm parameter variables.
         if (window.location.href.indexOf('?') >= 0) {
@@ -295,13 +272,11 @@ console.log(study_website_status);
     // }
 
     /* ---------------------------------------------------------------------------------
-     * ValidatecustomCSS_url(customCSS_url)
+     * ValidateStudyWebsiteStatus(param)
      * ---------------------------------------------------------------------------------
-     * This function is called to validate a widget url auto button input.  If the customJS_url
-     * input is valid, it is returned, otherwise null is returned.  At the moment, the
-     * only valid inputs are "left", "right", "none", and "test", but at some point we may allow 
-     * additional values.  Note that the values "none" and "test", when passed in via
-     * the load script url, will supercede values from the api response.
+     * This function is called to validate the study_website_status parameter.  If the
+     * current value of the variable is equal to an allowed value, it will not be changed.
+     * If it is blank or invalid, it will be changed to 'live'
      * --------------------------------------------------------------------------------- */
     function ValidateStudyWebsiteStatus(param) {
 
@@ -340,7 +315,6 @@ console.log(study_website_status);
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            // div.load(base_url+'content.html', function() {
             div.load(html_content_url, function() {
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var data = {};   
@@ -361,27 +335,6 @@ console.log(study_website_status);
         /*** NOTE - ANY FUNCTIONS DEFINED OUT HERE WILL NOT HAVE ACCESS TO JQUERY PROPERLY DUE TO jQuery.noConflict(true) ***/
 
     } // end main()
-
-    // Get the query string parameters passed into this page
-    // not used at the moment
-    // function getUrlVars() {
-
-    //     var vars = [], hash;
-
-    //     if (window.location.href.indexOf('?') >= 0) {
-
-    //         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-
-    //         for (var i=0; i < hashes.length; i++) {
-
-    //             hash = hashes[i].split('=');
-    //             vars.push(hash[0]);
-    //             vars[hash[0]] = hash[1];
-    //         }
-
-    //     }
-    //     return vars;
-    // }
 
     /* ---------------------------------------------------------------------------------
      * AddStylesheet(id, href)
