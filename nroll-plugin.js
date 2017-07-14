@@ -5,8 +5,8 @@
             var param1 = 'param1_value';
             var html_content_url = 'html_content_url_value';
             var customCSS_url = 'customCSS_url_value';
-            var param4 = 'param4_value';
-            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&customCSS_url=' + customCSS_url + '&param4=' + param4;
+            var customJS_url = 'customJS_url_value';
+            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&customCSS_url=' + customCSS_url + '&customJS_url=' + customJS_url;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
@@ -35,7 +35,7 @@
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
-    var param4 = "https://craig-vertiba.github.io/nroll/custom.js";  // fourth parameter from script_url;
+    var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
  
     /*
      * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
@@ -62,7 +62,7 @@
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
-    // param1, html_content_url, customCSS_url, and param4.
+    // param1, html_content_url, customCSS_url, and customJS_url.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -80,13 +80,13 @@
                 console.log("customCSS_url updated");
                 break;
             case 'd':
-                param4 = hash[1];
-                console.log("param4 updated");
+                customJS_url = hash[1];
+                console.log("customJS_url updated");
                 break;
         }
     }
 
-    console.log(surveyjs_url,html_content_url,customCSS_url,param4);
+    console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url);
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
 
@@ -96,8 +96,8 @@
     // // following validates customCSS_url.  Returns the input if valid or an empty string if not.
     // customCSS_url = ValidatecustomCSS_url(customCSS_url);
 
-    // // following validates param4.  Returns the input if valid or an empty string if not.
-    // param4 = ValidateParam4(param4);
+    // // following validates customJS_url.  Returns the input if valid or an empty string if not.
+    // customJS_url = ValidatecustomJS_url(customJS_url);
 
 
     // Chain load the scripts here in the order listed below...
@@ -111,7 +111,7 @@
         // {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
         {"name": "SurveyJS", "src": surveyjs_url},
         // {"name": "Custom", "src": base_url + "custom.js"},
-        {"name": "Custom", "src": param4},
+        {"name": "Custom", "src": customJS_url},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
@@ -291,27 +291,27 @@
     /* ---------------------------------------------------------------------------------
      * ValidatecustomCSS_url(customCSS_url)
      * ---------------------------------------------------------------------------------
-     * This function is called to validate a widget url auto button input.  If the param4
+     * This function is called to validate a widget url auto button input.  If the customJS_url
      * input is valid, it is returned, otherwise null is returned.  At the moment, the
      * only valid inputs are "left", "right", "none", and "test", but at some point we may allow 
      * additional values.  Note that the values "none" and "test", when passed in via
      * the load script url, will supercede values from the api response.
      * --------------------------------------------------------------------------------- */
-    // function Validateparam4(param4) {
+    // function ValidatecustomJS_url(customJS_url) {
 
-    //     var param4_valid = false;
+    //     var customJS_url_valid = false;
     //     var arr = [ "left", "right", "none", "test" ];
 
     //     for (var i = 0; i < arr.length; i++) {
-    //         if (arr[i] == param4) {
-    //             param4_valid = true;
+    //         if (arr[i] == customJS_url) {
+    //             customJS_url_valid = true;
     //         }
     //     }
 
-    //     if (!param4_valid) {
-    //         param4 = "";
+    //     if (!customJS_url_valid) {
+    //         customJS_url = "";
     //     }
-    //     return param4;
+    //     return customJS_url;
     // }
 
     /* --------------------------------------------------------------------------------------------------------
