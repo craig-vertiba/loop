@@ -26,7 +26,7 @@
     var all_scripts = document.getElementsByTagName('script');
     var script_url;
     var scripts_counter;
-    var base_url;
+    // var base_url; // not used as all resource urls are being passed in as parameters now
     var utm_source;
     var utm_medium;
     var utm_campaign;
@@ -56,7 +56,7 @@
 
     // following gets the base url of the plugin  
     // For the moment, this is the prefix used for retrieving all plugin assets
-    base_url  = script_url.substring(0,script_url.lastIndexOf("/") + 1);
+    // base_url  = script_url.substring(0,script_url.lastIndexOf("/") + 1);
 
     // Following gets the  base url of this script's hosting location.  May need to use this if other assets
     // are hosted at the same place.
@@ -93,8 +93,9 @@
     }
 
     console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url,study_website_status);
-    // // following validates param1.  Returns the input if valid or an empty string if not.
-    // param1 = ValidateParam1(param1);
+
+    // following validates param1.  Returns the input if valid or an empty string if not.
+    study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
     // // following validates html_content_url.  Returns the input if valid or an empty string if not.
     // html_content_url = Validatehtml_content_url(html_content_url);
@@ -303,22 +304,22 @@
      * additional values.  Note that the values "none" and "test", when passed in via
      * the load script url, will supercede values from the api response.
      * --------------------------------------------------------------------------------- */
-    // function ValidatecustomJS_url(customJS_url) {
+    function ValidateStudyWebsiteStatus(param) {
 
-    //     var customJS_url_valid = false;
-    //     var arr = [ "left", "right", "none", "test" ];
+        var param_valid = false;
+        var arr = [ "preview", "live" ];
 
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if (arr[i] == customJS_url) {
-    //             customJS_url_valid = true;
-    //         }
-    //     }
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == param) {
+                param_valid = true;
+            }
+        }
 
-    //     if (!customJS_url_valid) {
-    //         customJS_url = "";
-    //     }
-    //     return customJS_url;
-    // }
+        if (!param_valid) {
+            param = "live";
+        }
+        return param;
+    }
 
     /* --------------------------------------------------------------------------------------------------------
      * main()
