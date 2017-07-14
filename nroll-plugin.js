@@ -92,9 +92,7 @@
         }
     }
 
-    console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url,study_website_status);
-
-    // following validates param1.  Returns the input if valid or an empty string if not.
+    // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
 console.log(study_website_status);
