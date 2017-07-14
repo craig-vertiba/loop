@@ -32,7 +32,7 @@
     // var utm_term;
     // var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
-    var param1 = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // first parameter from script_url;
+    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
     var param2 = "https://craig-vertiba.github.io/nroll/content.html";  // second parameter from script_url;
     var param3 = "https://craig-vertiba.github.io/nroll/custom.css";  // third parameter from script_url;
     var param4 = "https://craig-vertiba.github.io/nroll/custom.js";  // fourth parameter from script_url;
@@ -68,7 +68,7 @@
         hash = hashes[i].split('=');
         switch (hash[0]) {
             case 'a':  
-                param1 = hash[1];
+                surveyjs_url = hash[1];
                 console.log("param1 updated");
                 break;
             case 'b':
@@ -109,7 +109,7 @@
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         // {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
-        {"name": "SurveyJS", "src": param1},
+        {"name": "SurveyJS", "src": surveyjs_url},
         // {"name": "Custom", "src": base_url + "custom.js"},
         {"name": "Custom", "src": param4},
     ];
