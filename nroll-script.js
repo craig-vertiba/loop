@@ -2,11 +2,11 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var param1 = 'param1_value';
-            var param2 = 'param2_value';
-            var param3 = 'param3_value';
-            var param4 = 'param4_value';
-            var params = '?param1=' + param1 + '&param2=' + param2 + '&param3=' + param3 + '&param4=' + param4;
+            var a = ''; // SurveyJS url. If blank, will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
+            var b = ''; // nRoll Plugin custom CSS url. Optional.
+            var c = ''; // nRoll Plugin custom javascript. Optional.
+            var d = ''; // Study website status. Options: preview,live. If blank, will default to live.
+            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
@@ -31,6 +31,10 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
+    var surveyjs_url;
+    var customCSS_url;
+    var customJS_url;
+    var study_website_status;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     // var param1;  // first parameter from script_url;
     // var param2;  // second parameter from script_url;
@@ -62,25 +66,27 @@
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
-    // param1, param2, param3, and param4.
-    // var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
-    // for (var i=0; i < hashes.length; i++) {
-    //     hash = hashes[i].split('=');
-    //     switch (hash[0]) {
-    //         case 'param1_name':  
-    //             param1 = hash[1];
-    //             break;
-    //         case 'param2_name':
-    //             param2 = hash[1];
-    //             break;
-    //         case 'param3_name':
-    //             param3 = hash[1];
-    //             break;
-    //         case 'param4_name':
-    //             param4 = hash[1];
-    //             break;
-    //     }
-    // }
+    // surveyjs_url, customCSS_url, customJS_url, and study_website_status.
+    var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
+    for (var i=0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        switch (hash[0]) {
+            case 'a':  
+                surveyjs_url = hash[1];
+                break;
+            case 'b':
+                customCSS_url = hash[1];
+                break;
+            case 'c':
+                customJS_url = hash[1];
+                break;
+            case 'd':
+                study_website_status = hash[1];
+                break;
+        }
+    }
+
+    console.log(surveyjs_url,customCSS_url,customJS_url,study_website_status);
 
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
