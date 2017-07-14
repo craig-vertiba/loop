@@ -196,7 +196,7 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        // AddStylesheet('custom', base_url + "custom.css");
+        AddStylesheet('custom', base_url + "custom.css");
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language
