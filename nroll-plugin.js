@@ -82,6 +82,7 @@
         }
     }
 
+    console.log(param1,param2,param3,param4);
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
 
