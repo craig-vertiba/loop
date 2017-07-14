@@ -75,11 +75,11 @@
                 param2 = hash[1];
                 console.log("param2 updated");
                 break;
-            case 'param3_name':
+            case 'param3':
                 param3 = hash[1];
                 console.log("param3 updated");
                 break;
-            case 'param4_name':
+            case 'param4':
                 param4 = hash[1];
                 console.log("param4 updated");
                 break;
