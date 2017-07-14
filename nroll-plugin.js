@@ -56,23 +56,18 @@
         switch (hash[0]) {
             case 'a':  
                 surveyjs_url = hash[1];
-                console.log("surveyjs_url updated");
                 break;
             case 'b':
                 html_content_url = hash[1];
-                console.log("html_content_url updated");
                 break;
             case 'c':
                 customCSS_url = hash[1];
-                console.log("customCSS_url updated");
                 break;
             case 'd':
                 customJS_url = hash[1];
-                console.log("customJS_url updated");
                 break;
             case 'e':
                 study_website_status = hash[1];
-                console.log("study_website_status updated");
                 break;
         }
     }
