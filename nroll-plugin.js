@@ -4,9 +4,9 @@
         (function() {
             var param1 = 'param1_value';
             var html_content_url = 'html_content_url_value';
-            var param3 = 'param3_value';
+            var customCSS_url = 'customCSS_url_value';
             var param4 = 'param4_value';
-            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&param3=' + param3 + '&param4=' + param4;
+            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&customCSS_url=' + customCSS_url + '&param4=' + param4;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
@@ -34,7 +34,7 @@
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
-    var param3 = "https://craig-vertiba.github.io/nroll/custom.css";  // third parameter from script_url;
+    var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var param4 = "https://craig-vertiba.github.io/nroll/custom.js";  // fourth parameter from script_url;
  
     /*
@@ -62,7 +62,7 @@
     // asset_url = base_url + "something here";
 
     // Following parses the param string of script_url and assigns values to
-    // param1, html_content_url, param3, and param4.
+    // param1, html_content_url, customCSS_url, and param4.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -76,8 +76,8 @@
                 console.log("html_content_url updated");
                 break;
             case 'c':
-                param3 = hash[1];
-                console.log("param3 updated");
+                customCSS_url = hash[1];
+                console.log("customCSS_url updated");
                 break;
             case 'd':
                 param4 = hash[1];
@@ -86,15 +86,15 @@
         }
     }
 
-    console.log(surveyjs_url,html_content_url,param3,param4);
+    console.log(surveyjs_url,html_content_url,customCSS_url,param4);
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
 
     // // following validates html_content_url.  Returns the input if valid or an empty string if not.
     // html_content_url = Validatehtml_content_url(html_content_url);
 
-    // // following validates param3.  Returns the input if valid or an empty string if not.
-    // param3 = ValidateParam3(param3);
+    // // following validates customCSS_url.  Returns the input if valid or an empty string if not.
+    // customCSS_url = ValidatecustomCSS_url(customCSS_url);
 
     // // following validates param4.  Returns the input if valid or an empty string if not.
     // param4 = ValidateParam4(param4);
@@ -204,7 +204,7 @@
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
         // AddStylesheet('custom', base_url + "custom.css");
-        AddStylesheet('custom', param3);
+        AddStylesheet('custom', customCSS_url);
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language
@@ -289,7 +289,7 @@
     // }
 
     /* ---------------------------------------------------------------------------------
-     * ValidateParam3(param3)
+     * ValidatecustomCSS_url(customCSS_url)
      * ---------------------------------------------------------------------------------
      * This function is called to validate a widget url auto button input.  If the param4
      * input is valid, it is returned, otherwise null is returned.  At the moment, the
