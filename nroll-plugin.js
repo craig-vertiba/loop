@@ -36,6 +36,7 @@
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
+    var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
  
     /*
      * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
@@ -82,6 +83,10 @@
             case 'd':
                 customJS_url = hash[1];
                 console.log("customJS_url updated");
+                break;
+            case 'e':
+                study_website_status = hash[1];
+                console.log("study_website_status updated");
                 break;
         }
     }
