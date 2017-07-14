@@ -1,14 +1,13 @@
  <body>
    <script>
     (function() {
-      var a = 'https://surveyjs.azureedge.net/0.12.19/survey.jquery.js';
-      var b = 'https://craig-vertiba.github.io/nroll/content.html';
-      var c = 'https://craig-vertiba.github.io/nroll/custom.css';
-      var d = '';
-      var e = 'live';
-      var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e;
+      var param1 = 'param1_value';
+      var param2 = 'param2_value';
+      var param3 = 'param3_value';
+      var param4 = 'param4_value';
+      var params = '?param1=' + param1 + '&param2=' + param2 + '&param3=' + param3 + '&param4=' + param4;
       var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-      js.src = 'https://craig-vertiba.github.io/nroll/nroll-plugin.js' + params; js.id = 'nroll-plugin';
+      js.src = 'https://craig-vertiba.github.io/nroll/nroll-plugin.js' + params; js.id = 'nroll-script';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
     }) ();
   </script>
