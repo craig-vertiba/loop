@@ -91,7 +91,7 @@
         }
     }
 
-    console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url);
+    console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url,study_website_status);
     // // following validates param1.  Returns the input if valid or an empty string if not.
     // param1 = ValidateParam1(param1);
 
