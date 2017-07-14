@@ -2,13 +2,14 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var param1 = 'param1_value';
-            var html_content_url = 'html_content_url_value';
-            var customCSS_url = 'customCSS_url_value';
-            var customJS_url = 'customJS_url_value';
-            var params = '?param1=' + param1 + '&html_content_url=' + html_content_url + '&customCSS_url=' + customCSS_url + '&customJS_url=' + customJS_url;
+            var a = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
+            var b = ''; // HTML content url. Required. No default. Plugin will fail without this file.
+            var c = ''; // nRoll Plugin custom CSS url. Optional.
+            var d = ''; // nRoll Plugin custom javascript. Optional.
+            var e = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
+            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
+            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
         }) ();
     </script>
@@ -26,11 +27,11 @@
     var script_url;
     var scripts_counter;
     var base_url;
-    // var utm_source;
-    // var utm_medium;
-    // var utm_campaign;
-    // var utm_term;
-    // var utm_content;
+    var utm_source;
+    var utm_medium;
+    var utm_campaign;
+    var utm_term;
+    var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
