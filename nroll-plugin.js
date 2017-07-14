@@ -32,10 +32,10 @@
     // var utm_term;
     // var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
-    var param1;  // first parameter from script_url;
-    var param2;  // second parameter from script_url;
-    var param3;  // third parameter from script_url;
-    var param4;  // fourth parameter from script_url;
+    var param1 = 'a';  // first parameter from script_url;
+    var param2 = 'b';  // second parameter from script_url;
+    var param3 = 'c';  // third parameter from script_url;
+    var param4 = 'd';  // fourth parameter from script_url;
  
     /*
      * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
