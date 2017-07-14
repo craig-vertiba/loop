@@ -2,13 +2,14 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var a = ''; // SurveyJS url. If blank, will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
-            var b = ''; // nRoll Plugin custom CSS url. Optional.
-            var c = ''; // nRoll Plugin custom javascript. Optional.
-            var d = ''; // Study website status. Options: preview,live. If blank, will default to live.
-            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d;
+            var a = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
+            var b = ''; // HTML content url. Required. No default. Plugin will fail without this file.
+            var c = ''; // nRoll Plugin custom CSS url. Optional.
+            var d = ''; // nRoll Plugin custom javascript. Optional.
+            var e = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
+            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-script';
+            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
         }) ();
     </script>
@@ -31,10 +32,11 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var surveyjs_url;
-    var customCSS_url;
-    var customJS_url;
-    var study_website_status;
+    var surveyjs_url = 'https://surveyjs.azureedge.net/0.12.19/survey.jquery.js'; // SurveyJS url parameter
+    var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
+    var customCSS_url; // nRoll Plugin custom CSS url parameter. No default.
+    var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
+    var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
     // var param1;  // first parameter from script_url;
     // var param2;  // second parameter from script_url;
@@ -51,7 +53,7 @@
     **/
 
     for (var i=0; i < all_scripts.length; i++) {
-        if (all_scripts[i].id == "nroll-script") {
+        if (all_scripts[i].id == "nroll-plugin") {
             script_url = all_scripts[i].src;
         }
     }
@@ -75,12 +77,15 @@
                 surveyjs_url = hash[1];
                 break;
             case 'b':
-                customCSS_url = hash[1];
+                html_content_url = hash[1];
                 break;
             case 'c':
-                customJS_url = hash[1];
+                customCSS_url = hash[1];
                 break;
             case 'd':
+                customJS_url = hash[1];
+                break;
+            case 'e':
                 study_website_status = hash[1];
                 break;
         }
@@ -88,17 +93,17 @@
 
     console.log(surveyjs_url,customCSS_url,customJS_url,study_website_status);
 
-    // // following validates param1.  Returns the input if valid or an empty string if not.
-    // param1 = ValidateParam1(param1);
+    // following validates param1.  Returns the input if valid or an empty string if not.
+    // surveyjs_url = ValidateParam1(surveyjs_url);
 
     // // following validates param2.  Returns the input if valid or an empty string if not.
-    // param2 = ValidateParam2(param2);
+    // customCSS_url = ValidateParam2(customCSS_url);
 
     // // following validates param3.  Returns the input if valid or an empty string if not.
-    // param3 = ValidateParam3(param3);
+    // customJS_url = ValidateParam3(customJS_url);
 
-    // // following validates param4.  Returns the input if valid or an empty string if not.
-    // param4 = ValidateParam4(param4);
+    // following validates param4.  Returns the input if valid or the default if blank or invalid.
+    study_website_status = ValidateParam4(study_website_status);
 
 
     // Chain load the scripts here in the order listed below...
@@ -109,8 +114,8 @@
         // where older versions of jQuery are already loaded and are required, will need to modify this
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
-        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
-        {"name": "Custom", "src": base_url + "custom.js"},
+        {"name": "SurveyJS", "src": surveyjs_url},
+        {"name": "Custom", "src": customJS_url},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
@@ -202,7 +207,7 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        AddStylesheet('custom', base_url + "custom.css");
+        AddStylesheet('custom', customCSS_url);
 
         // get the parameters passed into the page so that we can carry these forward if necessary
         // for example, to determine the country or language
@@ -238,7 +243,7 @@
     }
 
     /* ---------------------------------------------------------------------------------
-     * ValidateParam1(position)
+     * ValidateParam1(surveyjs_url)
      * ---------------------------------------------------------------------------------
      * This function is called to validate a widget position input.  If the position
      * input is valid, it is returned, otherwise null is returned.
@@ -287,30 +292,30 @@
     // }
 
     /* ---------------------------------------------------------------------------------
-     * ValidateParam3(param3)
+     * ValidateParam4(study_website_status)
      * ---------------------------------------------------------------------------------
-     * This function is called to validate a widget url auto button input.  If the param4
+     * This function is called to validate study_website_status.  If the param4
      * input is valid, it is returned, otherwise null is returned.  At the moment, the
      * only valid inputs are "left", "right", "none", and "test", but at some point we may allow 
      * additional values.  Note that the values "none" and "test", when passed in via
      * the load script url, will supercede values from the api response.
      * --------------------------------------------------------------------------------- */
-    // function Validateparam4(param4) {
+    function Validateparam4(param4) {
 
-    //     var param4_valid = false;
-    //     var arr = [ "left", "right", "none", "test" ];
+        var param4_valid = false;
+        var arr = [ "preview", "live" ];
 
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if (arr[i] == param4) {
-    //             param4_valid = true;
-    //         }
-    //     }
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == param4) {
+                param4_valid = true;
+            }
+        }
 
-    //     if (!param4_valid) {
-    //         param4 = "";
-    //     }
-    //     return param4;
-    // }
+        if (!param4_valid) {
+            param4 = "live";
+        }
+        return param4;
+    }
 
     /* --------------------------------------------------------------------------------------------------------
      * main()
@@ -332,7 +337,7 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            div.load(base_url+'content.html', function() {
+            div.load(html_content_url, function() {
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
