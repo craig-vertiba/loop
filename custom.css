@@ -36,3 +36,7 @@ r.btn-green {
 .panel-body h5 {
     font-size: 20px;
 }
+
+h5.nth-of-type(2) {
+    display:hidden:
+}
