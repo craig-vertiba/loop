@@ -91,7 +91,7 @@
         }
     }
 
-    console.log(surveyjs_url,customCSS_url,customJS_url,study_website_status);
+    console.log(surveyjs_url,html_content_url,customCSS_url,customJS_url,study_website_status);
 
     // following validates param1.  Returns the input if valid or an empty string if not.
     // surveyjs_url = ValidateParam1(surveyjs_url);
@@ -338,6 +338,7 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(html_content_url, function() {
+                console.log("here");
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
