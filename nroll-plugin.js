@@ -35,7 +35,7 @@
     var param1 = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // first parameter from script_url;
     var param2 = "https://craig-vertiba.github.io/nroll/content.html";  // second parameter from script_url;
     var param3 = "https://craig-vertiba.github.io/nroll/custom.css";  // third parameter from script_url;
-    var param4 = 'd';  // fourth parameter from script_url;
+    var param4 = "https://craig-vertiba.github.io/nroll/custom.js";  // fourth parameter from script_url;
  
     /*
      * iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
@@ -106,7 +106,8 @@
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         // {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
         {"name": "SurveyJS", "src": param1},
-        {"name": "Custom", "src": base_url + "custom.js"},
+        // {"name": "Custom", "src": base_url + "custom.js"},
+        {"name": "Custom", "src": param4},
     ];
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
