@@ -205,7 +205,7 @@
      *************************************************************************/
     function PreMain() {
         // Dynamically load the pre-requisite and local stylesheets
-
+console.log("premain");
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
         AddStylesheet('custom', customCSS_url);
 
