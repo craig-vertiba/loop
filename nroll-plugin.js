@@ -32,7 +32,7 @@
     // var utm_term;
     // var utm_content;
     // var asset_url;  //  may want to use this if the assets are in different location than the nroll script
-    var param1 = 'a';  // first parameter from script_url;
+    var param1 = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // first parameter from script_url;
     var param2 = 'b';  // second parameter from script_url;
     var param3 = 'c';  // third parameter from script_url;
     var param4 = 'd';  // fourth parameter from script_url;
@@ -104,7 +104,8 @@
         // where older versions of jQuery are already loaded and are required, will need to modify this
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
-        {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
+        // {"name": "SurveyJS", "src": "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"},
+        {"name": "SurveyJS", "src": param1},
         {"name": "Custom", "src": base_url + "custom.js"},
     ];
 
