@@ -104,8 +104,8 @@
     ];
 
     // If a custom js url is provided, add it to the scripts array
-    if (customjs_url) {
-        scripts.push({"name": "Custom", "src": customjs_url});
+    if (customJS_url) {
+        scripts.push({"name": "Custom", "src": customJS_url});
     }
 
 
