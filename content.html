@@ -7,8 +7,8 @@
         height: 400px;
         background-color: grey;
       }
-      #floating-panel {
-        position: absolute;
+      #postal-code-panel {
+        position: relative;
         top: 10px;
         left: 25%;
         z-index: 5;
@@ -26,12 +26,13 @@
     <div id="surveyElement"></div>
     <div id="surveyResult"></div>
     <div id="surveyScript"></div>
-    <div id="floating-panel">
-      <input id="address" type="textbox" placeholder="postal code">
-      <input id="submit" type="button" value="Geocode">
-    </div>
     <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
+    <div id="map">
+      <div id="postal-code-panel">
+        <input id="address" type="textbox" placeholder="postal code">
+        <input id="submit" type="button" value="Geocode">
+      </div>
+    </div>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&callback=initMap">
     </script>
