@@ -335,6 +335,7 @@
                     $("#surveyElement").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
+                    initMap();
                 });
                 $("#surveyElement").Survey({
                     model: survey,
