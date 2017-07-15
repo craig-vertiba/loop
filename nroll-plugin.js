@@ -333,7 +333,7 @@
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#surveyElement").css('display', 'none');
-                    $("#plugin-map").css('display', 'inline-block');
+                    $("#plugin-map").css('display', 'inline');
                 });
                 $("#surveyElement").Survey({
                     model: survey,
