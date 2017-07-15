@@ -40,3 +40,11 @@ r.btn-green {
 div#surveyElement2 h5:nth-of-type(1) {
     display:none;
 }
+
+.hide {
+    display:none;
+}
+
+.show {
+    display:block;
+}
