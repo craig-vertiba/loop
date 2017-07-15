@@ -331,8 +331,9 @@
                 Survey.Survey.cssType = "bootstrap";
                 var survey = new Survey.Model(surveyJSON);
                 survey.onComplete.add(function(result) {
-                    document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    div.css('display', 'none');
+                    // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
+                    $("#surveyElement").css('display', 'none');
+                    $("#map").css('display', 'inline-block');
                 });
                 $("#surveyElement").Survey({
                     model: survey,
