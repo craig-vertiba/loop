@@ -59,7 +59,7 @@
                 break;
             case 'b':
                 // If a parameter value for SurveyJS URL is passed in, use it, otherwise leave it unchanged.
-                if (hash[1] != null && hash[1] != "") {
+                if (hash[1] != null && hash[1] != "" && hash[1] != undefined ) {
                     surveyjs_url = hash[1];
                 }  
                 break;
@@ -102,7 +102,7 @@
     ];
 
     // If a custom js url is provided, add it to the scripts array
-    if (customJS_url != null && customJS_url != "") {
+    if (customJS_url != null && customJS_url != "" && customJS_url != undefined ) {
         scripts.push({"name": "Custom", "src": customJS_url});
     }
 
@@ -198,7 +198,7 @@
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
 
         // If a custom css url is provided, add it
-        if (customCSS_url != null && customCSS_url != "") {
+        if (customCSS_url != null && customCSS_url != "" && customCSS_url != undefined ) {
             AddStylesheet('custom', customCSS_url);
         }
 
