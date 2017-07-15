@@ -37,11 +37,6 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
-var var1 = "false";
-if(customJS_url == null) {
-    var1 = "true";
-}
-console.log(var1); 
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
      * We need the script url to retrieve the parameters that were included in the url.
@@ -64,7 +59,7 @@ console.log(var1);
                 break;
             case 'b':
                 // If a parameter value for SurveyJS URL is passed in, use it, otherwise leave it unchanged.
-                if (hash[1]) {
+                if (hash[1] != null && hash[1] != "") {
                     surveyjs_url = hash[1];
                 }  
                 break;
@@ -82,10 +77,6 @@ console.log(var1);
                 break;
         }
     }
-if(customJS_url == null) {
-    var1 = "true";
-}
-console.log(var1); 
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
@@ -111,7 +102,7 @@ console.log(var1);
     ];
 
     // If a custom js url is provided, add it to the scripts array
-    if (customJS_url) {
+    if (customJS_url != null && customJS_url != "") {
         scripts.push({"name": "Custom", "src": customJS_url});
     }
 
@@ -207,7 +198,7 @@ console.log(var1);
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
 
         // If a custom css url is provided, add it
-        if (customCSS_url) {
+        if (customCSS_url != null && customCSS_url != "") {
             AddStylesheet('custom', customCSS_url);
         }
 
