@@ -31,7 +31,8 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS url parameter
+    var study_id; // ID of the study, from the "Study ID" in the Study Detail record
+    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
@@ -49,24 +50,27 @@
     }
 
     // Following parses the param string of script_url and assigns values to
-    // surveyjs_url, html_content_url, customCSS_url, customJS_url and study_website_status.
+    // study_id, surveyjs_url, html_content_url, customCSS_url, customJS_url and study_website_status.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
         switch (hash[0]) {
             case 'a':  
+                study_id = hash[1];
+                break;
+            case 'b':  
                 surveyjs_url = hash[1];
                 break;
-            case 'b':
+            case 'c':
                 html_content_url = hash[1];
                 break;
-            case 'c':
+            case 'd':
                 customCSS_url = hash[1];
                 break;
-            case 'd':
+            case 'e':
                 customJS_url = hash[1];
                 break;
-            case 'e':
+            case 'f':
                 study_website_status = hash[1];
                 break;
         }
