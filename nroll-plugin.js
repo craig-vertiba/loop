@@ -37,7 +37,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
- 
+console.log(if(customJS_url)); 
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
      * We need the script url to retrieve the parameters that were included in the url.
