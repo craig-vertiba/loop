@@ -333,8 +333,10 @@
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#surveyElement").addClass("hide");
-                    $("#plugin-map, #postal-code-panel").removeClass("hide");
-                    $("#plugin-map, #postal-code-panel").addClass("show");
+                    $("#plugin-map").removeClass("hide");
+                    $("#plugin-map").addClass("show");
+                    $("#postal-code-panel").removeClass("hide");
+                    $("#postal-code-panel").addClass("show");
                     initMap();
                 });
                 $("#surveyElement").Survey({
