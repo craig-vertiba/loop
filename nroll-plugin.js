@@ -332,7 +332,7 @@
                 var survey = new Survey.Model(surveyJSON);
                 survey.onComplete.add(function(result) {
                     document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    div.style.display = "none";
+                    div.css('display', 'none');
                 });
                 $("#surveyElement").Survey({
                     model: survey,
