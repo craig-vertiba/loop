@@ -38,7 +38,7 @@
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
 var var1 = "false";
-if(customJS_url == "") {
+if(customJS_url == null) {
     var1 = "true";
 }
 console.log(var1); 
@@ -82,7 +82,7 @@ console.log(var1);
                 break;
         }
     }
-if(customJS_url == "") {
+if(customJS_url == null) {
     var1 = "true";
 }
 console.log(var1); 
