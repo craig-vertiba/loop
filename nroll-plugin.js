@@ -58,8 +58,11 @@
             case 'a':  
                 study_id = hash[1];
                 break;
-            case 'b':  
-                surveyjs_url = hash[1];
+            case 'b':
+                // If a parameter value for SurveyJS URL is passed in, use it, otherwise leave it unchanged.
+                if (hash[1]) {
+                    surveyjs_url = hash[1];
+                }  
                 break;
             case 'c':
                 html_content_url = hash[1];
@@ -98,8 +101,13 @@
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         {"name": "SurveyJS", "src": surveyjs_url},
-        {"name": "Custom", "src": customJS_url},
     ];
+
+    // If a custom js url is provided, add it to the scripts array
+    if (customjs_url) {
+        scripts.push({"name": "Custom", "src": customjs_url});
+    }
+
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
     // and used to keep track of progress through the script list.
@@ -190,7 +198,11 @@
         // Dynamically load the pre-requisite and local stylesheets
 
         AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-        AddStylesheet('custom', customCSS_url);
+
+        // If a custom css url is provided, add it
+        if (customCSS_url) {
+            AddStylesheet('custom', customCSS_url);
+        }
 
         // Parse the param string of url of the page that called this script looking for UTM parameters.
         // If found, assign them to the utm parameter variables.
