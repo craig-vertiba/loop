@@ -2,12 +2,13 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var a = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
-            var b = ''; // HTML content url. Required. No default. Plugin will fail without this file.
-            var c = ''; // nRoll Plugin custom CSS url. Optional.
-            var d = ''; // nRoll Plugin custom javascript. Optional.
-            var e = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
-            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e;
+            var a = ''; // Study ID. Mandatory. From the "Study ID" field in the Study Detail record.
+            var b = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
+            var c = ''; // HTML content url. Required. No default. Plugin will fail without this file.
+            var d = ''; // nRoll Plugin custom CSS url. Optional.
+            var e = ''; // nRoll Plugin custom javascript. Optional.
+            var f = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
+            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
