@@ -334,7 +334,7 @@
                 var survey2 = new Survey.Model(surveyJSON2);
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    $("#eligibility").addClass("hide");
+                    $("#plugin-eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
                     $("#site-finder").removeClass("hide");
