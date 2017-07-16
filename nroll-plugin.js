@@ -340,7 +340,7 @@
                     $("#plugin-eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
-                    console.log(surveyJSON3.temp);
+                    console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
                 });
                 $("#eligibility").Survey({
