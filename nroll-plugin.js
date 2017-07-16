@@ -337,15 +337,15 @@
                     $("#eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
-                    $("#site_finder").removeClass("hide");
-                    $("#site_finder").addClass("show");
+                    $("#site-finder").removeClass("hide");
+                    $("#site-finder").addClass("show");
                     initMap();
                 });
                 $("#eligibility").Survey({
                     model: survey,
                     data: data
                 });
-                $("#site_finder").Survey({
+                $("#site-finder").Survey({
                     model: survey2
                 });
 
