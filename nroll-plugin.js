@@ -327,9 +327,11 @@
             var div = $("#nroll-plugin");
             div.load(html_content_url, function() {
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
+                var surveyJSON2 = {pages:[{name:"page1",elements:[{type:"html",html:"Thank You</br></br>You may be eligible for this study.</br>Please search for your local study site",name:"zip message"}]}],showCompletedPage:false,showNavigationButtons:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false,storeOthersAsComment:false};
                 var data = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var survey = new Survey.Model(surveyJSON);
+                var survey2 = new Survey.Model(surveyJSON2);
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#surveyElement").addClass("hide");
@@ -343,6 +345,10 @@
                     model: survey,
                     data: data
                 });
+                $("#left-panel-content").Survey({
+                    model: survey2
+                });
+
 
             });
             
