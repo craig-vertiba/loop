@@ -42,7 +42,7 @@ div#eligibility .form-inline {
 }
 
 div#details .form-control {
-    padding: 5px 0 5px 0;
+    margin: 10px 0 10px 0;
 }
 
 /* following hides the Question titles of all of the questions in the details survey 
