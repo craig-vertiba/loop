@@ -22,12 +22,19 @@ div#site-finder .panel-body, div#eligibility .panel-body {
 }
 
 div#eligibility .panel-body {
-    width: 60%;
-    padding-left: 40%;
+    width: 70%;
+    padding-left: 30%;
 }
 
 div#eligibility .panel-body h5 {
     font-size: 20px;
+}
+
+div#eligibility .form-inline {
+    width: 70%;
+    padding-left: 30%;
+    font-size: 20px;
+    padding-top: 20px;
 }
 
 /* General custom styles go here */ 
