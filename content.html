@@ -1,26 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      #map {
-        width: 100%;
-        height: 400px;
-        background-color: grey;
-      }
-      #postal-code-panel {
-        position: absolute;
-        top: 100px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-    </style>
   </head>
   <body>
     <div id="surveyElement"></div>
@@ -31,7 +11,7 @@
       <input id="submit" type="button" value="Geocode">
     </div>
     <div id="plugin-map" class="hide">
-      <div style="width:50%"></div>
+      <div id="map-left-panel"></div>
       <div id="map"></div>
     </div>
     <script async defer
