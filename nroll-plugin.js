@@ -350,7 +350,7 @@
                     model: survey2
                 });
                 $("#details").Survey({
-                    model: survey2,
+                    model: survey3,
                     data: data3
                 });
                 $(document).on('click', '#continue', function() {
