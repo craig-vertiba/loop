@@ -337,8 +337,6 @@
                     $("#plugin-eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
-                    $("#site-finder").removeClass("hide");
-                    $("#site-finder").addClass("show");
                     initMap();
                 });
                 $("#eligibility").Survey({
