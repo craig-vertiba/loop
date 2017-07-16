@@ -45,6 +45,11 @@ div#details .form-control {
     margin-bottom: 20px;
 }
 
+div#details #sq_110 .form-inline {
+    padding-top: 5px;
+    width: 30%;
+}
+
 /* following hides the Question titles of all of the questions in the details survey 
  * then unhides the title for the fourth question 
  */
