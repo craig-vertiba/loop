@@ -69,6 +69,10 @@ div#eligibility .panel-body h5 {
   float:left;
 }
 
+#plugin-eligibility {
+  height: 100%;
+}
+
 #site-finder, #eligibility {
   position:relative;
   top: 50%;
