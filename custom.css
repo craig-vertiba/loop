@@ -51,8 +51,7 @@ div#details .form-control {
 div#details h5 {
     display:none;
 }
-#sq_110 > h5:nth-child(1) > span:nth-child(1)
-div#details #sq_110 > h5:nth-child(1) > span:nth-child(1) {
+div#details #sq_110 h5:nth-child(1)  {
     display:inline;
 }
 
