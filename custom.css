@@ -49,15 +49,10 @@ div#eligibility .panel-body h5 {
 }
 
 #postal-code-panel {
-  position: absolute;
-  top: 100px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
+  background-color: inherit;
   padding: 5px;
   border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
+  border-radius: 5px;
   line-height: 30px;
   padding-left: 10px;
 }
@@ -69,7 +64,7 @@ div#eligibility .panel-body h5 {
   float:left;
 }
 
-#plugin-eligibility {
+#plugin-eligibility, #site-finder-container {
   height: 100%;
 }
 
