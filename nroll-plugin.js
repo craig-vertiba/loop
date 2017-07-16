@@ -328,10 +328,13 @@
             div.load(html_content_url, function() {
                 var surveyJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var surveyJSON2 = {pages:[{name:"page1",elements:[{type:"html",html:"<span style=\"font-size:20px\">Thank You</span></br></br>You may be eligible for this study.</br>Please search for your local study site",name:"zip message"}]}],showCompletedPage:false,showNavigationButtons:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false,storeOthersAsComment:false};
+                var surveyJSON3 = {pages:[{name:"page1",elements:[{type:"html",html:"<span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.",name:"question1"},{type:"text",name:"question2",placeHolder:"NAME*"},{type:"text",name:"question3",placeHolder:"PHONE*"},{type:"text",name:"question4",placeHolder:"EMAIL*",validators:[{type:"email"}]},{type:"radiogroup",choices:["Email","Phone"],colCount:2,name:"question6",title:"CONTACT PREFERENCE"},{type:"html",html:"<span style=\"font-size:8px\">*Mandatory</span>",name:"question5"}]}]};
                 var data = {};   
+                var data3 = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var survey = new Survey.Model(surveyJSON);
                 var survey2 = new Survey.Model(surveyJSON2);
+                var survey3 = new Survey.Model(surveyJSON3);
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#plugin-eligibility").addClass("hide");
@@ -346,7 +349,15 @@
                 $("#site-finder").Survey({
                     model: survey2
                 });
-
+                $("#details").Survey({
+                    model: survey2,
+                    data: data3
+                });
+                $(document).on("click", "#continue", function() {
+                    $("#site-finder-container").addClass("hide");
+                    $("#details-container").removeClass("hide");
+                    $("#details-container").addClass("show");
+                });
 
             });
             
