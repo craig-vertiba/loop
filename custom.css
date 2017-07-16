@@ -56,12 +56,6 @@ div#eligibility .form-inline {
 }
 
 #postal-code-panel {
-  background-color: inherit;
-  padding: 5px;
-  border: 1px solid #999;
-  border-radius: 5px;
-  line-height: 30px;
-  padding-left: 10px;
 }
 
 #map-left-panel {
@@ -78,6 +72,7 @@ div#eligibility .form-inline {
 #site-finder-container, #eligibility {
   position:relative;
   top: 50%;
+  height: auto;
   transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
