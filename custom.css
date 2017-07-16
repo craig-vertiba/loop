@@ -75,7 +75,7 @@ div#eligibility .form-inline {
   height: 100%;
 }
 
-#site-finder, #eligibility {
+#site-finder-container, #eligibility {
   position:relative;
   top: 50%;
   transform: translateY(-50%);
