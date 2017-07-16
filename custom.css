@@ -11,13 +11,13 @@
  * Survey id prefixes are:
  * div#eligibility - for the eligibility survey
  * div#details
- * div#contact_info
- * div#ineligible_message
- * div#site_finder - for the survey that displays in the left panel when the Map opens
+ * div#contact-info
+ * div#ineligible-message
+ * div#site-finder - for the survey that displays in the left panel when the Map opens
  */
 
 
-div#site_finder .panel-body, div#eligibility .panel-body {
+div#site-finder .panel-body, div#eligibility .panel-body {
     text-align: center;
 }
 
@@ -69,7 +69,7 @@ div#eligibility .panel-body h5 {
   float:left;
 }
 
-#left-panel-content {
+#site-finder {
   top:40%;
   position:relative;
 }
