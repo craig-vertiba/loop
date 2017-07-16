@@ -77,6 +77,7 @@ div#surveyElement2 h5:nth-of-type(1) {
   float:left;
 }
 
-#map-left-panel span {
+#left-panel-content {
   top:40%;
+  height:100px;
 }
