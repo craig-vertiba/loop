@@ -51,8 +51,8 @@ div#details .form-control {
 div#details h5 {
     display:none;
 }
-
-div#details div div#sq_page.panel-body div div div:nth-child(5) h5 {
+#sq_110 > h5:nth-child(1) > span:nth-child(1)
+div#details #sq_110 > h5:nth-child(1) > span:nth-child(1) {
     display:inline;
 }
 
