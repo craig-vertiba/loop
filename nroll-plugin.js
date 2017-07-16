@@ -334,18 +334,18 @@
                 var survey2 = new Survey.Model(surveyJSON2);
                 survey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    $("#surveyElement").addClass("hide");
+                    $("#eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
-                    $("#postal-code-panel").removeClass("hide");
-                    $("#postal-code-panel").addClass("show");
+                    $("#site_finder").removeClass("hide");
+                    $("#site_finder").addClass("show");
                     initMap();
                 });
-                $("#surveyElement").Survey({
+                $("#eligibility").Survey({
                     model: survey,
                     data: data
                 });
-                $("#left-panel-content").Survey({
+                $("#site_finder").Survey({
                     model: survey2
                 });
 
