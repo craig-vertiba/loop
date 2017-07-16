@@ -353,7 +353,7 @@
                     model: survey2,
                     data: data3
                 });
-                $(document).on("click", "#continue", function() {
+                $(document).on('click', '#continue', function() {
                     $("#site-finder-container").addClass("hide");
                     $("#details-container").removeClass("hide");
                     $("#details-container").addClass("show");
