@@ -1,45 +1,36 @@
-r.btn-green {
-  background-color: #1ab394;
-  color: #fff;
-  border-radius: 3px;
-}
-
-.btn-green:hover, .btn-green:focus {
-    background-color: #18a689;
-    color: #fff;
-}
+/* Styles that apply to all surveys go here.  They are not prefixed with a survey id */
 
 .panel-footer {
+    text-align: center; /* aligns navigation buttons */
+    background-color: inherit;
+    border-top: none; /* removes the 1px top border */
+}
+
+/* Styles that apply to one or more individual surveys go here.  They should be prefixed by the survey elements's id,
+ * which is the same as the survey type in the Survey record detail.
+ * Survey id prefixes are:
+ * div#eligibility - for the eligibility survey
+ * div#details
+ * div#contact_info
+ * div#ineligible_message
+ * div#site_finder - for the survey that displays in the left panel when the Map opens
+ */
+
+
+div#site_finder .panel-body, div#eligibility .panel-body {
     text-align: center;
-    background-color: #fff;
-    border-top: none;
 }
 
-.form-inline .checkbox input[type="checkbox"], .form-inline .radio input[type="radio"] {
-    display: none;
-}
-
-.form-inline .checkbox label, .form-inline .radio label {
-    background-color: #6b62bd;
-    color: white;
-    padding: 5px 20px 5px 15px;
-    line-height: 2;
-    border-radius: 30px;
-}
-
-.panel-body {
-    text-align: center;
+div#eligibility .panel-body {
     width: 60%;
     padding-left: 40%;
 }
 
-.panel-body h5 {
+div#eligibility .panel-body h5 {
     font-size: 20px;
 }
 
-div#surveyElement2 h5:nth-of-type(1) {
-    display:none;
-}
+/* General custom styles go here */ 
 
 .hide {
     display:none;
