@@ -73,6 +73,7 @@ div#surveyElement2 h5:nth-of-type(1) {
 
 #map-left-panel {
   width:50%;
+  position:relative;
   text-align:center;
   float:left;
 }
