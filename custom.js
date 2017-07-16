@@ -1,10 +1,11 @@
 // GoogleMaps function:
 function initMap() {
   var locations = [
-     ['Title A', 40.025,-105.261, 1],
-     ['Title B', 40.035,-105.251, 2],
-     ['Title C', 40.045,-105.241, 3],
-     ['Title D', 40.055,-105.231, 4]
+     ['Mayo Clinic', 433.659101, -111.956419, 1],
+     ['Cleveland Clinic', 41.502910, -81.620959, 2],
+     ['Boulder Community Hospital', 40.016672, -105.236239, 3],
+     ['Johns Hopkins', 39.298154, -76.594253, 4],
+     ['Tufts Medical Center', 42.353467, -71.062980, 4]
   ];
   var uluru = {lat: 40.015, lng: -105.271};
   var map = new google.maps.Map(document.getElementById('map'), {
