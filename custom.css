@@ -84,3 +84,7 @@ div#eligibility .form-inline {
   -webkit-transform: translateY(-50%);
   -o-transform: translateY(-50%);
 }
+
+#details-container {
+    text-align:left;
+}
