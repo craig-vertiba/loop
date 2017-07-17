@@ -343,6 +343,9 @@
                     //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
                 });
+                detailsSurvey.onComplete.add(function(result) {
+                     document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
+                });
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
                     data: data
@@ -355,9 +358,9 @@
                     data: data3
                 });
                 $(document).on('click', '#continue', function() {
-                    //$("#site-finder-container").addClass("hide");
-                    //$("#details-container").removeClass("hide");
-                    //$("#details-container").addClass("show");
+                    $("#site-finder-container").addClass("hide");
+                    $("#details-container").removeClass("hide");
+                    $("#details-container").addClass("show");
                 });
 
             });
