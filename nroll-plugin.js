@@ -355,9 +355,9 @@
                     data: data3
                 });
                 $(document).on('click', '#continue', function() {
-                    $("#site-finder-container").addClass("hide");
-                    $("#details-container").removeClass("hide");
-                    $("#details-container").addClass("show");
+                    //$("#site-finder-container").addClass("hide");
+                    //$("#details-container").removeClass("hide");
+                    //$("#details-container").addClass("show");
                 });
 
             });
