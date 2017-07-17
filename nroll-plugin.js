@@ -335,12 +335,12 @@
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
                 var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
-                survey.onComplete.add(function(result) {
+                eligibilitySurvey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#plugin-eligibility").addClass("hide");
                     $("#plugin-map").removeClass("hide");
                     $("#plugin-map").addClass("show");
-                    console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
+                    //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
                 });
                 $("#eligibility").Survey({
