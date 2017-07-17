@@ -40,6 +40,13 @@ function geocodeAddress(geocoder, resultsMap) {
   var address = document.getElementById('address').value;
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {
+      var filtered_array = results[0].address_components.filter(function(address_component){
+        return address_component.types.includes("country");
+      }); 
+      var country_long = filtered_array.length ? filtered_array[0].long_name: "";
+      var country_short = filtered_array.length ? filtered_array[0].short_name: "";
+      console.log("country_long: ",country_long);
+      console.log("country_short: ",country_short);
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
         map: resultsMap,
