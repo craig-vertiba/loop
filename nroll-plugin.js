@@ -330,12 +330,14 @@
                 var siteFinderJSON = {pages:[{name:"page1",elements:[{type:"html",html:"<span style=\"font-size:20px\">Thank You</span></br></br>You may be eligible for this study.</br>Please search for your local study site",name:"zip message"}]}],showCompletedPage:false,showNavigationButtons:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false,storeOthersAsComment:false};
                 // var detailsJSON = {pages:[{name:"page1",elements:[{type:"html",temp:"temp",html:"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>",name:"question1"},{type:"text",name:"question2",placeHolder:"NAME*"},{type:"text",name:"question3",placeHolder:"PHONE*"},{type:"text",name:"question4",placeHolder:"EMAIL*",validators:[{type:"email"}]},{type:"radiogroup",choices:["Email","Phone"],colCount:2,name:"question6",title:"CONTACT PREFERENCE"},{type:"html",html:"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>",name:"question5"}]}],showCompletedPage:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false};
                 var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,title:"phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,title:"email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,title:"CONTACT PREFERENCE","colCount":2,"choices":["Email","Phone",]},{"type":"html","isRequired":true,"name":"mandatory","startWithNewLine":true,"html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
+                var successJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":false,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"hide","title":"","elements":[{"type":"html","isRequired":true,"name":"success message","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Thank you</span></br></br>Many thanks for your interest in XXXXXXXXXX Study.</br>One of our study team will be in touch shortly.</div>"},]},]};
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
                 var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
+                var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
                     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
                     $("#plugin-eligibility").addClass("hide");
@@ -345,7 +347,10 @@
                     initMap();
                 });
                 detailsSurvey.onComplete.add(function(result) {
-                     document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
+                     // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
+                    $("#details-container").addClass("hide");
+                    $("#success-container").removeClass("hide");
+                    $("#success-container").addClass("show");
                 });
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
@@ -357,6 +362,9 @@
                 $("#details").Survey({
                     model: detailsSurvey,
                     data: detailsData
+                });
+                $("#success").Survey({
+                    model: successSurvey
                 });
                 $(document).on('click', '#continue', function() {
                     $("#site-finder-container").addClass("hide");
