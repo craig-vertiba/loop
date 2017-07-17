@@ -348,6 +348,7 @@
                 });
                 detailsSurvey.onComplete.add(function(result) {
                      // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
+                    $("#details-container").removeClass("show");
                     $("#details-container").addClass("hide");
                     $("#success-container").removeClass("hide");
                     $("#success-container").addClass("show");
