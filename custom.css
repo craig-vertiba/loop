@@ -88,11 +88,11 @@ div#details #sq_110 h5:nth-child(1)  {
   float:left;
 }
 
-#plugin-eligibility, #site-finder-container, #details-container {
+#plugin-eligibility, #site-finder-container, #details-container, #success-container {
   height: 100%;
 }
 
-#site-finder-container, #eligibility, #details {
+#site-finder-container, #eligibility, #details, #success {
   position:relative;
   top: 50%;
   height: auto;
