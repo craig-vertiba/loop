@@ -389,14 +389,14 @@
             });
 
             function Show(element) {
-                if $(element).hasClass("hide") {
+                if ($(element).hasClass("hide")) {
                     $(element).removeClass("hide");
                 }
                 $(element).addClass("show");
             };
 
             function Hide(element) {
-                if $(element).hasClass("show") {
+                if ($(element).hasClass("show")) {
                     $(element).removeClass("show");
                 }
                 $(element).addClass("hide");
