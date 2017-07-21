@@ -326,6 +326,17 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
             div.load(html_content_url, function() {
+                // check to see if the appId cookie is set and if it is get the appId
+                // make plugin initiation call to API and include appId if available
+                // get all survey JSON
+                // get answer data if available
+                // show eligibility survey
+                // need to remember users location (zip/postal code/address)? probably not
+                // display map centered on selected site with all other sites hidden
+                // show site info at top of left panel and details survey below
+                // should have a "search again" button below selected site data
+                
+
                 var eligibilityJSON = {completeText:"Submit",pages:[{elements:[{type:"checkbox",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"checkbox",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
                 var siteFinderJSON = {pages:[{name:"page1",elements:[{type:"html",html:"<span style=\"font-size:20px\">Thank You</span></br></br>You may be eligible for this study.</br>Please search for your local study site",name:"zip message"}]}],showCompletedPage:false,showNavigationButtons:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false,storeOthersAsComment:false};
                 // var detailsJSON = {pages:[{name:"page1",elements:[{type:"html",temp:"temp",html:"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>",name:"question1"},{type:"text",name:"question2",placeHolder:"NAME*"},{type:"text",name:"question3",placeHolder:"PHONE*"},{type:"text",name:"question4",placeHolder:"EMAIL*",validators:[{type:"email"}]},{type:"radiogroup",choices:["Email","Phone"],colCount:2,name:"question6",title:"CONTACT PREFERENCE"},{type:"html",html:"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>",name:"question5"}]}],showCompletedPage:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false};
@@ -339,19 +350,21 @@
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
-                    // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    $("#plugin-eligibility").addClass("hide");
-                    $("#plugin-map").removeClass("hide");
-                    $("#plugin-map").addClass("show");
+                    // send results to API
+                    // if callback failedsurvey = false, execute the following:
+                    Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
+                    Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
+                    //$("#plugin-map").addClass("show");
                     //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
+                    // if callback failedsurvey= true, display the inelibible survey
                 });
                 detailsSurvey.onComplete.add(function(result) {
                      // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    $("#details-container").removeClass("show");
-                    $("#details-container").addClass("hide");
-                    $("#success-container").removeClass("hide");
-                    $("#success-container").addClass("show");
+                    Hide( "#details-container" ); // $("#details-container").removeClass("show");
+                    // $("#details-container").addClass("hide");
+                    Show( "#success-container" ); //$("#success-container").removeClass("hide");
+                    // $("#success-container").addClass("show");
                 });
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
@@ -368,13 +381,27 @@
                     model: successSurvey
                 });
                 $(document).on('click', '#continue', function() {
-                    $("#site-finder-container").addClass("hide");
-                    $("#details-container").removeClass("hide");
-                    $("#details-container").addClass("show");
+                    Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
+                    Show( "#details-container" ); // $("#details-container").removeClass("hide");
+                    // $("#details-container").addClass("show");
                 });
 
             });
-            
+
+            function Show(element) {
+                if $(element).hasClass("hide") {
+                    $(element).removeClass("hide");
+                }
+                $(element).addClass("show");
+            };
+
+            function Hide(element) {
+                if $(element).hasClass("show") {
+                    $(element).removeClass("show");
+                }
+                $(element).addClass("hide");
+            };
+
        }); // end jquery.documentready
 
         /*** NOTE - ANY FUNCTIONS DEFINED OUT HERE WILL NOT HAVE ACCESS TO JQUERY PROPERLY DUE TO jQuery.noConflict(true) ***/
@@ -472,5 +499,6 @@
       ( ( domain ) ? ";domain=" + domain : "" ) +
       ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
     }
+
 
 })(); // immediately call our anonymous function here...
