@@ -107,7 +107,7 @@
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
         {"name": "SurveyJS", "src": surveyjs_url},
-        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc"}
+        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry"}
     ];
 
     // If a custom js url is provided, add it to the scripts array
