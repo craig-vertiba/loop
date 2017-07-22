@@ -562,7 +562,7 @@
                     locations[i][4] = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
                     console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
                 }
-                locations[4].sort(function(a, b){return a-b});
+                locations.sort(function(a, b){return a[4]-b[4]});
                 for (i = 0; i < locations.length; i++) {
                     console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
                 }
