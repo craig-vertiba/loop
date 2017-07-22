@@ -39,7 +39,7 @@
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
     var locations = [
-         ['Mayo Clinic', 433.659101, -111.956419, 1],
+         ['Mayo Clinic', 33.5826, -111.7923, 1],
          ['Cleveland Clinic', 41.502910, -81.620959, 2],
          ['Boulder Community Hospital', 40.016672, -105.236239, 3],
          ['Johns Hopkins', 39.298154, -76.594253, 4],
@@ -351,6 +351,12 @@
                 var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,title:"phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,title:"email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,title:"CONTACT PREFERENCE","colCount":2,"choices":["Email","Phone",]},{"type":"html","isRequired":true,"name":"mandatory","startWithNewLine":true,"html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
                 var successJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":false,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"hide","title":"","elements":[{"type":"html","isRequired":true,"name":"success message","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Thank you</span></br></br>Many thanks for your interest in XXXXXXXXXX Study.</br>One of our study team will be in touch shortly.</div>"},]},]};
                 var sitesJSON = {sites:[{name:"Cleveland Clinic",lat:"41.5",long:"-81.622",id:"a0D6A000000B51ZUAS",street:"9105 Cedar Avenue",city:"Cleveland",state:"OH",country:"US"},{name:"Mayo Clinic",lat:"39.972",long:"-105.265",id:"a0D6A000000B51PUAS",street:"1550 blue sage court",city:"boulder",state:"co",country:"US"},]};
+                sitesJSON = $.parseJSON(sitesJSON);
+                for (var i = 0, len = sitesJSON.length; i < len; i++){
+                    console.log(sitesJSON[i][1],sitesJSON[i][2]);
+                    // img.setAttribute("src",obj[i][2] + obj[i][1]);
+                    // document.body.appendChild(img);
+                }
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
