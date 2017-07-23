@@ -571,6 +571,7 @@
                 }
                 locations.sort(function(a, b){return a[4]-b[4]});
                 for (i = 0; i < locations.length; i++) {
+                    locations[i][3] = i;
                     console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
                 }
             } else {
