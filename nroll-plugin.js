@@ -573,7 +573,7 @@
                 for (i = 0; i < locations.length; i++) {
                     locations[i][3] = i;
                     var d1 = document.getElementById('site-finder-container');
-                    d1.insertAdjacentHTML('beforeend', '<div>'+locations[i][0]+'</div>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left"></div><div style="width=50%;display:inline">'+locations[i][0]+'<br/>'+locations[i][1]+'</div><div style="width:30%;display:inline"></div></div>');
                     console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
                 }
             } else {
