@@ -561,7 +561,7 @@
                 });
                 for (i = 0; i < locations.length; i++) {
                     var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
-                    locations[i].distance] = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
+                    locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
                 locations.sort(function(a, b){return a[4]-b[4]});
