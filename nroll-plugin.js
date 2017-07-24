@@ -396,11 +396,6 @@
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
                     // $("#details-container").addClass("show");
                 });
-                $(document).on('click', '#submit', function() {
-                    geocoder = new google.maps.Geocoder();
-                    geocodeAddress(geocoder, map);
-                });
-
 
             });
 
@@ -516,35 +511,21 @@
       ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
     }
 
-
+    var lastmarker;
     // GoogleMaps function:
+    function initMap() {
       var uluru = {lat: 40.015, lng: -105.271};
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
+
         center: uluru
       });
       var infowindow = new google.maps.InfoWindow;
       var marker, i;
       var geocoder = new google.maps.Geocoder();
-      // document.getElementById('submit').addEventListener('click', function() {
-      //   geocodeAddress(geocoder, map);
-      // });
-      var marker = new google.maps.Marker({
-        position: uluru,
-        map: map
+      document.getElementById('submit').addEventListener('click', function() {
+        geocodeAddress(geocoder, map);
       });
-    function initMap() {
-      // var uluru = {lat: 40.015, lng: -105.271};
-      // var map = new google.maps.Map(document.getElementById('map'), {
-      //   zoom: 4,
-      //   center: uluru
-      // });
-      // var infowindow = new google.maps.InfoWindow;
-      // var marker, i;
-      // var geocoder = new google.maps.Geocoder();
-      // // document.getElementById('submit').addEventListener('click', function() {
-      // //   geocodeAddress(geocoder, map);
-      // // });
       // var marker = new google.maps.Marker({
       //   position: uluru,
       //   map: map
@@ -567,6 +548,9 @@
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
+                if (lastmarker) {
+                    lastmarker.setMap(null);
+                }
                 var filtered_array = results[0].address_components.filter(function(address_component){
                     return address_component.types.includes("country");
                 }); 
@@ -575,7 +559,7 @@
                 console.log("country_long: ",country_long);
                 console.log("country_short: ",country_short);
                 resultsMap.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
+                lastmarker = new google.maps.Marker({
                     map: resultsMap,
                     position: results[0].geometry.location
                 });
