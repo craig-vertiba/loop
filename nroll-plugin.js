@@ -396,6 +396,10 @@
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
                     // $("#details-container").addClass("show");
                 });
+                $(document).on('click', '#submit', function() {
+                    geocodeAddress(geocoder, map);
+                });
+
 
             });
 
@@ -522,9 +526,9 @@
       var infowindow = new google.maps.InfoWindow;
       var marker, i;
       var geocoder = new google.maps.Geocoder();
-      document.getElementById('submit').addEventListener('click', function() {
-        geocodeAddress(geocoder, map);
-      });
+      // document.getElementById('submit').addEventListener('click', function() {
+      //   geocodeAddress(geocoder, map);
+      // });
       var marker = new google.maps.Marker({
         position: uluru,
         map: map
