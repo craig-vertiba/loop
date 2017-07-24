@@ -38,7 +38,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
-    var locations = "[['Mayo Clinic', 33.5826, -111.7923, 1],['Cleveland Clinic', 41.502910, -81.620959, 2],['Boulder Community Hospital', 40.016672, -105.236239, 3],['Johns Hopkins', 39.298154, -76.594253, 4],['Tufts Medical Center', 42.353467, -71.062980, 4]],";
+    var locations = "[{'Mayo Clinic', 33.5826, -111.7923, 1},{'Cleveland Clinic', 41.502910, -81.620959, 2},{'Boulder Community Hospital', 40.016672, -105.236239, 3},{'Johns Hopkins', 39.298154, -76.594253, 4},{'Tufts Medical Center', 42.353467, -71.062980, 4}],";
     locations = JSON.parse(locations);
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
