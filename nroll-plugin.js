@@ -517,7 +517,6 @@
 
 
     // GoogleMaps function:
-    function initMap() {
       var uluru = {lat: 40.015, lng: -105.271};
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
@@ -533,6 +532,22 @@
         position: uluru,
         map: map
       });
+    function initMap() {
+      // var uluru = {lat: 40.015, lng: -105.271};
+      // var map = new google.maps.Map(document.getElementById('map'), {
+      //   zoom: 4,
+      //   center: uluru
+      // });
+      // var infowindow = new google.maps.InfoWindow;
+      // var marker, i;
+      // var geocoder = new google.maps.Geocoder();
+      // // document.getElementById('submit').addEventListener('click', function() {
+      // //   geocodeAddress(geocoder, map);
+      // // });
+      // var marker = new google.maps.Marker({
+      //   position: uluru,
+      //   map: map
+      // });
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
              position: new google.maps.LatLng(locations[i].lat, locations[i].long),
