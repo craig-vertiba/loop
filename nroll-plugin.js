@@ -39,7 +39,7 @@
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
 //    var locations = '[{"name":"Mayo Clinic","lat":"33.5826","long":"-111.7923","order":"1"},{"name":"Cleveland Clinic","lat":"41.502910","long":"-81.620959","order":"2"},{"name":"Boulder Community Hospital","lat":"40.016672","long":"-105.236239","order":"3"},{"name":"Johns Hopkins", "lat":"39.298154","long":"-76.594253","order":"4"},{"name":"Tufts Medical Center","lat":"42.353467","long":"-71.062980","order":"4"}]';
-    var locations = '{[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US"}]}';
+    var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US"}]';
     locations = JSON.parse(locations);
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
