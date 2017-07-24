@@ -397,6 +397,7 @@
                     // $("#details-container").addClass("show");
                 });
                 $(document).on('click', '#submit', function() {
+                    geocoder = new google.maps.Geocoder();
                     geocodeAddress(geocoder, map);
                 });
 
