@@ -564,12 +564,12 @@
                     locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
-                locations.sort(function(a, b){return a[4]-b[4]});
+                locations.sort(function(a, b){return a.distance-b.distance});
                 var d1 = document.getElementById('sites-list');
                 d1.innerHTML="";
                 for (i = 0; i < locations.length; i++) {
                     locations[i].order = i;
-                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px"></div><div style="width=60%;display:inline-block">'+locations[i][0]+'<br/>'+locations[i][1]+'</div><div style="width:20%;display:inline-block;min-height:1px"></div></div>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px"></div><div style="width=60%;display:inline-block">'+locations[i].name+'<br/>'+locations[i].lat+'</div><div style="width:20%;display:inline-block;min-height:1px"></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
             } else {
