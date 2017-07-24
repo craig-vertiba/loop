@@ -531,7 +531,7 @@
       });
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
-             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+             position: new google.maps.LatLng(locations[i].lat, locations[i].long),
              map: map
         });
 
@@ -560,17 +560,17 @@
                     position: results[0].geometry.location
                 });
                 for (i = 0; i < locations.length; i++) {
-                    var this_location = new google.maps.LatLng(locations[i][1], locations[i][2]);
-                    locations[i][4] = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
-                    console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
+                    var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    locations[i].distance] = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
+                    console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
                 locations.sort(function(a, b){return a[4]-b[4]});
                 var d1 = document.getElementById('sites-list');
                 d1.innerHTML="";
                 for (i = 0; i < locations.length; i++) {
-                    locations[i][3] = i;
+                    locations[i].order = i;
                     d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px"></div><div style="width=60%;display:inline-block">'+locations[i][0]+'<br/>'+locations[i][1]+'</div><div style="width:20%;display:inline-block;min-height:1px"></div></div>');
-                    console.log(locations[i][0],locations[i][1],locations[i][2],locations[i][3],locations[i][4]);
+                    console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
