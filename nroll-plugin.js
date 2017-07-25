@@ -41,6 +41,7 @@
 //    var locations = '[{"name":"Mayo Clinic","lat":"33.5826","long":"-111.7923","order":"1"},{"name":"Cleveland Clinic","lat":"41.502910","long":"-81.620959","order":"2"},{"name":"Boulder Community Hospital","lat":"40.016672","long":"-105.236239","order":"3"},{"name":"Johns Hopkins", "lat":"39.298154","long":"-76.594253","order":"4"},{"name":"Tufts Medical Center","lat":"42.353467","long":"-71.062980","order":"4"}]';
     var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US"}]';
     locations = JSON.parse(locations);
+    var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
      * We need the script url to retrieve the parameters that were included in the url.
@@ -347,6 +348,7 @@
                 var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,title:"phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,title:"email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,title:"CONTACT PREFERENCE","colCount":2,"choices":["Email","Phone",]},{"type":"html","isRequired":true,"name":"mandatory","startWithNewLine":true,"html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
                 var successJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":false,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"hide","title":"","elements":[{"type":"html","isRequired":true,"name":"success message","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Thank you</span></br></br>Many thanks for your interest in XXXXXXXXXX Study.</br>One of our study team will be in touch shortly.</div>"},]},]};
                 var sitesJSON = {"sites":[{"name":"Cleveland Clinic","lat":"41.5","long":"-81.622","id":"a0D6A000000B51ZUAS","street":"9105 Cedar Avenue","city":"Cleveland","state":"OH","country":"US"},{"name":"Site","lat":"33.583","long":"-111.792","id":"a0D6A000000B51PUAS","street":"13400 E. Shea Blvd.","city":"Scottsdale","state":"AZ","country":"US"},]};
+                // mapCenter = (get this from the initialization JSON);
                 console.log(sitesJSON.sites[0].name);
                 // sitesJSON = JSON.parse(sitesJSON);
                 // for (var i = 0, len = sitesJSON.length; i < len; i++){
@@ -515,11 +517,10 @@
     var lastmarker;
     // GoogleMaps function:
     function initMap() {
-      var uluru = {lat: 40.015, lng: -105.271};
+      var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
-
-        center: uluru
+        center: uluru // replace with mapCenter
       });
       var infowindow = new google.maps.InfoWindow;
       var marker, i;
@@ -539,7 +540,7 @@
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
              return function() {
-                 infowindow.setContent(locations[i][0]);
+                 infowindow.setContent(locations[i].name);
                  infowindow.open(map, marker);
              }
         })(marker, i));
