@@ -434,7 +434,7 @@
                 contentType: "application/x-www-form-urlencoded",
                 success: function (data) {
                     alert(data);
-                }
+                },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     alert("some error");
                 }
