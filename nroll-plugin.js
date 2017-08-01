@@ -419,6 +419,7 @@
 
             function gettoken()
             {
+                console.log("in gettoken");
                 var param = {
                   grant_type: "password",
                   client_id : "3MVG9sLbBxQYwWqszWUi_utes8J._m1TRh2ytppkiWGjl9V45LNsP6lrO8fBh9vp2PeZqjRLOvvd9.AhHKq8P",
