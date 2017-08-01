@@ -435,8 +435,8 @@
                 success: function (data) {
                     alert(data);
                 },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("some error");
+                error: function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
                 }
 
             });
