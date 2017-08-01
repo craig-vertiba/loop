@@ -427,7 +427,7 @@
                   username:"nroll.sysadmin%40langlandorg.com.dev2",
                   password:"nrollsysadmin2ITTYudvIeDt4TBiC5BF9epGh"};
             $.ajax({
-                url: 'https://cs14.salesforce.com/services/oauth2/token',
+                url: 'https://login.cs14.salesforce.com/services/oauth2/token',
                 type: 'POST',
                 data: param,
                 dataType: "json",
