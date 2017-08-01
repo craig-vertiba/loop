@@ -435,8 +435,8 @@
                 success: function (data) {
                     alert(data);
                 }
-                failure: function () {
-                    console.log("failed");
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
                 }
 
             });
