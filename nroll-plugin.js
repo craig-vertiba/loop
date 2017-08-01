@@ -435,6 +435,9 @@
                 success: function (data) {
                     alert(data);
                 }
+                failure: function () {
+                    console.log("failed");
+                }
 
             });
             }
