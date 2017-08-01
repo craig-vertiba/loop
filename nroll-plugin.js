@@ -435,8 +435,9 @@
                 success: function (data) {
                     alert(data);
                 },
-                error: function(xhr, ajaxOptions, thrownError){
-                    alert(xhr.status);
+                error: function(xhr,err){
+                    alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+                    alert("responseText: "+xhr.responseText);
                 }
 
             });
