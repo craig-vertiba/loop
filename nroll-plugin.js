@@ -356,7 +356,7 @@
                 //     // img.setAttribute("src",obj[i][2] + obj[i][1]);
                 //     // document.body.appendChild(img);
                 // }
-                gettoken();
+                // gettoken();
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
