@@ -417,31 +417,31 @@
                 $(element).addClass("hide");
             };
 
-            function gettoken()
-            {
-                console.log("in gettoken");
-                var param = {
-                  grant_type: "password",
-                  client_id : "3MVG9sLbBxQYwWqszWUi_utes8J._m1TRh2ytppkiWGjl9V45LNsP6lrO8fBh9vp2PeZqjRLOvvd9.AhHKq8P",
-                  client_secret : "1498148715654130436",
-                  username:"nroll.sysadmin@langlandorg.com.dev2",
-                  password:"nrollsysadmin2ITTYudvIeDt4TBiC5BF9epGh"};
-            $.ajax({
-                url: 'https://cs14.salesforce.com/services/oauth2/token',
-                type: 'POST',
-                data: param,
-                dataType: "json",
-                contentType: "application/x-www-form-urlencoded",
-                success: function (data) {
-                    alert(data);
-                },
-                error: function(xhr,err){
-                    alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-                    alert("responseText: "+xhr.responseText);
-                }
+            // function gettoken()
+            // {
+            //     console.log("in gettoken");
+            //     var param = {
+            //       grant_type: "password",
+            //       client_id : "3MVG9sLbBxQYwWqszWUi_utes8J._m1TRh2ytppkiWGjl9V45LNsP6lrO8fBh9vp2PeZqjRLOvvd9.AhHKq8P",
+            //       client_secret : "1498148715654130436",
+            //       username:"nroll.sysadmin@langlandorg.com.dev2",
+            //       password:"nrollsysadmin2ITTYudvIeDt4TBiC5BF9epGh"};
+            // $.ajax({
+            //     url: 'https://cs14.salesforce.com/services/oauth2/token',
+            //     type: 'POST',
+            //     data: param,
+            //     dataType: "json",
+            //     contentType: "application/x-www-form-urlencoded",
+            //     success: function (data) {
+            //         alert(data);
+            //     },
+            //     error: function(xhr,err){
+            //         alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+            //         alert("responseText: "+xhr.responseText);
+            //     }
 
-            });
-            }
+            // });
+            // }
 
         }); // end jquery.documentready
 
