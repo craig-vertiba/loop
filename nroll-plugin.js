@@ -565,7 +565,6 @@
              position: new google.maps.LatLng(locations[i].lat, locations[i].long),
              map: map
         });
-
           
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
              return function() {
