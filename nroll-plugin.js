@@ -566,6 +566,7 @@
              map: map
         });
 
+          
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
              return function() {
                  infowindow.setContent(locations[i].name);
