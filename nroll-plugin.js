@@ -348,7 +348,7 @@
                 var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,title:"phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,title:"email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,title:"CONTACT PREFERENCE","colCount":2,"choices":["Email","Phone",]},{"type":"html","isRequired":true,"name":"mandatory","startWithNewLine":true,"html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
                 var successJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":false,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"hide","title":"","elements":[{"type":"html","isRequired":true,"name":"success message","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Thank you</span></br></br>Many thanks for your interest in XXXXXXXXXX Study.</br>One of our study team will be in touch shortly.</div>"},]},]};
                 // var sitesJSON = {"sites":[{"name":"Cleveland Clinic","lat":"41.5","long":"-81.622","id":"a0D6A000000B51ZUAS","street":"9105 Cedar Avenue","city":"Cleveland","state":"OH","country":"US"},{"name":"Site","lat":"33.583","long":"-111.792","id":"a0D6A000000B51PUAS","street":"13400 E. Shea Blvd.","city":"Scottsdale","state":"AZ","country":"US"},]};
-                var sitesJSON = {"sites":[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]};
+                var siteFinderJSON = {pages:[{name:"page1",elements:[{type:"html",html:"<span style=\"font-size:20px\">Thank You</span></br></br>You may be eligible for this study.</br>Please search for your local study site",name:"zip message"}]}],showCompletedPage:false,showNavigationButtons:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false,storeOthersAsComment:false};
                 // mapCenter = (get this from the initialization JSON);
                 console.log(sitesJSON.sites[0].name);
                 // sitesJSON = JSON.parse(sitesJSON);
@@ -543,6 +543,8 @@
     }
 
     var lastmarker;
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var labelIndex = 0;
     // GoogleMaps function:
     function initMap() {
       var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
@@ -565,7 +567,7 @@
              position: new google.maps.LatLng(locations[i].lat, locations[i].long),
              map: map
         });
-          
+
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
              return function() {
                  infowindow.setContent(locations[i].name);
@@ -578,21 +580,20 @@
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
-                if (lastmarker) {
-                    lastmarker.setMap(null);
-                }
-                var filtered_array = results[0].address_components.filter(function(address_component){
-                    return address_component.types.includes("country");
-                }); 
-                var country_long = filtered_array.length ? filtered_array[0].long_name: "";
-                var country_short = filtered_array.length ? filtered_array[0].short_name: "";
-                console.log("country_long: ",country_long);
-                console.log("country_short: ",country_short);
+                setMapOnAll();
+                markers = [];
+
+                // if (lastmarker) {
+                //     lastmarker.setMap(null);
+                // }
+                // var filtered_array = results[0].address_components.filter(function(address_component){
+                //     return address_component.types.includes("country");
+                // }); 
+                // var country_long = filtered_array.length ? filtered_array[0].long_name: "";
+                // var country_short = filtered_array.length ? filtered_array[0].short_name: "";
+                // console.log("country_long: ",country_long);
+                // console.log("country_short: ",country_short);
                 resultsMap.setCenter(results[0].geometry.location);
-                lastmarker = new google.maps.Marker({
-                    map: resultsMap,
-                    position: results[0].geometry.location
-                });
                 for (i = 0; i < locations.length; i++) {
                     var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
                     locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
@@ -606,6 +607,25 @@
                     d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px"></div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="'+locations[i].order+'">Select</button></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
+                for (i = 0; i < locations.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+                        label: 'A';
+                        map: map
+                    });
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(locations[i].name);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                }
+
+                lastmarker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
