@@ -617,12 +617,12 @@
                         label: 'A',
                         map: resultsMap
                     });
-                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                        return function() {
-                            infowindow.setContent(locations[i].zip);
-                            infowindow.open(resultsMap, marker);
-                        }
-                    })(marker, i));
+                    // google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    //     return function() {
+                    //         infowindow.setContent(locations[i].zip);
+                    //         infowindow.open(resultsMap, marker);
+                    //     }
+                    // })(marker, i));
                 }
 
                 lastmarker = new google.maps.Marker({
