@@ -544,6 +544,7 @@
     var lastmarker;
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
+    var marker;
     // GoogleMaps function:
     function initMap() {
       var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
@@ -552,7 +553,8 @@
         center: uluru // replace with mapCenter
       });
       var infowindow = new google.maps.InfoWindow;
-      var marker, i;
+      // var marker, i;
+      var i;
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
