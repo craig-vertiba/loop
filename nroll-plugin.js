@@ -610,12 +610,12 @@
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
                         label: 'A',
-                        map: map
+                        map: resultMap
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                             infowindow.setContent(locations[i].zip);
-                            infowindow.open(map, marker);
+                            infowindow.open(resultsMap, marker);
                         }
                     })(marker, i));
                 }
