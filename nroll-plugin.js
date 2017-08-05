@@ -602,7 +602,7 @@
             lastmarker.setMap(null);
         }
         // recenter the map on the selected site location
-        resultsMap.setCenter(locations[id].lat, locations[id].long);
+        resultsMap.setCenter(google.maps.LatLng(locations[id].lat, locations[id].long));
 
         console.log('in siteSelected'+id);
     }
