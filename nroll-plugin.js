@@ -615,7 +615,7 @@
                 markers = [];
                 var a;
                 for (i = 0; i < locations.length; i++) {
-                    a = locations[i] + 1;
+                    a = locations[i].order + 1;
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
                         label: a.toString(),
