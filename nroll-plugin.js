@@ -588,6 +588,8 @@
                 if (lastmarker) {
                     lastmarker.setMap(null);
                 }
+                var a;
+
                 // var filtered_array = results[0].address_components.filter(function(address_component){
                 //     return address_component.types.includes("country");
                 // }); 
@@ -605,15 +607,15 @@
                 var d1 = document.getElementById('sites-list');
                 d1.innerHTML="";
                 for (i = 0; i < locations.length; i++) {
+                    a = i + 1;
                     locations[i].order = i;
-                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px"></div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="'+locations[i].order+'">Select</button></div></div>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="'+locations[i].order+'">Select</button></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
                 for (i = 0; i < marker.length; i++) {
                     marker[i].setMap(null);
                 }
                 markers = [];
-                var a;
                 for (i = 0; i < locations.length; i++) {
                     a = locations[i].order + 1;
                     marker = new google.maps.Marker({
