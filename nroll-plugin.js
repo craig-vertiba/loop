@@ -588,13 +588,13 @@
         // delete any html already attached to that element (like a previously selected site)
         d1.innerHTML="";
         // add new html to display the selected site
-        var id = Number(clicked_id.slice(9));
-        var a = id + 1;
-        d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[id].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
+        var i = Number(clicked_id.slice(9));
+        var a = i + 1;
+        d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
         // hide all the markers except the marker for the selected site
-        for (i = 0; i < marker.length; i++) {
-            if (i != id) {
-                marker[i].setMap(null);
+        for (j = 0; j < marker.length; j++) {
+            if (j != i) {
+                marker[j].setMap(null);
             }
         }
         // hide the user's current location marker
@@ -602,9 +602,9 @@
             lastmarker.setMap(null);
         }
         // recenter the map on the selected site location
-        resultsMap.setCenter(google.maps.LatLng(locations[id].lat, locations[id].long));
+        resultsMap.setCenter(google.maps.LatLng(locations[i].lat, locations[i].long));
 
-        console.log('in siteSelected'+id);
+        console.log('in siteSelected'+i);
     }
     function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
