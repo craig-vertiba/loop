@@ -610,7 +610,7 @@
                 for (i = 0; i < locations.length; i++) {
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-                        label: 'A';
+                        label: 'A',
                         map: map
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
