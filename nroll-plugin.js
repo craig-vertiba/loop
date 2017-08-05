@@ -585,9 +585,9 @@
 
                 // setMapOnAll(null);
 
-                // if (lastmarker) {
-                //     lastmarker.setMap(null);
-                // }
+                if (lastmarker) {
+                    lastmarker.setMap(null);
+                }
                 // var filtered_array = results[0].address_components.filter(function(address_component){
                 //     return address_component.types.includes("country");
                 // }); 
