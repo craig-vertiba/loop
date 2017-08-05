@@ -615,7 +615,7 @@
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
                         label: 'A',
-                        map: resultMap
+                        map: resultsMap
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
