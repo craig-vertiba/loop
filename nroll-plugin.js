@@ -577,6 +577,9 @@
         })(marker, i));
       }
     }
+    function siteSelected(resultsMap) {
+        console.log('in siteSelected');
+    }
     function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
@@ -609,8 +612,11 @@
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
                     locations[i].order = i;
-                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="'+locations[i].order+'">Select</button></div></div>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'">Select</button></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
+                    document.getElementById('location-' + i).addEventListener('click', function() {
+                        siteSelected(resultsMap);
+                    });
                 }
                 for (i = 0; i < marker.length; i++) {
                     marker[i].setMap(null);
