@@ -582,7 +582,7 @@
         })(marker, i));
       }
     }
-    function siteSelected(resultsMap,clicked_id) {
+    function siteSelected(resultsMap,clicked_id,locations) {
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
         // delete any html already attached to that element (like a previously selected site)
