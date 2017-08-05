@@ -581,6 +581,8 @@
         var address = document.getElementById('address').value;
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
+                var infowindow = new google.maps.InfoWindow;
+
                 // setMapOnAll(null);
 
                 // if (lastmarker) {
@@ -614,15 +616,15 @@
                 for (i = 0; i < locations.length; i++) {
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-                        label: 'A',
+                        label: locations[i].order + 1,
                         map: resultsMap
                     });
-                    // google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    //     return function() {
-                    //         infowindow.setContent(locations[i].zip);
-                    //         infowindow.open(resultsMap, marker);
-                    //     }
-                    // })(marker, i));
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(locations[i].name);
+                            infowindow.open(resultsMap, marker);
+                        }
+                    })(marker, i));
                 }
 
                 lastmarker = new google.maps.Marker({
