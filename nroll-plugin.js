@@ -590,7 +590,7 @@
         // add new html to display the selected site
         //d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
 
-        console.log('in siteSelected'+clicked_id);
+        console.log('in siteSelected'+clicked_id.slice(9));
     }
     function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
