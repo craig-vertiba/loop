@@ -584,11 +584,13 @@
     }
     function siteSelected(resultsMap,clicked_id) {
         // get the page element to which we need to add the selected site
-        //var d1 = document.getElementById('selected-site');
+        var d1 = document.getElementById('selected-site');
         // delete any html already attached to that element (like a previously selected site)
-        //d1.innerHTML="";
+        d1.innerHTML="";
         // add new html to display the selected site
-        //d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
+        var index = clicked_id.slice(9);
+        var a = index + 1;
+        d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
 
         console.log('in siteSelected'+clicked_id.slice(9));
     }
