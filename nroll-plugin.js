@@ -400,6 +400,11 @@
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
                     // $("#details-container").addClass("show");
                 });
+                $(document).on('click', '.site-selector', function() {
+                    Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
+                    Show( "#details-container" ); // $("#details-container").removeClass("hide");
+                    // $("#details-container").addClass("show");
+                });
 
             });
 
@@ -585,14 +590,11 @@
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
                 var infowindow = new google.maps.InfoWindow;
-
-                // setMapOnAll(null);
-
+                var a;
+                // if it exists, remove the marker of the user's location from the map
                 if (lastmarker) {
                     lastmarker.setMap(null);
                 }
-                var a;
-
                 // var filtered_array = results[0].address_components.filter(function(address_component){
                 //     return address_component.types.includes("country");
                 // }); 
@@ -600,28 +602,39 @@
                 // var country_short = filtered_array.length ? filtered_array[0].short_name: "";
                 // console.log("country_long: ",country_long);
                 // console.log("country_short: ",country_short);
+
+                // recenter the map on the user's new location
                 resultsMap.setCenter(results[0].geometry.location);
+                // iterate through the site locations and calculate the distance from each to the user's new location
                 for (i = 0; i < locations.length; i++) {
                     var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
                     locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
+                // sort the site locations in ascending order of distance from the user's new location
                 locations.sort(function(a, b){return a.distance-b.distance});
+                // get the page element to which we need to add the list of sites
                 var d1 = document.getElementById('sites-list');
+                // delete any html already attached to that element (like a prior list of sites)
                 d1.innerHTML="";
+                // add new html to display the list of sites, and add event listeners to all the select buttons
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
                     locations[i].order = i;
-                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'">Select</button></div></div>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                     document.getElementById('location-' + i).addEventListener('click', function() {
                         siteSelected(resultsMap);
                     });
                 }
+                // clear all existing site location markers from the map
                 for (i = 0; i < marker.length; i++) {
                     marker[i].setMap(null);
                 }
+                // reinitialize the marker array
                 markers = [];
+                // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
+                // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
                     a = locations[i].order + 1;
                     marker = new google.maps.Marker({
@@ -636,7 +649,7 @@
                         }
                     })(marker, i));
                 }
-
+                // add a marker for the user's new location
                 lastmarker = new google.maps.Marker({
                     map: resultsMap,
                     position: results[0].geometry.location
