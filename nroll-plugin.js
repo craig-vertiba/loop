@@ -590,7 +590,7 @@
         // add new html to display the selected site
         var i = Number(clicked_id.slice(9));
         var a = i + 1;
-        d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
+        d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
 
         console.log('in siteSelected'+i);
     }
