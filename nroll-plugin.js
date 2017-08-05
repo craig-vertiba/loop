@@ -613,10 +613,12 @@
                     marker[i].setMap(null);
                 }
                 markers = [];
+                var a;
                 for (i = 0; i < locations.length; i++) {
+                    a = locations[i] + 1;
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-                        label: locations[i].order + 1,
+                        label: a.toString(),
                         map: resultsMap
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
