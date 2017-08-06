@@ -611,7 +611,7 @@
         // delete any html already attached to that element (like a previously selected site)
         d1.innerHTML="";
         // add new html to display the selected site
-        d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
+        d1.insertAdjacentHTML('beforeend', '<div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
         // add an event listener to the change button
         document.getElementById('change-location').addEventListener('click', function() {
             changeSite(resultsMap);
@@ -665,7 +665,7 @@
                 // add new html to display the list of sites, and add event listeners to all the select buttons
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
-                    d1.insertAdjacentHTML('beforeend', '<div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div><hr>');
+                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
                     document.getElementById('location-' + i).addEventListener('click', function() {
                         siteSelected(resultsMap,this.id);
                     });
