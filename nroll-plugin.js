@@ -588,6 +588,19 @@ console.log(markers.length);
       map.fitBounds(bounds);
     }
     function changeSite(resultsMap) {
+        // show all the markers
+        for (j = 0; j < markers.length; j++) {
+            if (j != i) {
+                markers[j].setVisible(true);
+            }
+        }
+        // show the user's current location marker
+        if (lastmarker) {
+            lastmarker.setVisible(true);
+        }
+        // center the map on the user's current marker
+        resultsMap.setCenter(lastmarker.position);
+        resultsMap.setZoom(4);
 
     }
     function siteSelected(resultsMap,clicked_id) {
@@ -606,13 +619,11 @@ console.log(markers.length);
         // hide all the markers except the marker for the selected site
         for (j = 0; j < markers.length; j++) {
             if (j != i) {
-                //markers[j].setMap(null);
                 markers[j].setVisible(false);
             }
         }
         // hide the user's current location marker
         if (lastmarker) {
-            // lastmarker.setMap(null);
             lastmarker.setVisible(false);
         }
         // recenter the map on the selected site location
@@ -694,7 +705,6 @@ console.log(markers.length);
                     map: resultsMap,
                     position: results[0].geometry.location
                 });
-
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
