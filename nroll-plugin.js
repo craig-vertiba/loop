@@ -594,6 +594,7 @@
         // hide all the markers except the marker for the selected site
         for (j = 0; j < marker.length; j++) {
             if (j != i) {
+                console.log(j+i);
                 marker[j].setMap(null);
             }
         }
