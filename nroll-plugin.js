@@ -665,7 +665,7 @@
                 // add new html to display the list of sites, and add event listeners to all the select buttons
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
-                    d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
+                    d1.insertAdjacentHTML('beforeend', '<div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div><hr>');
                     document.getElementById('location-' + i).addEventListener('click', function() {
                         siteSelected(resultsMap,this.id);
                     });
