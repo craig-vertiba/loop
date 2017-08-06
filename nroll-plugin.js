@@ -553,7 +553,7 @@
     var bounds;
     // GoogleMaps function:
     function initMap() {
-      var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
+      var uluru = {lat: 60.015, lng: -105.271}; // replace with mapCenter
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: uluru // replace with mapCenter
