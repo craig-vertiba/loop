@@ -108,11 +108,10 @@ div#details #sq_110 h5:nth-child(1)  {
 }
 
 #postal-code-panel {
-    padding-tip: 2vw;
+    padding-top: 2vw;
 }
 
 #your-nearest-study-center {
-    line-height: 5;
     font-size: 150%;
 }
 
