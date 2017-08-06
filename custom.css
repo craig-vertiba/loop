@@ -120,3 +120,7 @@ div#details #sq_110 h5:nth-child(1)  {
     font-size: 2vw;
     padding-bottom: 2vw;
 }
+
+hr:nth-of-type(1){
+    margin-top: 2vw;
+}
