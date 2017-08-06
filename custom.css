@@ -108,7 +108,7 @@ div#details #sq_110 h5:nth-child(1)  {
 }
 
 #postal-code-panel {
-    height: 50px;
+    padding-tip: 2vw;
 }
 
 #your-nearest-study-center {
