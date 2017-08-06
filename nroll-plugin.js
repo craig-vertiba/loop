@@ -38,7 +38,6 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
-//    var locations = '[{"name":"Mayo Clinic","lat":"33.5826","long":"-111.7923","order":"1"},{"name":"Cleveland Clinic","lat":"41.502910","long":"-81.620959","order":"2"},{"name":"Boulder Community Hospital","lat":"40.016672","long":"-105.236239","order":"3"},{"name":"Johns Hopkins", "lat":"39.298154","long":"-76.594253","order":"4"},{"name":"Tufts Medical Center","lat":"42.353467","long":"-71.062980","order":"4"}]';
     var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
     locations = JSON.parse(locations);
     var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
@@ -652,7 +651,6 @@
                 for (i = 0; i < locations.length; i++) {
                     var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
                     locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
-                    console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                 }
                 // sort the site locations in ascending order of distance from the user's new location
                 locations.sort(function(a, b){return a.distance-b.distance});
@@ -663,7 +661,6 @@
                 // add new html to display the list of sites, and add event listeners to all the select buttons
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
-                    locations[i].order = i;
                     d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
                     document.getElementById('location-' + i).addEventListener('click', function() {
                         siteSelected(resultsMap,this.id);
@@ -678,7 +675,7 @@
                 // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
                 // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
-                    a = locations[i].order + 1;
+                    a = i + 1;
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
                         label: a.toString(),
