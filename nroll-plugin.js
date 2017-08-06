@@ -400,6 +400,7 @@
                 // });
                 $(document).on('click', '#submit', function() {
                     Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
+                    Show( "#your-nearest-study-center" );
                 });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
