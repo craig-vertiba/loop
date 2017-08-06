@@ -657,7 +657,7 @@
                     marker[i].setMap(null);
                 }
                 // empty the marker array
-                markers.length = 0;
+                marker.length = 0;
                 // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
                 // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
