@@ -593,6 +593,7 @@
         d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
         // hide all the markers except the marker for the selected site
         for (j = 0; j < marker.length; j++) {
+                console.log(j+i);
             if (j != i) {
                 console.log(j+i);
                 marker[j].setMap(null);
