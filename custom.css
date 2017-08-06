@@ -136,3 +136,7 @@ hr {
 #selected-site {
     padding-top: 12vh;
 }
+
+#selected-site-name {
+    font-size: 1.2em;
+}
