@@ -113,6 +113,7 @@ div#details #sq_110 h5:nth-child(1)  {
 
 #your-nearest-study-center {
     font-size: 150%;
+    padding: 2vw 0 2vw;
 }
 
 #success-header, #site-finder-header {
