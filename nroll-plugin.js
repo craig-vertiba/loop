@@ -589,18 +589,31 @@
         d1.innerHTML="";
         // add new html to display the selected site
         var i = Number(clicked_id.slice(9));
-        var j;
+        // var j;
         var a = i + 1;
         d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
         // hide all the markers except the marker for the selected site
-        console.log(marker.length);
-        for (j = 0; j < marker.length; j++) {
-                console.log(j+i);
-            if (j != i) {
-                console.log(j+i);
-                marker[j].setMap(null);
-            }
+        // console.log(marker.length);
+        // for (j = 0; j < marker.length; j++) {
+        //         console.log(j+i);
+        //     if (j != i) {
+        //         console.log(j+i);
+        //         marker[j].setMap(null);
+        //     }
+        // }
+        
+        // clear all existing site location markers from the map
+        for (i = 0; i < marker.length; i++) {
+            marker[i].setMap(null);
         }
+        // empty the marker array
+        marker.length = 0;
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+            label: a.toString(),
+            map: resultsMap
+        });
+
         // hide the user's current location marker
         if (lastmarker) {
             lastmarker.setMap(null);
