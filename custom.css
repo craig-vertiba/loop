@@ -106,3 +106,12 @@ div#details #sq_110 h5:nth-child(1)  {
 #details-container {
     text-align:left;
 }
+
+#postal-code-panel {
+    height: 50px;
+}
+
+#your-nearest-study-center {
+    line-height: 5;
+    font-size: 150%;
+}
