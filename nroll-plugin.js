@@ -687,6 +687,7 @@
                         }
                     })(marker, i));
                 }
+                console.log(marker.length);
                 // add a marker for the user's new location
                 lastmarker = new google.maps.Marker({
                     map: resultsMap,
