@@ -621,6 +621,7 @@ console.log(markers.length);
         }
         // recenter the map on the selected site location
         resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
+        resultsMap.setZoom(8);
 
         console.log('in siteSelected'+i);
     }
