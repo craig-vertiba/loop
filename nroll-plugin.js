@@ -395,10 +395,10 @@
                 $("#success").Survey({
                     model: successSurvey
                 });
-                $(document).on('click', '#continue', function() {
-                    Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                    Show( "#details-container" ); // $("#details-container").removeClass("hide");
-                });
+                // $(document).on('click', '#continue', function() {
+                //     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
+                //     Show( "#details-container" ); // $("#details-container").removeClass("hide");
+                // });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
