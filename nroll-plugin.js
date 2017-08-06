@@ -567,10 +567,6 @@
       document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
       });
-      // var marker = new google.maps.Marker({
-      //   position: uluru,
-      //   map: map
-      // });
       bounds = new google.maps.LatLngBounds();
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
@@ -669,7 +665,6 @@
                     a = i + 1;
                     locations[i].order = i;
                     d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
-                    console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                     document.getElementById('location-' + i).addEventListener('click', function() {
                         siteSelected(resultsMap,this.id);
                     });
@@ -678,10 +673,8 @@
                 for (i = 0; i < markers.length; i++) {
                     markers[i].setMap(null);
                 }
-                console.log(markers.length);
                 // empty the marker array
                 markers.length = 0;
-                console.log(markers.length);
                 // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
                 // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
@@ -691,7 +684,6 @@
                         label: a.toString(),
                         map: resultsMap
                     });
-                console.log(markers.length);
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                             infowindow.setContent(locations[i].name);
@@ -700,7 +692,6 @@
                     })(marker, i));
                     markers.push(marker);
                 }
-                console.log(markers.length);
                 // add a marker for the user's new location
                 lastmarker = new google.maps.Marker({
                     map: resultsMap,
