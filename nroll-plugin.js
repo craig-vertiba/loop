@@ -585,6 +585,7 @@ console.log(markers.length);
         markers.push(marker);
         bounds.extend(marker.getPosition());
       }
+      map.fitBounds(bounds);
     }
     function siteSelected(resultsMap,clicked_id) {
         // get the page element to which we need to add the selected site
