@@ -92,7 +92,7 @@ div#details #sq_110 h5:nth-child(1)  {
   height: 100%;
 }
 
-#site-finder-container, #eligibility, #details, #success {
+#eligibility, #details, #success {
   position:relative;
   top: 50%;
   height: auto;
@@ -101,6 +101,11 @@ div#details #sq_110 h5:nth-child(1)  {
   -moz-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   -o-transform: translateY(-50%);
+}
+
+#site-finder-container {
+  position:relative;
+   height: auto;
 }
 
 #details-container {
