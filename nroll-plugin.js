@@ -669,8 +669,10 @@
                 for (i = 0; i < marker.length; i++) {
                     marker[i].setMap(null);
                 }
+                console.log(marker.length);
                 // empty the marker array
                 marker.length = 0;
+                console.log(marker.length);
                 // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
                 // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
@@ -680,6 +682,7 @@
                         label: a.toString(),
                         map: resultsMap
                     });
+                console.log(marker.length);
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                             infowindow.setContent(locations[i].name);
