@@ -575,7 +575,6 @@
              position: new google.maps.LatLng(locations[i].lat, locations[i].long),
              map: map
         });
-console.log(markers.length);
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
              return function() {
                  infowindow.setContent(locations[i].name);
@@ -598,10 +597,10 @@ console.log(markers.length);
         if (lastmarker) {
             lastmarker.setVisible(true);
         }
+        // reset the map to the bounds of the site markers
+        resultsMap.fitBounds(bounds);
         // center the map on the user's current marker
         resultsMap.setCenter(lastmarker.position);
-        resultsMap.setZoom(4);
-
     }
     function siteSelected(resultsMap,clicked_id) {
         var i = Number(clicked_id.slice(9));
