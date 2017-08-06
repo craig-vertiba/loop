@@ -360,9 +360,9 @@
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
-                var siteFinderSurvey = new Survey.Model(siteFinderJSON);
+                // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
-                var successSurvey = new Survey.Model(successJSON);
+                // var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
                     // send results to API
                     // if callback failedsurvey = false, execute the following:
