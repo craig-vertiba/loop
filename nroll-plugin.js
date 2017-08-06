@@ -391,9 +391,9 @@
                     model: detailsSurvey,
                     data: detailsData
                 });
-                $("#success").Survey({
-                    model: successSurvey
-                });
+                // $("#success").Survey({
+                //     model: successSurvey
+                // });
                 // $(document).on('click', '#continue', function() {
                 //     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                 //     Show( "#details-container" ); // $("#details-container").removeClass("hide");
