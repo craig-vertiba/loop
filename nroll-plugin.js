@@ -620,7 +620,7 @@ console.log(markers.length);
             lastmarker.setMap(null);
         }
         // recenter the map on the selected site location
-        resultsMap.setCenter(google.maps.LatLng(locations[i].lat, locations[i].long));
+        resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
 
         console.log('in siteSelected'+i);
     }
