@@ -132,3 +132,7 @@ hr {
     margin-left: 3vw;
     margin-right: 3vw;
 }
+
+#selected-site {
+    padding-top: 12vh;
+}
