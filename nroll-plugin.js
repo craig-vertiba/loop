@@ -602,6 +602,7 @@ console.log(markers.length);
         // add an event listener to the change button
         document.getElementById('change-location').addEventListener('click', function() {
             changeSite(resultsMap);
+        });
         // hide all the markers except the marker for the selected site
         for (j = 0; j < markers.length; j++) {
             if (j != i) {
