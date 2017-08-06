@@ -398,12 +398,14 @@
                 $(document).on('click', '#continue', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
-                    // $("#details-container").addClass("show");
                 });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
-                    // $("#details-container").addClass("show");
+                });
+                $(document).on('click', '#change-location', function() {
+                    Show( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
+                    Hide( "#details-container" ); // $("#details-container").removeClass("hide");
                 });
 
             });
@@ -587,7 +589,7 @@
       map.fitBounds(bounds);
     }
     function changeSite(resultsMap) {
-        // show all the markers
+        // show all site markers
         for (j = 0; j < markers.length; j++) {
             if (j != i) {
                 markers[j].setVisible(true);
