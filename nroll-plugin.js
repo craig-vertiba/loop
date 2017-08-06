@@ -398,6 +398,9 @@
                 //     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                 //     Show( "#details-container" ); // $("#details-container").removeClass("hide");
                 // });
+                $(document).on('click', '#submit', function() {
+                    Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
+                });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                     Show( "#details-container" ); // $("#details-container").removeClass("hide");
