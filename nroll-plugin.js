@@ -582,7 +582,7 @@
         })(marker, i));
       }
     }
-    function siteSelected(resultsMap,clicked_id,marker) {
+    function siteSelected(resultsMap,clicked_id) {
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
         // delete any html already attached to that element (like a previously selected site)
@@ -649,7 +649,7 @@
                     d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
                     console.log(locations[i].name,locations[i].lat,locations[i].long,locations[i].order,locations[i].distance);
                     document.getElementById('location-' + i).addEventListener('click', function() {
-                        siteSelected(resultsMap,this.id,marker);
+                        siteSelected(resultsMap,this.id);
                     });
                 }
                 // clear all existing site location markers from the map
@@ -657,7 +657,7 @@
                     marker[i].setMap(null);
                 }
                 // empty the marker array
-                markers = [];
+                markers.length = 0;
                 // loop through all the locations and create new markers numbered in ascending order based on the site's distance 
                 // from the user's new location, then add an infowindow listener to each marker
                 for (i = 0; i < locations.length; i++) {
