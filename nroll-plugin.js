@@ -553,7 +553,7 @@
     var bounds;
     // GoogleMaps function:
     function initMap() {
-      var uluru = {lat: 60.015, lng: -105.271}; // replace with mapCenter
+      var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: uluru // replace with mapCenter
@@ -587,47 +587,37 @@ console.log(markers.length);
       }
       map.fitBounds(bounds);
     }
+    function changeSite(resultsMap) {
+
+    }
     function siteSelected(resultsMap,clicked_id) {
+        var i = Number(clicked_id.slice(9));
+        var a = i + 1;
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
         // delete any html already attached to that element (like a previously selected site)
         d1.innerHTML="";
         // add new html to display the selected site
-        var i = Number(clicked_id.slice(9));
-        // var j;
-        var a = i + 1;
         d1.insertAdjacentHTML('beforeend', '<hr/><div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div>');
+        // add an event listener to the change button
+        document.getElementById('change-location').addEventListener('click', function() {
+            changeSite(resultsMap);
         // hide all the markers except the marker for the selected site
-        console.log(markers.length);
         for (j = 0; j < markers.length; j++) {
-                console.log(j+i);
             if (j != i) {
-                console.log(j+i);
-                markers[j].setMap(null);
+                //markers[j].setMap(null);
+                markers[j].setVisible(false);
             }
         }
-
-        // clear all existing site location markers from the map
-        // for (i = 0; i < marker.length; i++) {
-        //     marker[i].setMap(null);
-        // }
-        // // empty the marker array
-        // marker.length = 0;
-        // marker = new google.maps.Marker({
-        //     position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-        //     label: a.toString(),
-        //     map: resultsMap
-        // });
-
         // hide the user's current location marker
         if (lastmarker) {
-            lastmarker.setMap(null);
+            // lastmarker.setMap(null);
+            lastmarker.setVisible(false);
         }
         // recenter the map on the selected site location
         resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
+        // reset the map zoom level
         resultsMap.setZoom(8);
-
-        console.log('in siteSelected'+i);
     }
     function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
