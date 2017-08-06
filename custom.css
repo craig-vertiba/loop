@@ -124,3 +124,8 @@ div#details #sq_110 h5:nth-child(1)  {
 hr:nth-of-type(1){
     margin-top: 3vw;
 }
+
+hr {
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
