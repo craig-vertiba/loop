@@ -368,8 +368,13 @@
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
+                // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
+                // when there is a survey named this way.
                 var survey = new Survey.Model(eligibilityJSON);
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
+                var language_code = "de"; // this will come from the initialization string
+                // sets the language for localization of survey messages.  Will apply to all surveys.
+                survey.locale = language_code;
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // var successSurvey = new Survey.Model(successJSON);
                 survey.onComplete.add(function(result) {
@@ -393,7 +398,6 @@
                     model: survey,
                     data: eligibilityData
                 });
-                survey.locale = "de";
                 // $("#site-finder").Survey({
                 //     model: siteFinderSurvey
                 // });
