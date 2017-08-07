@@ -579,34 +579,47 @@
 
     // GoogleMaps function:
     function initMap() {
-      var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: uluru // replace with mapCenter
-      });
-      var infowindow = new google.maps.InfoWindow;
-      var marker, i;
-      // var i;
-      var geocoder = new google.maps.Geocoder();
-      document.getElementById('submit').addEventListener('click', function() {
-        geocodeAddress(geocoder, map);
-      });
-      bounds = new google.maps.LatLngBounds();
-      for (i = 0; i < locations.length; i++) {
-        marker = new google.maps.Marker({
-             position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-             map: map
+        var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru // replace with mapCenter
         });
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-             return function() {
-                 infowindow.setContent(locations[i].name);
-                 infowindow.open(map, marker);
-             }
-        })(marker, i));
-        markers.push(marker);
-        bounds.extend(marker.getPosition());
-      }
-      map.fitBounds(bounds);
+        var infowindow = new google.maps.InfoWindow;
+        var marker, i;
+        // var i;
+        var geocoder = new google.maps.Geocoder();
+        document.getElementById('submit').addEventListener('click', function() {
+            geocodeAddress(geocoder, map);
+        });
+        bounds = new google.maps.LatLngBounds();
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+                map: map
+            });
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infowindow.setContent(locations[i].name);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+            markers.push(marker);
+            bounds.extend(marker.getPosition());
+        }
+        map.fitBounds(bounds);
+        // Add all the locations to the Sites list element.  This is only to determine the height of the content in this element
+        // so we can decide (elsewhere) whether the content can be centered vertically or not.  After the user enters their
+        // location, this list will be rebuilt based on each site's distance from the user's location.
+        // get the page element to which we need to add the list of sites
+        var d1 = document.getElementById('sites-list');
+        // delete any html already attached to that element (shouldn't be any)
+        d1.innerHTML="";
+        // add new html to display the list of sites
+        for (i = 0; i < locations.length; i++) {
+            a = i + 1;
+            d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
+        }        
+
     }
     function changeSite(resultsMap) {
         // show all site markers
@@ -653,18 +666,6 @@
         resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
         // reset the map zoom level
         resultsMap.setZoom(8);
-        // Add all the locations to the Sites list element.  This is only to determine the height of the content in this element
-        // so we can decide (elsewhere) whether the content can be centered vertically or not.  After the user enters their
-        // location, this list will be rebuilt based on each site's distance from the user's location.
-        // get the page element to which we need to add the list of sites
-        var d2 = document.getElementById('sites-list');
-        // delete any html already attached to that element (shouldn't be any)
-        d2.innerHTML="";
-        // add new html to display the list of sites
-        for (i = 0; i < locations.length; i++) {
-            a = i + 1;
-            d2.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
-        }        
     }
     function geocodeAddress(geocoder, resultsMap) {
         // get the value submitted by the user.  Should be a zip code but could be anything.
