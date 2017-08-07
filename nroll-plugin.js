@@ -416,8 +416,8 @@
                     // of the div will not be hidden
                     console.log($('#your-nearest-study-center').get(0).scrollHeight);
                     console.log($('#postal-code-panel').get(0).scrollHeight);
-                    console.log($('#your-nearest-study-center').get(0).scrollHeight);
                     console.log($('#sites-list').get(0).scrollHeight);
+                    console.log($('#map-left-panel').get(0).scrollHeight);
                     // if ($('#site-finder-container').hasScrollBar()) {
                     //     $('#site-finder-container').removeClass("center-vertically");
                     // };
@@ -653,6 +653,18 @@
         resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
         // reset the map zoom level
         resultsMap.setZoom(8);
+        // Add all the locations to the Sites list element.  This is only to determine the height of the content in this element
+        // so we can decide (elsewhere) whether the content can be centered vertically or not.  After the user enters their
+        // location, this list will be rebuilt based on each site's distance from the user's location.
+        // get the page element to which we need to add the list of sites
+        var d2 = document.getElementById('sites-list');
+        // delete any html already attached to that element (shouldn't be any)
+        d2.innerHTML="";
+        // add new html to display the list of sites
+        for (i = 0; i < locations.length; i++) {
+            a = i + 1;
+            d2.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
+        }        
     }
     function geocodeAddress(geocoder, resultsMap) {
         // get the value submitted by the user.  Should be a zip code but could be anything.
