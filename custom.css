@@ -51,12 +51,14 @@ div#details #sq_110 .form-inline {
 }
 
 /* following hides the Question titles of all of the questions in the details survey 
- * then unhides the title for the fourth question 
+ * then unhides the title for the fourth question which is in the fifth div element of its type on the page 
  */
+
 div#details h5 {
     display:none;
 }
-div#details #sq_110 h5:nth-child(1)  {
+
+div#details div#sq_page.panel-body div div:nth-of-type(5) h5 {
     display:inline;
 }
 
