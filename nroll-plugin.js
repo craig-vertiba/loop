@@ -370,9 +370,11 @@
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
                 eligibilitySurvey.locale = "de";
+                eligibilitySurvey.render();
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 detailsSurvey.locale = "zh-cn";
+                detailsSurvey.render();
                 // var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
                     // send results to API
