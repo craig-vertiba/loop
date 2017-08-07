@@ -410,6 +410,7 @@
                 $(document).on('click', '#submit', function() {
                     Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
                     Show( "#your-nearest-study-center" );
+                    Show( "#sites-list");
                     // the content of the site finder container is centered vertically by default.
                     // if there are so many sites available that a vertical scroll bar will be visible,
                     // remove the class that centers the content vertically so the content at the top
