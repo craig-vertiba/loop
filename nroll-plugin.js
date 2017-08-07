@@ -335,6 +335,7 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
+            console.log(surveyStrings.requiredError);
             div.load(html_content_url, function() {
                 // check to see if the appId cookie is set and if it is get the appId
                 // make plugin initiation call to API and include appId if available
