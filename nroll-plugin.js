@@ -365,6 +365,7 @@
                 //     // document.body.appendChild(img);
                 // }
                 // gettoken();
+                
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
@@ -376,8 +377,8 @@
                 // sets the language for localization of survey messages.  Will apply to all surveys.
                 survey.locale = language_code;
 
-                console.log(Survey.surveyLocalization.locales["de"].pagePrevText);
-                
+                console.log(Survey.surveyLocalization.locales[language_code].pagePrevText);
+
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // var successSurvey = new Survey.Model(successJSON);
                 survey.onComplete.add(function(result) {
