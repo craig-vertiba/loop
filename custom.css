@@ -88,6 +88,7 @@ div#details div#sq_page.panel-body div div:nth-of-type(5) h5 {
   height:100%;
   text-align:center;
   float:left;
+  overflow:auto;
 }
 
 #plugin-eligibility, #site-finder-container, #details-container, #success-container {
