@@ -335,7 +335,6 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            console.log(surveyStrings.requiredError);
             div.load(html_content_url, function() {
                 // check to see if the appId cookie is set and if it is get the appId
                 // make plugin initiation call to API and include appId if available
@@ -371,6 +370,8 @@
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
+                console.log(eligibilitySurvey.surveyStrings.requiredError);
+
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
