@@ -32,6 +32,7 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
+    var language_code = "en"; // default is English.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
@@ -239,6 +240,9 @@
                     case 'utm_medium':
                         utm_medium = hash[1];
                         break;
+                    case 'language':
+                        language_code = hash[1];
+                        break;
                 }
             }
         }
@@ -377,7 +381,7 @@
                 // when there is a survey named this way.
                 var survey = new Survey.Model(eligibilityJSON);
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
-                var language_code = "de"; // this will come from the initialization string
+                // var language_code = "de"; // this will come from the initialization string
                 // sets the language for localization of survey messages.  Will apply to all surveys.
                 survey.locale = language_code;
 
