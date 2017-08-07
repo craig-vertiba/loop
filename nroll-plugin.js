@@ -369,10 +369,8 @@
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
-//                Survey.Survey.locale = "de";
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
-                // detailsSurvey.locale = "zh-cn";
                 // var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
                     // send results to API
@@ -393,17 +391,17 @@
                 });
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
-                    data: eligibilityData,
-                    locale: 'de'
+                    data: eligibilityData
                 });
+                eligibilitySurvey.locale = "de";
                 // $("#site-finder").Survey({
                 //     model: siteFinderSurvey
                 // });
                 $("#details").Survey({
                     model: detailsSurvey,
-                    data: detailsData,
-                    locale: 'de'
+                    data: detailsData
                 });
+                detailsSurvey.locale = "zh-cn";
                 // $("#success").Survey({
                 //     model: successSurvey
                 // });
