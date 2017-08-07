@@ -369,7 +369,7 @@
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
-                Survey.Survey.locale = "de";
+//                Survey.Survey.locale = "de";
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // detailsSurvey.locale = "zh-cn";
@@ -393,14 +393,16 @@
                 });
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
-                    data: eligibilityData
+                    data: eligibilityData,
+                    locales: "de"
                 });
                 // $("#site-finder").Survey({
                 //     model: siteFinderSurvey
                 // });
                 $("#details").Survey({
                     model: detailsSurvey,
-                    data: detailsData
+                    data: detailsData,
+                    locales: "de"
                 });
                 // $("#success").Survey({
                 //     model: successSurvey
