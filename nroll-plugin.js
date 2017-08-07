@@ -420,9 +420,9 @@
                     console.log($('#sites-list').get(0).scrollHeight);
                     console.log($('#map-left-panel').get(0).scrollHeight);
                     console.log($('#map-left-panel').height());
-                    // if ($('#site-finder-container').hasScrollBar()) {
-                    //     $('#site-finder-container').removeClass("center-vertically");
-                    // };
+                    if ($('#map-left-panel').hasScrollBar()) {
+                        $('#site-finder-container').removeClass("center-vertically");
+                    };
                 });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
