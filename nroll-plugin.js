@@ -377,13 +377,6 @@
                     // if callback failedsurvey = false, execute the following:
                     Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
                     Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
-                    // the content of the site finder container is centered vertically by default.
-                    // if there are so many sites available that a vertical scroll bar will be visible,
-                    // remove the class that centers the content vertically so the content at the top
-                    // of the div will not be hidden
-                    if ($('#site-finder-container').hasScrollBar()) {
-                        $('#site-finder-container').removeClass("center-vertically");
-                    };
                     //$("#plugin-map").addClass("show");
                     //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
@@ -417,6 +410,13 @@
                 $(document).on('click', '#submit', function() {
                     Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
                     Show( "#your-nearest-study-center" );
+                    // the content of the site finder container is centered vertically by default.
+                    // if there are so many sites available that a vertical scroll bar will be visible,
+                    // remove the class that centers the content vertically so the content at the top
+                    // of the div will not be hidden
+                    if ($('#site-finder-container').hasScrollBar()) {
+                        $('#site-finder-container').removeClass("center-vertically");
+                    };
                 });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
