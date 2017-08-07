@@ -368,11 +368,11 @@
                 var eligibilityData = {};   
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
-                var eligibilitySurvey = new Survey.Model(eligibilityJSON);
+                var survey = new Survey.Model(eligibilityJSON);
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // var successSurvey = new Survey.Model(successJSON);
-                eligibilitySurvey.onComplete.add(function(result) {
+                survey.onComplete.add(function(result) {
                     // send results to API
                     // if callback failedsurvey = false, execute the following:
                     Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
@@ -390,10 +390,10 @@
                     // $("#success-container").addClass("show");
                 });
                 $("#eligibility").Survey({
-                    model: eligibilitySurvey,
+                    model: survey,
                     data: eligibilityData
                 });
-                eligibilitySurvey.locale = "de";
+                survey.locale = "de";
                 // $("#site-finder").Survey({
                 //     model: siteFinderSurvey
                 // });
@@ -401,7 +401,6 @@
                     model: detailsSurvey,
                     data: detailsData
                 });
-                detailsSurvey.locale = "zh-cn";
                 // $("#success").Survey({
                 //     model: successSurvey
                 // });
