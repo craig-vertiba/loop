@@ -143,3 +143,7 @@ hr {
 #selected-site-name {
     font-size: 1.2em;
 }
+
+input[type="submit"] {
+    font-family: FontAwesome;
+}
