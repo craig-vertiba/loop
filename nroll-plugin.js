@@ -108,6 +108,9 @@
         // where older versions of jQuery are already loaded and are required, will need to modify this
         // to check for jQuery and use it if already loaded
         {"name": "jQuery", "src": "https://unpkg.com/jquery"},
+        // Loads FontAwesome.  The id number in the url below is linked to craig.mcsavaney@vertiba.com.
+        // To get a new embed code linked to a different email address, go to fontawesome.io/get-started/,
+        // get a new embed code, and update the url with the new one below.
         {"name": "FontAwesome", "src": "https://use.fontawesome.com/7bbc654582.js"},
         {"name": "SurveyJS", "src": surveyjs_url},
         {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry"}
