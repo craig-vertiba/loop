@@ -38,17 +38,15 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
-    // var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
-    // locations = JSON.parse(locations);
-    var locations;
-
-    var lastmarker;
-    // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    // var labelIndex = 0;
-    var markers = [];
-    var bounds;
-
+    // the following variables are used to display sites on the map:
+    var locations; // json of sites
+    var lastmarker; // user's location marker
+    // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Alpha marker labels
+    // var labelIndex = 0; // used with Alpha marker labels
+    var markers = []; // array of all site markers
+    var bounds; // boundary coordinates to enclose all site markers
     var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
+
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
      * We need the script url to retrieve the parameters that were included in the url.
@@ -359,8 +357,6 @@
                 locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
                 locations = JSON.parse(locations);
 
-                // console.log(sitesJSON.sites[0].name);
-                console.log(locations[0].name);
                 // sitesJSON = JSON.parse(sitesJSON);
                 // for (var i = 0, len = sitesJSON.length; i < len; i++){
                 //     console.log(sitesJSON[i][1],sitesJSON[i][2]);
