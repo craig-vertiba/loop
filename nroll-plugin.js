@@ -369,7 +369,7 @@
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
-                survey.locale = "de";
+                Survey.Survey.locale = "de";
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // detailsSurvey.locale = "zh-cn";
