@@ -414,9 +414,10 @@
                     // if there are so many sites available that a vertical scroll bar will be visible,
                     // remove the class that centers the content vertically so the content at the top
                     // of the div will not be hidden
-                    if ($('#site-finder-container').hasScrollBar()) {
-                        $('#site-finder-container').removeClass("center-vertically");
-                    };
+                    console.log($('#your-nearest-study-center').get(0).scrollHeight);
+                    // if ($('#site-finder-container').hasScrollBar()) {
+                    //     $('#site-finder-container').removeClass("center-vertically");
+                    // };
                 });
                 $(document).on('click', '.site-selector', function() {
                     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
