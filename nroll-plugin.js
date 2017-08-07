@@ -415,6 +415,9 @@
                     // remove the class that centers the content vertically so the content at the top
                     // of the div will not be hidden
                     console.log($('#your-nearest-study-center').get(0).scrollHeight);
+                    console.log($('#postal-code-panel').get(0).scrollHeight);
+                    console.log($('#your-nearest-study-center').get(0).scrollHeight);
+                    console.log($('#sites-list').get(0).scrollHeight);
                     // if ($('#site-finder-container').hasScrollBar()) {
                     //     $('#site-finder-container').removeClass("center-vertically");
                     // };
