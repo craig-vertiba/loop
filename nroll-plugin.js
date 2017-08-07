@@ -369,10 +369,10 @@
                 var detailsData = {};   
                 Survey.Survey.cssType = "bootstrap";
                 var eligibilitySurvey = new Survey.Model(eligibilityJSON);
+                eligibilitySurvey.locale = "de";
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
-                console.log(eligibilitySurvey.surveyStrings.requiredError);
-
                 var detailsSurvey = new Survey.Model(detailsJSON);
+                detailsSurvey.locale = "zh-cn";
                 // var successSurvey = new Survey.Model(successJSON);
                 eligibilitySurvey.onComplete.add(function(result) {
                     // send results to API
