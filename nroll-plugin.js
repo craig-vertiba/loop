@@ -38,8 +38,16 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
-    var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
-    locations = JSON.parse(locations);
+    // var locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
+    // locations = JSON.parse(locations);
+    var locations;
+
+    var lastmarker;
+    // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    // var labelIndex = 0;
+    var markers = [];
+    var bounds;
+
     var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
     /*
      * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
@@ -346,9 +354,13 @@
                 // var detailsJSON = {pages:[{name:"page1",elements:[{type:"html",temp:"temp",html:"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>",name:"question1"},{type:"text",name:"question2",placeHolder:"NAME*"},{type:"text",name:"question3",placeHolder:"PHONE*"},{type:"text",name:"question4",placeHolder:"EMAIL*",validators:[{type:"email"}]},{type:"radiogroup",choices:["Email","Phone"],colCount:2,name:"question6",title:"CONTACT PREFERENCE"},{type:"html",html:"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>",name:"question5"}]}],showCompletedPage:false,showPageTitles:false,showQuestionNumbers:"off",showTitle:false};
                 var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,title:"phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,title:"email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,title:"CONTACT PREFERENCE","colCount":2,"choices":["Email","Phone",]},{"type":"html","isRequired":true,"name":"mandatory","startWithNewLine":true,"html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
                 // var successJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":false,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"hide","title":"","elements":[{"type":"html","isRequired":true,"name":"success message","startWithNewLine":true,"html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Thank you</span></br></br>Many thanks for your interest in XXXXXXXXXX Study.</br>One of our study team will be in touch shortly.</div>"},]},]};
-                var sitesJSON = {"sites":[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]};
+                // var sitesJSON = {"sites":[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]};
                 // mapCenter = (get this from the initialization JSON);
-                console.log(sitesJSON.sites[0].name);
+                locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
+                locations = JSON.parse(locations);
+
+                // console.log(sitesJSON.sites[0].name);
+                console.log(locations[0].name);
                 // sitesJSON = JSON.parse(sitesJSON);
                 // for (var i = 0, len = sitesJSON.length; i < len; i++){
                 //     console.log(sitesJSON[i][1],sitesJSON[i][2]);
@@ -551,11 +563,6 @@
       ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
     }
 
-    var lastmarker;
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var labelIndex = 0;
-    var markers = [];
-    var bounds;
     // GoogleMaps function:
     function initMap() {
       var uluru = {lat: 40.015, lng: -105.271}; // replace with mapCenter
@@ -604,7 +611,9 @@
         resultsMap.setCenter(lastmarker.position);
     }
     function siteSelected(resultsMap,clicked_id) {
+        // clicked_id should always be in the format location-i.  Slice off 'i' and convert to a Number.
         var i = Number(clicked_id.slice(9));
+        // add 1 so the marker numbers don't start at 0 like the marker array identifiers
         var a = i + 1;
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
@@ -632,12 +641,15 @@
         resultsMap.setZoom(8);
     }
     function geocodeAddress(geocoder, resultsMap) {
+        // get the value submitted by the user.  Should be a zip code but could be anything.
         var address = document.getElementById('address').value;
+        // attempt to geocode the address information submitted by the user.
         geocoder.geocode({'address': address}, function(results, status) {
             if (status === 'OK') {
                 var infowindow = new google.maps.InfoWindow;
                 var a;
                 // if it exists, remove the marker of the user's location from the map
+                // this will be replaced by a new marker with the new location below
                 if (lastmarker) {
                     lastmarker.setMap(null);
                 }
@@ -691,6 +703,7 @@
                             infowindow.open(resultsMap, marker);
                         }
                     })(marker, i));
+                    // now add the new marker to the markers array
                     markers.push(marker);
                 }
                 // add a marker for the user's new location
