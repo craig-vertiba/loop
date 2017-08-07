@@ -375,6 +375,9 @@
                 var language_code = "de"; // this will come from the initialization string
                 // sets the language for localization of survey messages.  Will apply to all surveys.
                 survey.locale = language_code;
+
+                console.log(Survey.surveyLocalization.locales["de"].pagePrevText);
+                
                 var detailsSurvey = new Survey.Model(detailsJSON);
                 // var successSurvey = new Survey.Model(successJSON);
                 survey.onComplete.add(function(result) {
