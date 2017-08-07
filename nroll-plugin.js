@@ -377,6 +377,8 @@
                     // if callback failedsurvey = false, execute the following:
                     Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
                     Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
+                    var visible = $('#site-finder-container').hasScrollBar();
+                    console.log(visible);
                     //$("#plugin-map").addClass("show");
                     //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                     initMap();
@@ -435,6 +437,12 @@
                 }
                 $(element).addClass("hide");
             };
+
+            (function($) {
+                $.fn.hasScrollBar = function() {
+                    return this.get(0).scrollHeight > this.height();
+                }
+            })(jQuery);
 
             // function gettoken()
             // {
