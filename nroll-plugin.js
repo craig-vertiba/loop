@@ -419,6 +419,7 @@
                     console.log($('#postal-code-panel').get(0).scrollHeight);
                     console.log($('#sites-list').get(0).scrollHeight);
                     console.log($('#map-left-panel').get(0).scrollHeight);
+                    console.log($('#map-left-panel').height());
                     // if ($('#site-finder-container').hasScrollBar()) {
                     //     $('#site-finder-container').removeClass("center-vertically");
                     // };
