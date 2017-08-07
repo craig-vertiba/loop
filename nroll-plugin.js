@@ -394,7 +394,7 @@
                 $("#eligibility").Survey({
                     model: eligibilitySurvey,
                     data: eligibilityData,
-                    locales: "de"
+                    locale: 'de'
                 });
                 // $("#site-finder").Survey({
                 //     model: siteFinderSurvey
@@ -402,7 +402,7 @@
                 $("#details").Survey({
                     model: detailsSurvey,
                     data: detailsData,
-                    locales: "de"
+                    locale: 'de'
                 });
                 // $("#success").Survey({
                 //     model: successSurvey
