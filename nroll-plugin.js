@@ -144,6 +144,16 @@
     // customJS_url = ValidateCustomJSUrl(customJS_url);
 
 
+    // Dynamically load the pre-requisite and local stylesheets
+
+    AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
+
+    // If a custom css url is provided, add it
+    if (customCSS_url && customCSS_url != "undefined" ) {
+        AddStylesheet('custom', customCSS_url);
+    }
+
+
     // Chain load the scripts here in the order listed below...
     // when the last script in the chain is loaded, main() will be called
 
@@ -248,7 +258,8 @@
         } else {
 
             // This is the last script in the page, call PreMain()
-            PreMain();
+            // PreMain();
+            main();
         }
     }
 
@@ -259,47 +270,47 @@
      * without jQuery.  Once we get into script that requires jQuery we
      * have to enter main(), which is called at the end of this script.
      *************************************************************************/
-    function PreMain() {
-        // Dynamically load the pre-requisite and local stylesheets
+    // function PreMain() {
+    //     // Dynamically load the pre-requisite and local stylesheets
 
-        AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
+    //     AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
 
-        // If a custom css url is provided, add it
-        if (customCSS_url && customCSS_url != "undefined" ) {
-            AddStylesheet('custom', customCSS_url);
-        }
+    //     // If a custom css url is provided, add it
+    //     if (customCSS_url && customCSS_url != "undefined" ) {
+    //         AddStylesheet('custom', customCSS_url);
+    //     }
 
-        // // Parse the param string of url of the page that called this script looking for UTM parameters.
-        // // If found, assign them to the utm parameter variables.
-        // if (window.location.href.indexOf('?') >= 0) {
-        //     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        //     for (var i=0; i < hashes.length; i++) {
-        //         hash = hashes[i].split('=');
-        //         switch (hash[0]) {
-        //             case 'utm_source':  
-        //                 utm_source = hash[1];
-        //                 break;
-        //             case 'utm_content':
-        //                 utm_content = hash[1];
-        //                 break;
-        //             case 'utm_term':
-        //                 utm_term = hash[1];
-        //                 break;
-        //             case 'utm_campaign':
-        //                 utm_campaign = hash[1];
-        //                 break;
-        //             case 'utm_medium':
-        //                 utm_medium = hash[1];
-        //                 break;
-        //             case 'language':
-        //                 language_code = hash[1];
-        //                 break;
-        //         }
-        //     }
-        // }
+    //     // // Parse the param string of url of the page that called this script looking for UTM parameters.
+    //     // // If found, assign them to the utm parameter variables.
+    //     // if (window.location.href.indexOf('?') >= 0) {
+    //     //     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    //     //     for (var i=0; i < hashes.length; i++) {
+    //     //         hash = hashes[i].split('=');
+    //     //         switch (hash[0]) {
+    //     //             case 'utm_source':  
+    //     //                 utm_source = hash[1];
+    //     //                 break;
+    //     //             case 'utm_content':
+    //     //                 utm_content = hash[1];
+    //     //                 break;
+    //     //             case 'utm_term':
+    //     //                 utm_term = hash[1];
+    //     //                 break;
+    //     //             case 'utm_campaign':
+    //     //                 utm_campaign = hash[1];
+    //     //                 break;
+    //     //             case 'utm_medium':
+    //     //                 utm_medium = hash[1];
+    //     //                 break;
+    //     //             case 'language':
+    //     //                 language_code = hash[1];
+    //     //                 break;
+    //     //         }
+    //     //     }
+    //     // }
         
-        main();  
-    }
+    //     main();  
+    // }
 
     /* ---------------------------------------------------------------------------------
      * ValidateParam1(position)
@@ -512,18 +523,13 @@
                 };
             });
             $(document).on('click', '.site-selector', function() {
-                Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                Show( "#details-container" ); // $("#details-container").removeClass("hide");
+                Hide( "#site-finder-container" ); 
+                Show( "#details-container" ); 
             });
             $(document).on('click', '#change-location', function() {
-                Show( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                Hide( "#details-container" ); // $("#details-container").removeClass("hide");
+                Show( "#site-finder-container" ); 
+                Hide( "#details-container" ); 
             });
-            // $('#address').keyup(function(event){
-            //     if(event.keycode == 13){//Enter key pressed
-            //         $('#submit').click();//Trigger search button click event
-            //     }
-            // });
 
 
             function initializePlugin() {
