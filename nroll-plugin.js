@@ -385,9 +385,11 @@
                 // sets the language for localization of survey messages.  Will apply to all surveys.
                 if (language_code = "zh") {
                     survey.locale = "zh-cn";
-                    else
+                }
+                else {
                     survey.locale = language_code;
                 }
+                
 
                 // console.log(Survey.surveyLocalization.locales[language_code].pagePrevText);
 
