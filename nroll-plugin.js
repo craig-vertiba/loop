@@ -519,6 +519,11 @@
                 Show( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                 Hide( "#details-container" ); // $("#details-container").removeClass("hide");
             });
+            $('#address').keypress(function(e){
+                if(e.which == 13){//Enter key pressed
+                    $('#submit').click();//Trigger search button click event
+                }
+            });
 
 
             function initializePlugin() {
