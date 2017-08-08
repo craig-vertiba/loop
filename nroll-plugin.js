@@ -32,7 +32,7 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var language_code = "EN"; // default is English.
+    var language_code = "en"; // default is English.  Must be lowercase to access SurveyJS localizations.
     var country_code = "US"; // passed in from Study website url. Default to US if blank.
     var region_code = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
@@ -115,7 +115,7 @@
                     utm_medium = hash[1];
                     break;
                 case 'language':
-                    language_code = hash[1].toUpperCase();
+                    language_code = hash[1].toLowerCase();
                     break;
                 case 'country':
                     country_code = hash[1].toUpperCase();
