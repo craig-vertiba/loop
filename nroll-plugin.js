@@ -521,7 +521,7 @@
             });
             $('#address').keypress(function(e){
                 if(e.which == 13){//Enter key pressed
-                    $('#submit').click();//Trigger search button click event
+                    $('#submit').trigger("click");//Trigger search button click event
                 }
             });
 
