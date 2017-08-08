@@ -33,6 +33,8 @@
     var utm_term;
     var utm_content;
     var language_code = "en"; // default is English.
+    var country_code = "us"; // passed in from Study website url. default is US.
+    var region_code = ""; // used in Google Maps Geocoding to limit scope of search results
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
@@ -115,11 +117,19 @@
                 case 'language':
                     language_code = hash[1];
                     break;
+                case 'country':
+                    country_code = hash[1];
+                    break;
             }
         }
     }
 
-
+    // set region code = country code except when country code is "uk"
+    if (country_code.toUpperCase() == "UK") {
+        region_code = "GB";
+    } else {
+        region_code = country_code.toUpperCase();
+    }
 
 
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
@@ -733,7 +743,7 @@
         // get the value submitted by the user.  Should be a zip code but could be anything.
         var address = document.getElementById('address').value;
         // attempt to geocode the address information submitted by the user.
-        geocoder.geocode({'address': address}, function(results, status) {
+        geocoder.geocode({'address': address, componentRestrictions: {country: country_code}}, function(results, status) {
             if (status === 'OK') {
                 var infowindow = new google.maps.InfoWindow;
                 var a;
