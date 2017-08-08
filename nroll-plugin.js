@@ -32,9 +32,9 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var language_code = "en"; // default is English.
-    var country_code = "us"; // passed in from Study website url. default is US.
-    var region_code = ""; // used in Google Maps Geocoding to limit scope of search results
+    var language_code = "EN"; // default is English.
+    var country_code = "US"; // passed in from Study website url. Default to US if blank.
+    var region_code = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
@@ -115,22 +115,21 @@
                     utm_medium = hash[1];
                     break;
                 case 'language':
-                    language_code = hash[1];
+                    language_code = hash[1].toUpperCase();
                     break;
                 case 'country':
-                    country_code = hash[1];
+                    country_code = hash[1].toUpperCase();
                     break;
             }
         }
     }
 
     // set region code = country code except when country code is "uk"
-    if (country_code.toUpperCase() == "UK") {
+    if (country_code == "UK") {
         region_code = "GB";
     } else {
-        region_code = country_code.toUpperCase();
+        region_code = country_code;
     }
-
 
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
