@@ -88,6 +88,40 @@
                 break;
         }
     }
+
+
+    // Parse the param string of url of the page that called this script looking for UTM parameters.
+    // If found, assign them to the utm parameter variables.
+    if (window.location.href.indexOf('?') >= 0) {
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i=0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            switch (hash[0]) {
+                case 'utm_source':  
+                    utm_source = hash[1];
+                    break;
+                case 'utm_content':
+                    utm_content = hash[1];
+                    break;
+                case 'utm_term':
+                    utm_term = hash[1];
+                    break;
+                case 'utm_campaign':
+                    utm_campaign = hash[1];
+                    break;
+                case 'utm_medium':
+                    utm_medium = hash[1];
+                    break;
+                case 'language':
+                    language_code = hash[1];
+                    break;
+            }
+        }
+    }
+
+
+
+
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
@@ -114,7 +148,7 @@
         // get a new embed code, and update the url with the new one below.
         {"name": "FontAwesome", "src": "https://use.fontawesome.com/7bbc654582.js"},
         {"name": "SurveyJS", "src": surveyjs_url},
-        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry"}
+        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry&language="+language_code}
     ];
 
     // If a custom js url is provided, add it to the scripts array
@@ -218,34 +252,34 @@
             AddStylesheet('custom', customCSS_url);
         }
 
-        // Parse the param string of url of the page that called this script looking for UTM parameters.
-        // If found, assign them to the utm parameter variables.
-        if (window.location.href.indexOf('?') >= 0) {
-            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-            for (var i=0; i < hashes.length; i++) {
-                hash = hashes[i].split('=');
-                switch (hash[0]) {
-                    case 'utm_source':  
-                        utm_source = hash[1];
-                        break;
-                    case 'utm_content':
-                        utm_content = hash[1];
-                        break;
-                    case 'utm_term':
-                        utm_term = hash[1];
-                        break;
-                    case 'utm_campaign':
-                        utm_campaign = hash[1];
-                        break;
-                    case 'utm_medium':
-                        utm_medium = hash[1];
-                        break;
-                    case 'language':
-                        language_code = hash[1];
-                        break;
-                }
-            }
-        }
+        // // Parse the param string of url of the page that called this script looking for UTM parameters.
+        // // If found, assign them to the utm parameter variables.
+        // if (window.location.href.indexOf('?') >= 0) {
+        //     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        //     for (var i=0; i < hashes.length; i++) {
+        //         hash = hashes[i].split('=');
+        //         switch (hash[0]) {
+        //             case 'utm_source':  
+        //                 utm_source = hash[1];
+        //                 break;
+        //             case 'utm_content':
+        //                 utm_content = hash[1];
+        //                 break;
+        //             case 'utm_term':
+        //                 utm_term = hash[1];
+        //                 break;
+        //             case 'utm_campaign':
+        //                 utm_campaign = hash[1];
+        //                 break;
+        //             case 'utm_medium':
+        //                 utm_medium = hash[1];
+        //                 break;
+        //             case 'language':
+        //                 language_code = hash[1];
+        //                 break;
+        //         }
+        //     }
+        // }
         
         main();  
     }
