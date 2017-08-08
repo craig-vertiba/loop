@@ -156,9 +156,17 @@
         // To get a new embed code linked to a different email address, go to fontawesome.io/get-started/,
         // get a new embed code, and update the url with the new one below.
         {"name": "FontAwesome", "src": "https://use.fontawesome.com/7bbc654582.js"},
-        {"name": "SurveyJS", "src": surveyjs_url},
-        {"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry&language="+language_code}
+        {"name": "SurveyJS", "src": surveyjs_url}
     ];
+
+    // If the Study country is China or Taiwan, load Google Maps API from the china-specific URL, otherwise load from the standard URL
+    if (country_code == "CN") {
+        scripts.push({"name": "GoogleMaps", "src": "https://maps.google.cn/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry&language=zh-CN"});
+    } else if (country_code == "TW") {
+        scripts.push({"name": "GoogleMaps", "src": "https://maps.google.cn/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry&language=zh-TW"});
+    } else {
+        scripts.push({"name": "GoogleMaps", "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyDV9iKalrE9WbGJMceb9vKM9nmjYqZD0rc&libraries=geometry&language="+language_code});
+    }
 
     // If a custom js url is provided, add it to the scripts array
     if (customJS_url && customJS_url != "undefined" ) {
