@@ -34,7 +34,7 @@
     var utm_content;
     var language_code = "en"; // default is English.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
-    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js";  // SurveyJS source url parameter
+    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
