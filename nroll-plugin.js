@@ -383,7 +383,7 @@
                 // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
                 // var language_code = "de"; // this will come from the initialization string
                 // sets the language for localization of survey messages.  Will apply to all surveys.
-                if (language_code = "zh") {
+                if (language_code == "zh") {
                     survey.locale = "zh-cn";
                 }
                 else {
