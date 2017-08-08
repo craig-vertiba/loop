@@ -519,11 +519,11 @@
                 Show( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
                 Hide( "#details-container" ); // $("#details-container").removeClass("hide");
             });
-            $('#address').keyup(function(event){
-                if(event.keycode == 13){//Enter key pressed
-                    $('#submit').click();//Trigger search button click event
-                }
-            });
+            // $('#address').keyup(function(event){
+            //     if(event.keycode == 13){//Enter key pressed
+            //         $('#submit').click();//Trigger search button click event
+            //     }
+            // });
 
 
             function initializePlugin() {
@@ -687,6 +687,14 @@
         var geocoder = new google.maps.Geocoder();
         document.getElementById('submit').addEventListener('click', function() {
             geocodeAddress(geocoder, map);
+        });
+
+        document.getElementById("address")
+            .addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                document.getElementById("submit").click();
+            }
         });
         bounds = new google.maps.LatLngBounds();
         for (i = 0; i < locations.length; i++) {
