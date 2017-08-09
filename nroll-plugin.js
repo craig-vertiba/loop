@@ -36,10 +36,13 @@
     var country_code = "US"; // passed in from Study website url. Default to US if blank.
     var region_code = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
+    var langCountryCode = "en-us"; // language plus country code pulled from Study website url
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
+    var api_base_url = "https://cs14.force.com/services/apexrest/";
+    var access_token = "00Dc0000003w6AY!ARcAQHhOi5NgXMK0KgPHqFqiTeFaHaGGr_v_Ycv2YFPZulEMA6oEqTTe0ne97493Hg_hF3aOdpcPoVetGUxSDLrBzCqWhCcU"; // 
     var study_website_status = 'live'; // Study website status parameter.  Default is 'live'
     // the following variables are used to display sites on the map:
     var locations; // json of sites
@@ -310,124 +313,116 @@
             // function getToken() {
             //     // ajax call, assign token to variable in callback
             // }
-            // // get the Application Plugin data necessary to initialize the Plugin
-            // function getPluginData() {
-            //     // ajax call, assign json to variable in callback
-            // }
+            // get the Application Plugin data necessary to initialize the Plugin
+            function getPluginData() {
+                return $.ajax({
+                    type:'GET',
+                    url: api_base_url + "InitiatePlugin?studyId=" + study_id + "&langCountryCode=" + langCountryCode,
+                    headers:{'Authorization':'Bearer ' + access_token},
+                    success: function(json) {
+                        PluginData = json;
+                    },
+                    error: function(data, status, xhr) {
+
+                    },
+                    complete: function(jqXHR, textStatus) {
+
+                    }
+                });
+
+            }
 
 
 
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
-            $.when( $.ajax(html_content_url),$.ajax({type:'GET',url:"https://cs14.force.com/services/apexrest/InitiatePlugin?studyId=a09c0000008s2DQ&langCountryCode=en-us",headers:{'Authorization':'Bearer 00Dc0000003w6AY!ARcAQHhOi5NgXMK0KgPHqFqiTeFaHaGGr_v_Ycv2YFPZulEMA6oEqTTe0ne97493Hg_hF3aOdpcPoVetGUxSDLrBzCqWhCcU'}})).done(function(a,b){
+            $.when( $.ajax(html_content_url)).done(function(a){
                 div.append(a);
-                console.log(b);
 
-                //$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp',jsonp:false})
-                
-                // check to see if the appId cookie is set and if it is get the appId
-                // make plugin initiation call to API and include appId if available
-                // get all survey JSON
-                // get answer data if available
-                // show eligibility survey
-                // need to remember users location (zip/postal code/address)? probably not
-                // display map centered on selected site with all other sites hidden
-                // show site info at top of left panel and details survey below
-                // should have a "search again" button below selected site data
-                
+                $.when( getPluginData()).done(function(a) {
 
-                var eligibilityJSON = {completeText:"Submit",pages:[{elements:[{type:"radiogroup",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
-                var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"visibleIf":"","html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,"visibleIf":"",title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,"visibleIf":"",title:"Phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,"visibleIf":"",title:"Email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,"visibleIf":"",title:"CONTACT PREFERENCE","colCount":2,"choices":[{"value":"Email","text":"Email"},{"value":"Phone","text":"Phone"},]},{"type":"html","isRequired":true,"name":"blank space HTML","startWithNewLine":true,"visibleIf":"","html":"<br/>"},{"type":"checkbox","isRequired":true,"name":"terms","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"I have read and agree to the terms of use*","text":"I have read and agree to the terms of use*"},]},{"type":"checkbox","isRequired":false,"name":"agent","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"True","text":"I am submitting this information on behalf of the person shown above"},]},{"type":"html","isRequired":true,"name":"Agent HTML","startWithNewLine":true,"visibleIf":"{agent} = 'True'","html":"<br/><br/><div style=\"text-align:center;margin-bottom:20px\">As the authorized representative of the candidate shown above, please enter your contact information below.</div>"},{"type":"text","isRequired":true,"name":"agent name","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Name",placeHolder:"YOUR NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent phone","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Phone",placeHolder:"YOUR PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent email","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Email",placeHolder:"YOUR EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"html","isRequired":true,"name":"Mandatory HTML","startWithNewLine":true,"visibleIf":"","html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
-                // mapCenter = (get this from the initialization JSON);
-                locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
-                locations = JSON.parse(locations);
+                    console.log(PluginData);
 
-                // sitesJSON = JSON.parse(sitesJSON);
-                // for (var i = 0, len = sitesJSON.length; i < len; i++){
-                //     console.log(sitesJSON[i][1],sitesJSON[i][2]);
-                //     // img.setAttribute("src",obj[i][2] + obj[i][1]);
-                //     // document.body.appendChild(img);
-                // }
-                // gettoken();
+                    //$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp',jsonp:false})
+                    
+                    // check to see if the appId cookie is set and if it is get the appId
+                    // make plugin initiation call to API and include appId if available
+                    // get all survey JSON
+                    // get answer data if available
+                    // show eligibility survey
+                    // need to remember users location (zip/postal code/address)? probably not
+                    // display map centered on selected site with all other sites hidden
+                    // show site info at top of left panel and details survey below
+                    // should have a "search again" button below selected site data
+                    
 
-                var eligibilityData = {};   
-                var detailsData = {};   
-                Survey.Survey.cssType = "bootstrap";
-                // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
-                // when there is a survey named this way.
-                var survey = new Survey.Model(eligibilityJSON);
-                // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
-                // var language_code = "de"; // this will come from the initialization string
-                // sets the language for localization of survey messages.  Will apply to all surveys.
-                if (language_code == "zh") {
-                    survey.locale = "zh-cn";
-                }
-                else {
-                    survey.locale = language_code;
-                }
-                
+                    var eligibilityJSON = {completeText:"Submit",pages:[{elements:[{type:"radiogroup",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
+                    var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"visibleIf":"","html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,"visibleIf":"",title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,"visibleIf":"",title:"Phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,"visibleIf":"",title:"Email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,"visibleIf":"",title:"CONTACT PREFERENCE","colCount":2,"choices":[{"value":"Email","text":"Email"},{"value":"Phone","text":"Phone"},]},{"type":"html","isRequired":true,"name":"blank space HTML","startWithNewLine":true,"visibleIf":"","html":"<br/>"},{"type":"checkbox","isRequired":true,"name":"terms","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"I have read and agree to the terms of use*","text":"I have read and agree to the terms of use*"},]},{"type":"checkbox","isRequired":false,"name":"agent","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"True","text":"I am submitting this information on behalf of the person shown above"},]},{"type":"html","isRequired":true,"name":"Agent HTML","startWithNewLine":true,"visibleIf":"{agent} = 'True'","html":"<br/><br/><div style=\"text-align:center;margin-bottom:20px\">As the authorized representative of the candidate shown above, please enter your contact information below.</div>"},{"type":"text","isRequired":true,"name":"agent name","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Name",placeHolder:"YOUR NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent phone","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Phone",placeHolder:"YOUR PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent email","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Email",placeHolder:"YOUR EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"html","isRequired":true,"name":"Mandatory HTML","startWithNewLine":true,"visibleIf":"","html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
+                    // mapCenter = (get this from the initialization JSON);
+                    locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
+                    locations = JSON.parse(locations);
 
-                // console.log(Survey.surveyLocalization.locales[language_code].pagePrevText);
+                    // sitesJSON = JSON.parse(sitesJSON);
+                    // for (var i = 0, len = sitesJSON.length; i < len; i++){
+                    //     console.log(sitesJSON[i][1],sitesJSON[i][2]);
+                    //     // img.setAttribute("src",obj[i][2] + obj[i][1]);
+                    //     // document.body.appendChild(img);
+                    // }
+                    // gettoken();
 
-                var detailsSurvey = new Survey.Model(detailsJSON);
-                // var successSurvey = new Survey.Model(successJSON);
-                survey.onComplete.add(function(result) {
-                    // send results to API
-                    // if callback failedsurvey = false, execute the following:
-                    Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
-                    Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
-                    //$("#plugin-map").addClass("show");
-                    //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
-                    initMap();
-                    // if callback failedsurvey= true, display the inelibible survey
-                });
-                detailsSurvey.onComplete.add(function(result) {
-                     // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
-                    Hide( "#details-container" ); // $("#details-container").removeClass("show");
-                    // $("#details-container").addClass("hide");
-                    Show( "#success-container" ); //$("#success-container").removeClass("hide");
-                    // $("#success-container").addClass("show");
-                });
-                $("#eligibility").Survey({
-                    model: survey,
-                    data: eligibilityData
-                });
-                // $("#site-finder").Survey({
-                //     model: siteFinderSurvey
-                // });
-                $("#details").Survey({
-                    model: detailsSurvey,
-                    data: detailsData
-                });
-                // $("#success").Survey({
-                //     model: successSurvey
-                // });
-                // $(document).on('click', '#continue', function() {
-                //     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                //     Show( "#details-container" ); // $("#details-container").removeClass("hide");
-                // });
-                // $(document).on('click', '#submit', function() {
-                //     Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
-                //     Show( "#your-nearest-study-center" );
-                //     Show( "#sites-list");
-                //     // the content of the site finder container is centered vertically by default.
-                //     // if there are so many sites available that a vertical scroll bar will be visible,
-                //     // remove the class that centers the content vertically so the content at the top
-                //     // of the div will not be hidden
-                //     if ($('#map-left-panel').hasScrollBar()) {
-                //         $('#site-finder-container').removeClass("center-vertically");
-                //     };
-                // });
-                // $(document).on('click', '.site-selector', function() {
-                //     Hide( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                //     Show( "#details-container" ); // $("#details-container").removeClass("hide");
-                // });
-                // $(document).on('click', '#change-location', function() {
-                //     Show( "#site-finder-container" ); // $("#site-finder-container").addClass("hide");
-                //     Hide( "#details-container" ); // $("#details-container").removeClass("hide");
-                // });
+                    var eligibilityData = {};   
+                    var detailsData = {};   
+                    Survey.Survey.cssType = "bootstrap";
+                    // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
+                    // when there is a survey named this way.
+                    var survey = new Survey.Model(eligibilityJSON);
+                    // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
+                    // var language_code = "de"; // this will come from the initialization string
+                    // sets the language for localization of survey messages.  Will apply to all surveys.
+                    if (language_code == "zh") {
+                        survey.locale = "zh-cn";
+                    }
+                    else {
+                        survey.locale = language_code;
+                    }
+                    
 
-            });
+                    // console.log(Survey.surveyLocalization.locales[language_code].pagePrevText);
+
+                    var detailsSurvey = new Survey.Model(detailsJSON);
+                    // var successSurvey = new Survey.Model(successJSON);
+                    survey.onComplete.add(function(result) {
+                        // send results to API
+                        // if callback failedsurvey = false, execute the following:
+                        Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
+                        Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
+                        //$("#plugin-map").addClass("show");
+                        //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
+                        initMap();
+                        // if callback failedsurvey= true, display the inelibible survey
+                    });
+                    detailsSurvey.onComplete.add(function(result) {
+                         // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
+                        Hide( "#details-container" ); // $("#details-container").removeClass("show");
+                        // $("#details-container").addClass("hide");
+                        Show( "#success-container" ); //$("#success-container").removeClass("hide");
+                        // $("#success-container").addClass("show");
+                    });
+                    $("#eligibility").Survey({
+                        model: survey,
+                        data: eligibilityData
+                    });
+                    // $("#site-finder").Survey({
+                    //     model: siteFinderSurvey
+                    // });
+                    $("#details").Survey({
+                        model: detailsSurvey,
+                        data: detailsData
+                    });
+
+                }); // end of getPluginData block
+
+            });  // end of when block that starts with getting html content and access token
 
             $(document).on('click', '#submit', function() {
                 Hide( "#site-finder" ); // $("#site-finder-container").addClass("hide");
