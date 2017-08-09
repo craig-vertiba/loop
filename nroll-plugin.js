@@ -533,6 +533,7 @@
         
         head.appendChild(link);
     }
+    
 
     function GetCookie(check_name) {
       
