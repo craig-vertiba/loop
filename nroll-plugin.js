@@ -321,6 +321,10 @@
 //            div.load(html_content_url, function() {
             $.when( $.ajax(html_content_url)).done(function(a){
                 div.append(a);
+
+                $.when($.ajax("https://dev2-healthcs14.cs14.force.com/CallRestFromJS")).done(function(a) {
+                    console.log(a);
+                }
                 // check to see if the appId cookie is set and if it is get the appId
                 // make plugin initiation call to API and include appId if available
                 // get all survey JSON
