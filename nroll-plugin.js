@@ -326,6 +326,7 @@
                     type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     dataType: "html",
+                    headers: {'access-control-allow-origin':'*'},
                     success: function(data,textStatus,jqXHR) {
                         console.log("data:"data);
                     },
