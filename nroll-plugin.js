@@ -319,7 +319,7 @@
 
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
-            $.when( $.ajax(html_content_url),$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp html',jsonp:false})).done(function(a,b){
+            $.when( $.ajax(html_content_url),$.ajax({type:'GET',url:"https://cs14.force.com/services/apexrest/InitiatePlugin?studyId=a09c0000008s2DQ&langCountryCode=en-us",headers:{'Authorization':'Bearer 00Dc0000003w6AY!ARcAQHhOi5NgXMK0KgPHqFqiTeFaHaGGr_v_Ycv2YFPZulEMA6oEqTTe0ne97493Hg_hF3aOdpcPoVetGUxSDLrBzCqWhCcU'}})).done(function(a,b){
                 div.append(a);
                 console.log(b);
 
