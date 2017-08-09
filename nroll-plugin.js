@@ -294,6 +294,29 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
 
+            // // First, asynchronously load and append the HTML content to the Plugin element and get the Salesforce
+            // // access token
+            // $.when(loadHTMLContent(),getToken()).done(function(a,b) {
+            //     // now that we have the token we can retrieve the data necessary to initialize the Plugin
+            //     $.when(getPluginData()).done(function(a) {
+
+            //     }
+            // }
+            // // load the HTML content to a content variable
+            // function loadHTMLContent() {
+            //     // ajax call, assign content to variable in callback
+            // }
+            // // get the Salesforce access token and assign to a variable
+            // function getToken() {
+            //     // ajax call, assign token to variable in callback
+            // }
+            // // get the Application Plugin data necessary to initialize the Plugin
+            // function getPluginData() {
+            //     // ajax call, assign json to variable in callback
+            // }
+
+
+
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
             $.when( $.ajax(html_content_url)).done(function(a){
