@@ -323,7 +323,7 @@
                 div.append(a);
 
                 $.when($.ajax({
-                    type:'GET',
+                    type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     success: function(data,textStatus,jqXHR) {
                         console.log("success");
