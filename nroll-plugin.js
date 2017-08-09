@@ -325,7 +325,7 @@
                 $.when($.ajax({
                     type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
-                    dataType: "jsonp",
+                    dataType: "html",
                     success: function(json) {
 
                     },
