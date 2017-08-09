@@ -324,7 +324,8 @@
 
                 $.when($.ajax({
                     type:'POST',
-                    url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS"
+                    url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
+                    dataType: 'jsonp'
                 })
                 ).done(function(a) {
                     console.log(a);
@@ -533,7 +534,7 @@
         
         head.appendChild(link);
     }
-    
+
 
     function GetCookie(check_name) {
       
