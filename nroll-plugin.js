@@ -334,7 +334,8 @@
                     },
                     complete: function(jqXHR, textStatus) {
 
-                    })
+                    }
+                })
                 ).done(function(a) {
                     console.log(a);
                 });
