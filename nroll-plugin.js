@@ -134,17 +134,7 @@
     // Validate study_website_status.  Returns 'live' if the input is empty or invalid.
     study_website_status = ValidateStudyWebsiteStatus(study_website_status);
 
-    // // following validates html_content_url.  Returns the input if valid or an empty string if not.
-    // html_content_url = ValidateHTMLContentUrl(html_content_url);
-
-    // // following validates customCSS_url.  Returns the input if valid or an empty string if not.
-    // customCSS_url = ValidateCustomCSSUrl(customCSS_url);
-
-    // // following validates customJS_url.  Returns the input if valid or an empty string if not.
-    // customJS_url = ValidateCustomJSUrl(customJS_url);
-
-
-    // Dynamically load the pre-requisite and local stylesheets
+    // Dynamically load stylesheets
 
     AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
 
@@ -152,7 +142,6 @@
     if (customCSS_url && customCSS_url != "undefined" ) {
         AddStylesheet('custom', customCSS_url);
     }
-
 
     // Chain load the scripts here in the order listed below...
     // when the last script in the chain is loaded, main() will be called
@@ -182,7 +171,6 @@
     if (customJS_url && customJS_url != "undefined" ) {
         scripts.push({"name": "Custom", "src": customJS_url});
     }
-
 
     // Set the scripts_counter to 0.  This is incremented as the scripts are loaded
     // and used to keep track of progress through the script list.
@@ -257,109 +245,10 @@
         
         } else {
 
-            // This is the last script in the page, call PreMain()
-            // PreMain();
+            // This is the last script in the page, call main()
             main();
         }
     }
-
-    /* ----------------------------------------------------------------------- 
-     * PreMain()
-     * ----------------------------------------------------------------------- 
-     * This function contains all the remaining script that can be executed
-     * without jQuery.  Once we get into script that requires jQuery we
-     * have to enter main(), which is called at the end of this script.
-     *************************************************************************/
-    // function PreMain() {
-    //     // Dynamically load the pre-requisite and local stylesheets
-
-    //     AddStylesheet('bootstrap', "https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css");
-
-    //     // If a custom css url is provided, add it
-    //     if (customCSS_url && customCSS_url != "undefined" ) {
-    //         AddStylesheet('custom', customCSS_url);
-    //     }
-
-    //     // // Parse the param string of url of the page that called this script looking for UTM parameters.
-    //     // // If found, assign them to the utm parameter variables.
-    //     // if (window.location.href.indexOf('?') >= 0) {
-    //     //     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    //     //     for (var i=0; i < hashes.length; i++) {
-    //     //         hash = hashes[i].split('=');
-    //     //         switch (hash[0]) {
-    //     //             case 'utm_source':  
-    //     //                 utm_source = hash[1];
-    //     //                 break;
-    //     //             case 'utm_content':
-    //     //                 utm_content = hash[1];
-    //     //                 break;
-    //     //             case 'utm_term':
-    //     //                 utm_term = hash[1];
-    //     //                 break;
-    //     //             case 'utm_campaign':
-    //     //                 utm_campaign = hash[1];
-    //     //                 break;
-    //     //             case 'utm_medium':
-    //     //                 utm_medium = hash[1];
-    //     //                 break;
-    //     //             case 'language':
-    //     //                 language_code = hash[1];
-    //     //                 break;
-    //     //         }
-    //     //     }
-    //     // }
-        
-    //     main();  
-    // }
-
-    /* ---------------------------------------------------------------------------------
-     * ValidateParam1(position)
-     * ---------------------------------------------------------------------------------
-     * This function is called to validate a widget position input.  If the position
-     * input is valid, it is returned, otherwise null is returned.
-     * --------------------------------------------------------------------------------- */
-    // function ValidateParam1(position) {
-
-    //     var widget_position_valid = false;
-    //     var arr = [ "top-left","top-center","top-right","left-center","center","right-center","bottom-left","bottom-center","bottom-right"];
-
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if (arr[i] == position) {
-    //             widget_position_valid = true;
-    //         }
-    //     }
-
-    //     if (!widget_position_valid) {
-    //         position = "";
-    //     }
-    //     return position;
-    // }
-
-    /* ---------------------------------------------------------------------------------
-     * Validatehtml_content_url(target)
-     * ---------------------------------------------------------------------------------
-     * This function is called to validate a widget url target input.  If the target
-     * input is valid, it is returned, otherwise null is returned.  At the moment, the
-     * only valid inputs are "local" and "default", but at some point we may allow 
-     * specific urls to be passed in, in which case we'll have to test for a valid url
-     * pattern here.
-     * --------------------------------------------------------------------------------- */
-    // function Validatehtml_content_url(target) {
-
-    //     var widget_target_valid = false;
-    //     var arr = [ "local", "default" ];
-
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if (arr[i] == target) {
-    //             widget_target_valid = true;
-    //         }
-    //     }
-
-    //     if (!widget_target_valid) {
-    //         target = "";
-    //     }
-    //     return target;
-    // }
 
     /* ---------------------------------------------------------------------------------
      * ValidateStudyWebsiteStatus(param)
@@ -390,8 +279,7 @@
      * --------------------------------------------------------------------------------------------------------
      * This is the main function that will perform most of the functionality of the nroll plugin.
      * It will *only* be called after the necessary scripts have been loaded in the prescribed order in the
-     * main anonymous function. It is called by the PreMain script which is called by the load handler 
-     * after the last script is loaded
+     * main anonymous function. It is called by the script load handler function after the last script is loaded
      * -------------------------------------------------------------------------------------------------------- */
     function main() {
 
@@ -405,7 +293,11 @@
 
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
-            div.load(html_content_url, function() {
+
+            // Load the html content from the html content file (typically content.html) into the selected page element
+//            div.load(html_content_url, function() {
+            $.when( $.ajax(html_content_url)).done(function(a){
+                div.append(a);
                 // check to see if the appId cookie is set and if it is get the appId
                 // make plugin initiation call to API and include appId if available
                 // get all survey JSON
