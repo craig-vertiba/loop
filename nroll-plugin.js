@@ -319,21 +319,12 @@
 
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
-            $.when( $.ajax(html_content_url)).done(function(a){
+            $.when( $.ajax(html_content_url),$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp',jsonp:false})).done(function(a,b){
                 div.append(a);
+                console.log(b);
 
-                $.when($.ajax({
-                    type:'POST',
-                    url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
-                    dataType: 'jsonp',
-                    jsonp: false,
-                    success: function(json) {
-                        console.log(json);
-                    }
-                })
-                ).done(function(a) {
-                    console.log(a);
-                });
+                //$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp',jsonp:false})
+                
                 // check to see if the appId cookie is set and if it is get the appId
                 // make plugin initiation call to API and include appId if available
                 // get all survey JSON
