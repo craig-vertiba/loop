@@ -328,7 +328,7 @@
                     dataType: "html",
                     headers: {'access-control-allow-origin':'*'},
                     success: function(data,textStatus,jqXHR) {
-                        console.log("data:"data);
+                        console.log("success");
                     },
                     error: function(jqXHR,textStatus,errorThrown) {
                         console.log(jqXHR);
