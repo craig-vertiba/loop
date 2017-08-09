@@ -326,7 +326,11 @@
                     type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     dataType: "html",
-                    headers: {'access-control-allow-origin':'*'},
+                    beforeSend: function (request)
+                    {
+                        request.setRequestHeader("access-control-allow-origin","*");
+                    },
+                    crossDomain: true,
                     success: function(data,textStatus,jqXHR) {
                         console.log("success");
                     },
