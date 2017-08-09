@@ -319,7 +319,7 @@
 
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
-            $.when( $.ajax(html_content_url),$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp text',jsonp:false})).done(function(a,b){
+            $.when( $.ajax(html_content_url),$.ajax({type:'POST',url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",dataType:'jsonp text xml',jsonp:false})).done(function(a,b){
                 div.append(a);
                 console.log(b);
 
