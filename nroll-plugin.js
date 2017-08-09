@@ -326,14 +326,14 @@
                     type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     dataType: "html",
-                    success: function(json) {
-
+                    success: function(data,textStatus,jqXHR) {
+                        console.log("data:"data);
                     },
-                    error: function(data, status, xhr) {
-
+                    error: function(jqXHR,textStatus,errorThrown) {
+                        console.log(jqXHR);
                     },
                     complete: function(jqXHR, textStatus) {
-
+                        console.log("complete");
                     }
                 })
                 ).done(function(a) {
