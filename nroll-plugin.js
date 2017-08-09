@@ -323,9 +323,9 @@
                 div.append(a);
 
                 $.when($.ajax({
-                    type:'POST',
+                    type:'GET',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
-                    dataType: "html",
+                    contentType: "application/json",
                     beforeSend: function (request)
                     {
                         request.setRequestHeader("access-control-allow-origin","*");
