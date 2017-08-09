@@ -326,7 +326,10 @@
                     type:'POST',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     dataType: 'jsonp',
-                    jsonp: false
+                    jsonp: false,
+                    success: function(json) {
+                        console.log(json);
+                    }
                 })
                 ).done(function(a) {
                     console.log(a);
