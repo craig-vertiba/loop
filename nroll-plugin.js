@@ -325,12 +325,10 @@
                 $.when($.ajax({
                     type:'GET',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
-                    contentType: "application/json",
-                    beforeSend: function (request)
-                    {
-                        request.setRequestHeader("access-control-allow-origin","*");
+                    headers: {
+                        "access-control-allow-origin","*",
+                        "Content-Type":"application/json"
                     },
-                    crossDomain: true,
                     success: function(data,textStatus,jqXHR) {
                         console.log("success");
                     },
