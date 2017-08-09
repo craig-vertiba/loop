@@ -324,16 +324,7 @@
 
                 $.when($.ajax({
                     type:'POST',
-                    url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
-                    success: function(data,textStatus,jqXHR) {
-                        console.log("success");
-                    },
-                    error: function(jqXHR,textStatus,errorThrown) {
-                        console.log(jqXHR);
-                    },
-                    complete: function(jqXHR, textStatus) {
-                        console.log("complete");
-                    }
+                    url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS"
                 })
                 ).done(function(a) {
                     console.log(a);
