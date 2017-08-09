@@ -326,7 +326,7 @@
                     type:'GET',
                     url:"https://dev2-healthcs14.cs14.force.com/CallRestFromJS",
                     headers: {
-                        "access-control-allow-origin","*",
+                        "access-control-allow-origin":"*",
                         "Content-Type":"application/json"
                     },
                     success: function(data,textStatus,jqXHR) {
