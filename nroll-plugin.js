@@ -413,6 +413,20 @@
                         Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
                         //$("#plugin-map").addClass("show");
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
+                        var eligibilityDataNew = "";
+                        eligibilityData = JSON.stringify(eligibilityData);
+                        eligibilityDataSegments = eligibilityData.split(',');
+                        for (var i=0; i < eligibilityDataSegments.length; i++) {
+                            if (eligibilityDataSegments[i].indexOf(":") > -1) {
+                                a = eligibilityDataSegments[i].indexOf(":");
+                                if (eligibilityDataSegments[i].substring(a,a+4) != "null") {
+                                    eligibilityDataNew += eligibilityDataSegments[i];
+                                }
+                            } else {
+                                eligibilityDataNew += eligibilityDataSegments[i];
+                            }
+                            console.log(eligibilityDataNew);
+                        }
                         console.log(JSON.stringify(eligibilityData));
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
