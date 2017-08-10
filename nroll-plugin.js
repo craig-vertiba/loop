@@ -581,7 +581,7 @@
 
     // GoogleMaps function:
     function initMap() {
-        var uluru = {lat: PluginData.latitude, lng: PluginData.longitude}; // Center of Study Country, from PluginData
+        var uluru = {lat: Number(PluginData.latitude), lng: Number(PluginData.longitude)}; // Center of Study Country, from PluginData
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
             center: uluru 
