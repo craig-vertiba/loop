@@ -417,10 +417,10 @@
                         eligibilityData = JSON.stringify(eligibilityData);
                         eligibilityDataSegments = eligibilityData.split(',');
                         for (var i=0; i < eligibilityDataSegments.length; i++) {
-                            if (eligibilityDataSegments[i].indexOf(":") > -1) {
-                                a = eligibilityDataSegments[i].indexOf(":");
-                                if (eligibilityDataSegments[i].substring(a,a+4) != "null") {
+                            if (eligibilityDataSegments[i].indexOf(':') >= 0) {
+                                a = eligibilityDataSegments[i].indexOf(':');
                                     console.log(eligibilityDataSegments[i].substring(a,a+4));
+                                if (eligibilityDataSegments[i].substring(a,a+4) != "null") {
                                     eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
