@@ -96,7 +96,6 @@
     var base_url = window.location.href;
     var base_url_segments = base_url.split('/');
     for ( i = 0; i < base_url_segments.length; i++ ) {
-        console.log(base_url_segments[i]);
         if (base_url_segments[i].length == 5) {
             if (base_url_segments[i].indexOf('-') == 2 
                 && base_url_segments[i].charAt(0).toLowerCase() != base_url_segments[i].charAt(0).toUpperCase()
@@ -104,7 +103,9 @@
                 && base_url_segments[i].charAt(3).toLowerCase() != base_url_segments[i].charAt(3).toUpperCase()
                 && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase())
                 {
-                console.log(base_url_segments[i]);
+                    language_code = base_url_segments[i].substring(0,2).toLowerCase();
+                    country_code = base_url_segments[i].substring(3).toUpperCase();
+                console.log(language_code+country_code);
             }
         }
     }
