@@ -418,7 +418,7 @@
                         // if callback failedsurvey= true, display the inelibible survey
                     });
                     survey.onCurrentPageChanged.add(function(result) {
-                        console.log(eligibilityData);
+                        alert(eligibilityData);
                     });
                     detailsSurvey.onComplete.add(function(result) {
                          // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
