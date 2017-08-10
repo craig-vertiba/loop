@@ -32,6 +32,8 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
+    var application_id = ""; // salesforce id number of the current application
+    var selected_site = ""; // salesforce id number of the selected site
     var language_code; // Extracted from Study website. Must be lowercase to access SurveyJS localizations.
     var country_code; // Extracted from Study website url.
     var region_code; // Used in Google Maps Geocoding to limit scope of search results.
@@ -351,6 +353,42 @@
 
             }
 
+            // get the Application Plugin data necessary to initialize the Plugin
+            function CreateNewApplication() {
+                var new_application_data = new Object();
+                new_application_data.survey = PluginData.survey;
+                new_application_data.studycountry = PluginData.studyCountry;
+                new_application_data.application = "";
+                new_application_data.type = "eligibility";
+                new_application_data.answers = eligibilityData;
+                new_application_data.utmsource = utm_source;
+                new_application_data.utmcontent = utm_content;
+                new_application_data.utmterm = utm_term;
+                new_application_data.utmcampaign = utm_campaign;
+                new_application_data.utmmedium = utm_medium;
+                new_application_data.country = PluginData.country;
+                new_application_data.language = PluginData.language;
+                new_application_data.site = selected_site;
+
+                return $.ajax({
+                    type:'POST',
+                    url: api_base_url + "ApplicationPlugin",
+                    headers:{'Authorization':'Bearer ' + access_token},
+                    data: new_application_data;
+                    success: function(json) {
+                        CreateApplicationResponse = json;
+                        application_id = CreateApplicationResponse.application;
+                        console.log(application_id);
+                    },
+                    error: function(data, status, xhr) {
+                    },
+                    complete: function(jqXHR, textStatus) {
+                    }
+                });
+
+            }
+
+
 
 
             // Load the html content from the html content file (typically content.html) into the selected page element
@@ -404,7 +442,12 @@
                         // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
                         // and if the string is not empty, send the partial result to the API.  If not, skip this.
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
-                            console.log(JSON.stringify(eligibilityData));
+                            // if the application record hasn't been created yet, create it
+                            if (application_id == "") {
+                                CreateNewApplication();
+                            }
+                            // otherwise, update the existing application
+                            console.log("update existing application");
                             // send result data to API
                         }
                     });
@@ -700,6 +743,8 @@
     function siteSelected(resultsMap,clicked_id) {
         // clicked_id should always be in the format location-i.  Slice off 'i' and convert to a Number.
         var i = Number(clicked_id.slice(9));
+        // set the selected site variable equal to the salesforce id of the clicked site
+        selected_site = locations[i].id;
         // add 1 so the marker numbers don't start at 0 like the marker array identifiers
         var a = i + 1;
         // get the page element to which we need to add the selected site
