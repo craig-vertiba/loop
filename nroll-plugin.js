@@ -427,8 +427,8 @@
                                         } else {
                                             eligibilityDataNew += "{";
                                         }
-                                        eligibilityDataNew += eligibilityDataSegments[i];
                                     }
+                                    eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
                                 if (eligibilityDataNew !== "{") { eligibilityDataNew += ","};
