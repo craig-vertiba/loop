@@ -374,7 +374,7 @@
                     type:'POST',
                     url: api_base_url + "ApplicationPlugin",
                     headers:{'Authorization':'Bearer ' + access_token},
-                    data: new_application_data;
+                    data: new_application_data,
                     success: function(json) {
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
