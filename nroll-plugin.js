@@ -23,6 +23,7 @@
  * It will be called automatically via the () at the end of the function.
  **/
 
+
 (function() {
     var all_scripts = document.getElementsByTagName('script');
     var script_url;
