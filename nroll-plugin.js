@@ -32,6 +32,8 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
+    var eligibilityData = {}; // holds the eligibility survey results data
+    var detailsData = {}; // holds the details survey results data
     var application_id = ""; // salesforce id number of the current application
     var selected_site = ""; // salesforce id number of the selected site
     var language_code; // Extracted from Study website. Must be lowercase to access SurveyJS localizations.
@@ -407,8 +409,6 @@
                     // show eligibility survey
                     // need to remember users location (zip/postal code/address)? probably not
 
-                    var eligibilityData = {};   
-                    var detailsData = {};   
                     Survey.Survey.cssType = "bootstrap";
                     // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
                     // when there is a survey named this way.
