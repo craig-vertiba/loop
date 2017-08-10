@@ -320,6 +320,7 @@
                     headers:{'Authorization':'Bearer ' + access_token},
                     success: function(json) {
                         PluginData = json;
+                        console.log(PluginData);
                     },
                     error: function(data, status, xhr) {
 
