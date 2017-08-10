@@ -419,7 +419,7 @@
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
 
-                        function RemoveEligibilityData(a) {
+                        function RemoveNullResults(a) {
                             // Upon completion of a survey, SurveyJS adds null results for comment fields to
                             // the result data, even if comments is disabled for all of the survey questions.  These must be
                             // stripped out to prevent them from being entered into the Application record
