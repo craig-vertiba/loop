@@ -32,11 +32,11 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var language_code = "en"; // default is English.  Must be lowercase to access SurveyJS localizations.
-    var country_code = "US"; // passed in from Study website url. Default to US if blank.
-    var region_code = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
+    var language_code; // = "en"; // default is English.  Must be lowercase to access SurveyJS localizations.
+    var country_code; // = "US"; // passed in from Study website url. Default to US if blank.
+    var region_code; // = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record
-    var langCountryCode = "en-us"; // language plus country code pulled from Study website url
+    var langCountryCode; // = "en-us"; // language plus country code pulled from Study website url
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
@@ -109,6 +109,7 @@
                 && base_url_segments[i].charAt(1).toLowerCase() != base_url_segments[i].charAt(1).toUpperCase()
                 && base_url_segments[i].charAt(3).toLowerCase() != base_url_segments[i].charAt(3).toUpperCase()
                 && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase()) {
+                langCountryCode = base_url_segments[i].toLowerCase();
                 language_code = base_url_segments[i].substring(0,2).toLowerCase();
                 country_code = base_url_segments[i].substring(3).toUpperCase();
                 break;
