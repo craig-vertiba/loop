@@ -423,7 +423,7 @@
                                     console.log(eligibilityDataSegments[i].substring(a+1,a+5));
                                 if (eligibilityDataSegments[i].substring(a+1,a+5) != "null") {
                                     if (eligibilityDataNew == "" && i > 0) {eligibilityDataNew += "{"};
-                                    if (eligibilityDataNew !== "{") { eligibilityDataNew += ","};
+                                    if (eligibilityDataNew !== "") { eligibilityDataNew += ","};
                                     eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
@@ -432,7 +432,7 @@
                             }
                             console.log(eligibilityDataNew);
                         }
-                        eligibilityDataNew += "}";
+                        if (eligibilityDataNew.indexOf('}') < 0) {eligibilityDataNew += "}"};
                         console.log(eligibilityDataNew);
                         console.log(eligibilityData);
                         initMap();
