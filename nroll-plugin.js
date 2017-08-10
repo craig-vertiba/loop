@@ -384,29 +384,28 @@
                     }
                     
                     var detailsSurvey = new Survey.Model(PluginData.details);
-                    // var successSurvey = new Survey.Model(successJSON);
                     survey.onComplete.add(function(result) {
-                        // send results to API
-                        // if callback failedsurvey = false, execute the following:
-                        Hide( "#plugin-eligibility" ); 
-                        Show( "#plugin-map" ); 
-
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
 
+                        // send results to API
+
+                        // if callback failedsurvey = false, execute the following:
+                        Hide( "#plugin-eligibility" ); 
+                        Show( "#plugin-map" ); 
                         initMap();
-                        // if callback failedsurvey= true, display the inelibible survey
+                        // if callback failedsurvey= true, display the ineligible message/survey
                     });
 
                     
                     survey.onCurrentPageChanged.add(function(result) {
-                    // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
-                    // and if the string is not empty, send the partial result to the API.  If not, skip this.
+                        // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
+                        // and if the string is not empty, send the partial result to the API.  If not, skip this.
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
-                            console.log(JSON.parse(PluginData.eligibility).sendResultOnPageNext);
                             console.log(JSON.stringify(eligibilityData));
+                            // send result data to API
                         }
                     });
 
@@ -418,6 +417,8 @@
                         detailsData = JSON.stringify(detailsData);
                         // remove null results from the results data
                         detailsData = RemoveNullResults(detailsData);
+
+
                     });
 
                     $("#eligibility").Survey({
@@ -448,7 +449,8 @@
             });
             $(document).on('click', '.site-selector', function() {
                 Hide( "#site-finder-container" ); 
-                Show( "#details-container" ); 
+                Show( "#details-container" );
+                // send selected site info to API 
             });
             $(document).on('click', '#change-location', function() {
                 Show( "#site-finder-container" ); 
