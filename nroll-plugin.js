@@ -23,7 +23,6 @@
  * It will be called automatically via the () at the end of the function.
  **/
 
-
 (function() {
     var all_scripts = document.getElementsByTagName('script');
     var script_url;
@@ -98,7 +97,7 @@
     var base_url_segments = base_url.split('/');
     for ( i = 0; i < base_url_segments.length; i++ ) {
         if (base_url_segments[i].length == 5) {
-            if (base_url_segments[i].indexOf('-') = 2 
+            if (base_url_segments[i].indexOf('-') == 2 
                 && base_url_segments[i].charAt(0).match(/[a-z|A-Z]/i)
                 && base_url_segments[i].charAt(1).match(/[a-z|A-Z]/i)
                 && base_url_segments[i].charAt(3).match(/[a-z|A-Z]/i)
