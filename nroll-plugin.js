@@ -420,6 +420,7 @@
                             if (eligibilityDataSegments[i].indexOf(":") > -1) {
                                 a = eligibilityDataSegments[i].indexOf(":");
                                 if (eligibilityDataSegments[i].substring(a,a+4) != "null") {
+                                    console.log(eligibilityDataSegments[i].substring(a,a+4));
                                     eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
@@ -427,7 +428,7 @@
                             }
                             console.log(eligibilityDataNew);
                         }
-                        console.log(JSON.stringify(eligibilityData));
+                        console.log(eligibilityData);
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
                     });
