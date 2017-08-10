@@ -413,12 +413,12 @@
                         Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
                         //$("#plugin-map").addClass("show");
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
-                        alert(eligibilityData);
+                        console.log(JSON.stringify(eligibilityData);
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
                     });
                     survey.onCurrentPageChanged.add(function(result) {
-                        alert(eligibilityData);
+                        console.log(JSON.stringify(eligibilityData);
                     });
                     detailsSurvey.onComplete.add(function(result) {
                          // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
