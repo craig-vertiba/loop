@@ -451,6 +451,7 @@
                         // $("#details-container").addClass("hide");
                         Show( "#success-container" ); //$("#success-container").removeClass("hide");
                         // $("#success-container").addClass("show");
+                        console.log(JSON.stringify(detailsData));
                     });
                     $("#eligibility").Survey({
                         model: survey,
