@@ -416,7 +416,7 @@
                         var eligibilityDataNew = "";
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove { and }
-                        eligibilityDataSegments = eligibilityDataTemp.split(',');
+                        eligibilityDataSegments = eligibilityData.split(',');
                         for (var i=0; i < eligibilityDataSegments.length; i++) {
                             if (eligibilityDataSegments[i].indexOf(':') >= 0) {
                                 a = eligibilityDataSegments[i].indexOf(':');
