@@ -420,10 +420,13 @@
                         for (var i=0; i < eligibilityDataSegments.length; i++) {
                             if (eligibilityDataSegments[i].indexOf(':') >= 0) {
                                 a = eligibilityDataSegments[i].indexOf(':');
-                                    console.log(eligibilityDataSegments[i].substring(a+1,a+5));
                                 if (eligibilityDataSegments[i].substring(a+1,a+5) != "null") {
-                                    if (eligibilityDataNew == "" && i > 0) {eligibilityDataNew += "{"};
-                                    if (eligibilityDataNew !== "") { eligibilityDataNew += ","};
+                                    if (i > 0) {
+                                        if (eligibilityDataNew != "") {
+                                            eligibilityDataNew += ",";
+                                        } else {
+                                            eligibilityDataNew += "{";
+                                        }
                                     eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
