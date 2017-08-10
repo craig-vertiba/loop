@@ -101,8 +101,6 @@
         }
     }
 
-
-
     // Parse the param string of url of the page that called this script looking for UTM parameters.
     // If found, assign them to the utm parameter variables.
     if (window.location.href.indexOf('?') >= 0) {
