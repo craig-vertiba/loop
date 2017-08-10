@@ -415,19 +415,25 @@
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
                         var eligibilityDataNew = "";
                         eligibilityData = JSON.stringify(eligibilityData);
-                        eligibilityDataSegments = eligibilityData.split(',');
+                        // remove { and }
+                        eligibilityDataSegments = eligibilityDataTemp.split(',');
                         for (var i=0; i < eligibilityDataSegments.length; i++) {
                             if (eligibilityDataSegments[i].indexOf(':') >= 0) {
                                 a = eligibilityDataSegments[i].indexOf(':');
-                                    console.log(eligibilityDataSegments[i].substring(a,a+4));
-                                if (eligibilityDataSegments[i].substring(a,a+4) != "null") {
+                                    console.log(eligibilityDataSegments[i].substring(a+1,a+5));
+                                if (eligibilityDataSegments[i].substring(a+1,a+5) != "null") {
+                                    if (eligibilityDataNew == "" && i > 0) {eligibilityDataNew += "{"};
+                                    if (eligibilityDataNew !== "{") { eligibilityDataNew += ","};
                                     eligibilityDataNew += eligibilityDataSegments[i];
                                 }
                             } else {
+                                if (eligibilityDataNew !== "{") { eligibilityDataNew += ","};
                                 eligibilityDataNew += eligibilityDataSegments[i];
                             }
                             console.log(eligibilityDataNew);
                         }
+                        eligibilityDataNew += "}";
+                        console.log(eligibilityDataNew);
                         console.log(eligibilityData);
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
