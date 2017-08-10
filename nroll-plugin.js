@@ -413,58 +413,11 @@
                         Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
                         //$("#plugin-map").addClass("show");
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
-                        console.log(eligibilityData.Age);
 
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
-
-                        function RemoveNullResults(a) {
-                            // Upon completion of a survey, SurveyJS adds null results for comment fields to
-                            // the result data, even if comments is disabled for all of the survey questions.  These must be
-                            // stripped out to prevent them from being entered into the Application record
-                            // through the API.
-                            // Note that the input string 'a' must already be stringified JSON
-                            //
-                            // create variable to hold the new result JSON
-                            var new_a = "";
-                            // split the results data into segments on all commas
-                            a_segments = a.split(',');
-                            // iterate through all the segments
-                            for (var i=0; i < a_segments.length; i++) {
-                                // check to see if the segment has a ':'.  If not, it can be added to the new result string right away.
-                                if (a_segments[i].indexOf(':') >= 0) {
-                                    // get the location of the ':'
-                                    a = a_segments[i].indexOf(':');
-                                    // check to see if the value after the colon is "null"
-                                    if (a_segments[i].substring(a+1,a+5) != "null") {
-                                        // check to see if this is not the first segment.
-                                        if (i > 0) {
-                                            // add a comma if there is already content in the new results string
-                                            if (new_a != "") {
-                                                new_a += ",";
-                                            // otherwise, add a '{'. This will be necessary if the first segment contains a null value.    
-                                            } else {
-                                                new_a += "{";
-                                            }
-                                        }
-                                        // since this is the first segment and it does not have a null value, add it to the new results string.
-                                        new_a += a_segments[i];
-                                    }
-                                // this segment does not contain a ':' - add it to the new results string.    
-                                } else {
-                                    // if there is already content in the new results string, add a comma before adding this segment
-                                    if (new_a !== "{") { new_a += ","};
-                                    new_a += a_segments[i];
-                                }
-                            }
-                            // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
-                            // segment in the results data contains a null value.
-                            if (new_a.indexOf('}') < 0) {new_a += "}"};
-                            // return the new results string
-                            return new_a;
-                        }
 
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
@@ -478,7 +431,14 @@
                         // $("#details-container").addClass("hide");
                         Show( "#success-container" ); //$("#success-container").removeClass("hide");
                         // $("#success-container").addClass("show");
+
+                        // stringify the results data before removing null results
+                        detailsData = JSON.stringify(detailsData);
+                        // remove null results from the results data
+                        detailsData = RemoveNullResults(detailsData);
+
                         console.log(JSON.stringify(detailsData));
+
                     });
                     $("#eligibility").Survey({
                         model: survey,
@@ -536,6 +496,52 @@
                     return this.get(0).scrollHeight > this.height();
                 }
             })(jQuery);
+
+            function RemoveNullResults(a) {
+                // Upon completion of a survey, SurveyJS adds null results for comment fields to
+                // the result data, even if comments is disabled for all of the survey questions.  These must be
+                // stripped out to prevent them from being entered into the Application record
+                // through the API.
+                // Note that the input string 'a' must already be stringified JSON
+                //
+                // create variable to hold the new result JSON
+                var new_a = "";
+                // split the results data into segments on all commas
+                a_segments = a.split(',');
+                // iterate through all the segments
+                for (var i=0; i < a_segments.length; i++) {
+                    // check to see if the segment has a ':'.  If not, it can be added to the new result string right away.
+                    if (a_segments[i].indexOf(':') >= 0) {
+                        // get the location of the ':'
+                        a = a_segments[i].indexOf(':');
+                        // check to see if the value after the colon is "null"
+                        if (a_segments[i].substring(a+1,a+5) != "null") {
+                            // check to see if this is not the first segment.
+                            if (i > 0) {
+                                // add a comma if there is already content in the new results string
+                                if (new_a != "") {
+                                    new_a += ",";
+                                // otherwise, add a '{'. This will be necessary if the first segment contains a null value.    
+                                } else {
+                                    new_a += "{";
+                                }
+                            }
+                            // since this is the first segment and it does not have a null value, add it to the new results string.
+                            new_a += a_segments[i];
+                        }
+                    // this segment does not contain a ':' - add it to the new results string.    
+                    } else {
+                        // if there is already content in the new results string, add a comma before adding this segment
+                        if (new_a !== "{") { new_a += ","};
+                        new_a += a_segments[i];
+                    }
+                }
+                // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
+                // segment in the results data contains a null value.
+                if (new_a.indexOf('}') < 0) {new_a += "}"};
+                // return the new results string
+                return new_a;
+            }
 
         }); // end jquery.documentready
 
