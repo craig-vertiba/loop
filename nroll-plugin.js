@@ -413,7 +413,8 @@
                         Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
                         //$("#plugin-map").addClass("show");
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
-                        
+                        console.log(eligibilityData.Age);
+
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove null results from the results data
@@ -465,7 +466,6 @@
                             return new_a;
                         }
 
-                        console.log(eligibilityData.Age);
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
                     });
