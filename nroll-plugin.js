@@ -369,29 +369,12 @@
                     // show eligibility survey
                     // need to remember users location (zip/postal code/address)? probably not
 
-                    // var eligibilityJSON = {completeText:"Submit",pages:[{elements:[{type:"radiogroup",name:"Are you 18 years or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"age",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Are you recently diagnosed with mild-moderate asthma?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],innerIndent:2,name:"asthma",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Typically, do you use an inhaler more than twice daily?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"inhaler",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you undertake exercise more than three times per week?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"exercise",navigationButtonsVisibility:"show"},{elements:[{type:"radiogroup",name:"Do you have a BMI of 35 or over?",title:"Do you have a BMI of 35 or over?",isRequired:true,choices:[{value:"no",text:"No"},{value:"yes",text:"Yes"}],colCount:2}],name:"bmi",navigationButtonsVisibility:"show"}],showCompletedPage:false,showPageTitles:false,showProgressBar:"top",showQuestionNumbers:"off",showTitle:false,title:"Title of the survey"};
-                    // var detailsJSON = {"showPageNumbers":false,"showTitle":false,"showCompletedPage":false,"showNavigationButtons":true,"showProgressBar":"off","showQuestionNumbers":"off","showPageTitles":false,"title":"",completeText:"",pageNextText:"",pagePrevText:"","pages":[{"navigationButtonsVisibility":"show","title":"","elements":[{"type":"html","isRequired":true,"name":"Top HTML","startWithNewLine":true,"visibleIf":"","html":"<div style=\"text-align:center;margin-bottom:20px\"><span style=\"font-size:20px\">Lastly, please leave your details</span></br></br>So that we can get in touch with you about the possibility of you taking part in the XXXXXXXXXX Study, please complete this form with your details.</div>"},{"type":"text","isRequired":true,"name":"name","startWithNewLine":true,"visibleIf":"",title:"Name",placeHolder:"NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"phone","startWithNewLine":true,"visibleIf":"",title:"Phone",placeHolder:"PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"email","startWithNewLine":true,"visibleIf":"",title:"Email",placeHolder:"EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"radiogroup","isRequired":true,"name":"contact preference","startWithNewLine":true,"visibleIf":"",title:"CONTACT PREFERENCE","colCount":2,"choices":[{"value":"Email","text":"Email"},{"value":"Phone","text":"Phone"},]},{"type":"html","isRequired":true,"name":"blank space HTML","startWithNewLine":true,"visibleIf":"","html":"<br/>"},{"type":"checkbox","isRequired":true,"name":"terms","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"I have read and agree to the terms of use*","text":"I have read and agree to the terms of use*"},]},{"type":"checkbox","isRequired":false,"name":"agent","startWithNewLine":true,"visibleIf":"",title:"shouldn't be visible on this survey","colCount":1,"choices":[{"value":"True","text":"I am submitting this information on behalf of the person shown above"},]},{"type":"html","isRequired":true,"name":"Agent HTML","startWithNewLine":true,"visibleIf":"{agent} = 'True'","html":"<br/><br/><div style=\"text-align:center;margin-bottom:20px\">As the authorized representative of the candidate shown above, please enter your contact information below.</div>"},{"type":"text","isRequired":true,"name":"agent name","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Name",placeHolder:"YOUR NAME*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent phone","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Phone",placeHolder:"YOUR PHONE*",inputType:"text"},{"type":"text","isRequired":true,"name":"agent email","startWithNewLine":true,"visibleIf":"{agent} = 'True'",title:"Agent Email",placeHolder:"YOUR EMAIL*",inputType:"email",validators:[{type:"email",text:""}]},{"type":"html","isRequired":true,"name":"Mandatory HTML","startWithNewLine":true,"visibleIf":"","html":"<span style=\"font-size:10px;line-height:4\">*Mandatory</span>"},]},]};
-                    // mapCenter = (get this from the initialization JSON);
-                    // locations = '[{"name":"Ronald Reagan UCLA Medical Center","lat":"34.066","long":"-118.446","id":"a0D6A000000wtOYUAY","street":"757 Westwood Plaza","city":"Los Angeles","state":"CA","country":"US","zip":"90095"},{"name":"Mayo Clinic","lat":"44.022","long":"-92.466","id":"a0D6A000000wtOTUAY","street":"200 1st St SW","city":"Rochester","state":"MN","country":"US","zip":"55905"},{"name":"Diabetes Research Institute","lat":"25.789","long":"-80.212","id":"a0D6A000000wtOdUAI","street":"1450 NW 10th Ave #R77","city":"Miami","state":"FL","country":"US","zip":"33136"}]';
-                    // locations = JSON.parse(locations);
-
-                    // sitesJSON = JSON.parse(sitesJSON);
-                    // for (var i = 0, len = sitesJSON.length; i < len; i++){
-                    //     console.log(sitesJSON[i][1],sitesJSON[i][2]);
-                    //     // img.setAttribute("src",obj[i][2] + obj[i][1]);
-                    //     // document.body.appendChild(img);
-                    // }
-                    // gettoken();
-
                     var eligibilityData = {};   
                     var detailsData = {};   
                     Survey.Survey.cssType = "bootstrap";
                     // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
                     // when there is a survey named this way.
-                    // var survey = new Survey.Model(eligibilityJSON);
                     var survey = new Survey.Model(PluginData.eligibility);
-                    // var siteFinderSurvey = new Survey.Model(siteFinderJSON);
-                    // var language_code = "de"; // this will come from the initialization string
                     // sets the language for localization of survey messages.  Will apply to all surveys.
                     if (language_code == "zh") {
                         survey.locale = "zh-cn";
@@ -400,19 +383,13 @@
                         survey.locale = language_code;
                     }
                     
-
-                    // console.log(Survey.surveyLocalization.locales[language_code].pagePrevText);
-
-                    //var detailsSurvey = new Survey.Model(detailsJSON);
                     var detailsSurvey = new Survey.Model(PluginData.details);
                     // var successSurvey = new Survey.Model(successJSON);
                     survey.onComplete.add(function(result) {
                         // send results to API
                         // if callback failedsurvey = false, execute the following:
-                        Hide( "#plugin-eligibility" ); //$("#plugin-eligibility").addClass("hide");
-                        Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
-                        //$("#plugin-map").addClass("show");
-                        //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
+                        Hide( "#plugin-eligibility" ); 
+                        Show( "#plugin-map" ); 
 
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
@@ -422,31 +399,30 @@
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
                     });
+
+                    
                     survey.onCurrentPageChanged.add(function(result) {
+                    // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
+                    // send the partial result to the API.  If not, skip this.
+                        console.log(JSON.parse(PluginData.eligibility).sendResultOnPageNext);
                         console.log(JSON.stringify(eligibilityData));
                     });
+
                     detailsSurvey.onComplete.add(function(result) {
-                         // document.querySelector('#detailsResult').innerHTML = "result: " + JSON.stringify(result.data);
-                        Hide( "#details-container" ); // $("#details-container").removeClass("show");
-                        // $("#details-container").addClass("hide");
-                        Show( "#success-container" ); //$("#success-container").removeClass("hide");
-                        // $("#success-container").addClass("show");
+                        Hide( "#details-container" );
+                        Show( "#success-container" ); 
 
                         // stringify the results data before removing null results
                         detailsData = JSON.stringify(detailsData);
                         // remove null results from the results data
                         detailsData = RemoveNullResults(detailsData);
-
-                        console.log(JSON.stringify(detailsData));
-
                     });
+
                     $("#eligibility").Survey({
                         model: survey,
                         data: eligibilityData
                     });
-                    // $("#site-finder").Survey({
-                    //     model: siteFinderSurvey
-                    // });
+
                     $("#details").Survey({
                         model: detailsSurvey,
                         data: detailsData
