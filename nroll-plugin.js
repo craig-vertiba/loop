@@ -27,11 +27,11 @@
     var all_scripts = document.getElementsByTagName('script');
     var script_url;
     var scripts_counter;
-    var utm_source;
-    var utm_medium;
-    var utm_campaign;
-    var utm_term;
-    var utm_content;
+    var utm_source = "";
+    var utm_medium = "";
+    var utm_campaign = "";
+    var utm_term = "";
+    var utm_content = "";
     var eligibilityData = {}; // holds the eligibility survey results data
     var detailsData = {}; // holds the details survey results data
     var application_id = ""; // salesforce id number of the current application
@@ -362,7 +362,7 @@
                 new_application_data.studycountry = PluginData.studyCountry;
                 new_application_data.application = "";
                 new_application_data.type = "eligibility";
-                new_application_data.answers = eligibilityData;
+                new_application_data.answers = JSON.stringify(eligibilityData);
                 new_application_data.utmsource = utm_source;
                 new_application_data.utmcontent = utm_content;
                 new_application_data.utmterm = utm_term;
