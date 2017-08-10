@@ -32,12 +32,12 @@
     var utm_campaign;
     var utm_term;
     var utm_content;
-    var language_code; // = "en"; // default is English.  Must be lowercase to access SurveyJS localizations.
-    var country_code; // = "US"; // passed in from Study website url. Default to US if blank.
-    var region_code; // = "US"; // used in Google Maps Geocoding to limit scope of search results. Default to US.
-    var study_id; // ID of the study, from the "Study ID" in the Study Detail record
-    var langCountryCode; // = "en-us"; // language plus country code pulled from Study website url
-    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter
+    var language_code; // Extracted from Study website. Must be lowercase to access SurveyJS localizations.
+    var country_code; // Extracted from Study website url.
+    var region_code; // Used in Google Maps Geocoding to limit scope of search results.
+    var study_id; // ID of the study, from the "Study ID" in the Study Detail record.  Passed in as nroll-plugin parameter.
+    var langCountryCode; // language plus country code extracted from Study website url.
+    var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter with default.
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
@@ -92,7 +92,6 @@
                 break;
         }
     }
-
 
     // extract the language code and country code from the Study website url
     // we are looking for a string in the url like "/en-us/"
