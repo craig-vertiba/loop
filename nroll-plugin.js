@@ -323,10 +323,10 @@
                         console.log(PluginData);
                     },
                     error: function(data, status, xhr) {
-
+                        console.log("data: "+data+ "status: "+status+" xhr: "+xhr);
                     },
                     complete: function(jqXHR, textStatus) {
-
+                        console.log("jqXHR: "+jqXHR+" textStatus: "+textStatus);
                     }
                 });
 
