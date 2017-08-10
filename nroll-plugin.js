@@ -413,9 +413,9 @@
                         Show( "#plugin-map" ); //$("#plugin-map").removeClass("hide");
                         //$("#plugin-map").addClass("show");
                         //console.log(surveyJSON3.pages[0]['elements'][0]['temp']);
+                        
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
-                        console.log(eligibilityData);
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
 
@@ -461,13 +461,11 @@
                             // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
                             // segment in the results data contains a null value.
                             if (new_a.indexOf('}') < 0) {new_a += "}"};
-                            console.log(new_a);
                             // return the new results string
                             return new_a;
                         }
-                        
 
-                        console.log(eligibilityData);
+                        console.log(eligibilityData.Age);
                         initMap();
                         // if callback failedsurvey= true, display the inelibible survey
                     });
