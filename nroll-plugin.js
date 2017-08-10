@@ -362,7 +362,7 @@
                 new_application_data.studycountry = PluginData.studyCountry;
                 new_application_data.application = "";
                 new_application_data.type = "eligibility";
-                new_application_data.answers = JSON.stringify(eligibilityData);
+                new_application_data.answers = eligibilityData;
                 new_application_data.utmsource = utm_source;
                 new_application_data.utmcontent = utm_content;
                 new_application_data.utmterm = utm_term;
@@ -371,6 +371,8 @@
                 new_application_data.country = PluginData.country;
                 new_application_data.language = PluginData.language;
                 new_application_data.site = selected_site;
+                new_application_data = JSON.stringify(new_application_data);
+                console.log(new_application_data);
 
                 return $.ajax({
                     type:'POST',
