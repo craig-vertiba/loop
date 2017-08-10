@@ -96,15 +96,21 @@
     var base_url = window.location.href;
     var base_url_segments = base_url.split('/');
     for ( i = 0; i < base_url_segments.length; i++ ) {
+        console.log(base_url_segments[i]);
         if (base_url_segments[i].length == 5) {
-            if (base_url_segments[i].indexOf('-') == 2 
-                && base_url_segments[i].charAt(0).match(/[a-z|A-Z]/i)
-                && base_url_segments[i].charAt(1).match(/[a-z|A-Z]/i)
-                && base_url_segments[i].charAt(3).match(/[a-z|A-Z]/i)
-                && base_url_segments[i].charAt(4).match(/[a-z|A-Z]/i))
-                {
-                console.log(base_url_segments[i]);
-            }
+            // if (base_url_segments[i].indexOf('-') == 2 
+            //     && base_url_segments[i].charAt(0).match(/[a-z|A-Z]/i)
+            //     && base_url_segments[i].charAt(1).match(/[a-z|A-Z]/i)
+            //     && base_url_segments[i].charAt(3).match(/[a-z|A-Z]/i)
+            //     && base_url_segments[i].charAt(4).match(/[a-z|A-Z]/i))
+            //     {
+                console.log(base_url_segments[i].indexOf('-'));
+                console.log(base_url_segments[i].charAt(0).match(/[a-z|A-Z]/i));
+                console.log(base_url_segments[i].charAt(1).match(/[a-z|A-Z]/i));
+                console.log(base_url_segments[i].charAt(3).match(/[a-z|A-Z]/i));
+                console.log(base_url_segments[i].charAt(4).match(/[a-z|A-Z]/i));
+                // console.log(base_url_segments[i]);
+            // }
         }
     }
 
