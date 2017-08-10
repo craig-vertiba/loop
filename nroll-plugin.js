@@ -93,6 +93,13 @@
         }
     }
 
+
+    // extract the language code and country code from the Study website url
+    // we are looking for a string in the url like "/en-us/"
+    // we look for the first segment of the url that is five characters between two forward slashes
+    // then we check to see if the third character is a dash and the remaining characters are numbers
+    // if the string fits this pattern, we assume the first two characters are the language code
+    // and the last two characters are the country code and assign them accordingly, then discontinue searching.
     var base_url = window.location.href;
     var base_url_segments = base_url.split('/');
     for ( i = 0; i < base_url_segments.length; i++ ) {
@@ -101,11 +108,10 @@
                 && base_url_segments[i].charAt(0).toLowerCase() != base_url_segments[i].charAt(0).toUpperCase()
                 && base_url_segments[i].charAt(1).toLowerCase() != base_url_segments[i].charAt(1).toUpperCase()
                 && base_url_segments[i].charAt(3).toLowerCase() != base_url_segments[i].charAt(3).toUpperCase()
-                && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase())
-                {
-                    language_code = base_url_segments[i].substring(0,2).toLowerCase();
-                    country_code = base_url_segments[i].substring(3).toUpperCase();
-                console.log(language_code+country_code);
+                && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase()) {
+                language_code = base_url_segments[i].substring(0,2).toLowerCase();
+                country_code = base_url_segments[i].substring(3).toUpperCase();
+                break;
             }
         }
     }
@@ -132,12 +138,12 @@
                 case 'utm_medium':
                     utm_medium = hash[1];
                     break;
-                case 'language':
-                    language_code = hash[1].toLowerCase();
-                    break;
-                case 'country':
-                    country_code = hash[1].toUpperCase();
-                    break;
+                // case 'language':
+                //     language_code = hash[1].toLowerCase();
+                //     break;
+                // case 'country':
+                //     country_code = hash[1].toUpperCase();
+                //     break;
             }
         }
     }
