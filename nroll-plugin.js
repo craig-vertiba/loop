@@ -96,7 +96,9 @@
     var base_url = window.location.href;
     var base_url_segments = base_url.split('/');
     for ( i = 0; i < base_url_segments.length; i++ ) {
-        console.log(base_url_segments[i]);
+        if (base_url_segments[i].length == 5) {
+            console.log(base_url_segments[i]);
+        }
     }
 
 
