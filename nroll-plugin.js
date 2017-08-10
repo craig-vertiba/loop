@@ -102,7 +102,7 @@
                 && base_url_segments[i].charAt(0).toLowerCase() != base_url_segments[i].charAt(0).toUpperCase()
                 && base_url_segments[i].charAt(1).toLowerCase() != base_url_segments[i].charAt(1).toUpperCase()
                 && base_url_segments[i].charAt(3).toLowerCase() != base_url_segments[i].charAt(3).toUpperCase()
-                && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase()
+                && base_url_segments[i].charAt(4).toLowerCase() != base_url_segments[i].charAt(4).toUpperCase())
                 {
                 console.log(base_url_segments[i]);
             }
