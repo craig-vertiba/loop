@@ -404,7 +404,7 @@
                     survey.onCurrentPageChanged.add(function(result) {
                     // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
                     // and if the string is not empty, send the partial result to the API.  If not, skip this.
-                        if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && eligibilityData != "{}") {
+                        if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
                             console.log(JSON.parse(PluginData.eligibility).sendResultOnPageNext);
                             console.log(JSON.stringify(eligibilityData));
                         }
