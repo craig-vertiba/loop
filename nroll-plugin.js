@@ -46,7 +46,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var api_base_url = "https://cs14.force.com/services/apexrest/";
-    var access_token = "00Dc0000003w6AY!ARcAQGO39oR_gl3Zx5sKKmNKftRJk1T_jmE3mCf5sgztBwYyqmjBDwsqXwGfwg1yR4o.psVqHYJiOa4zb_n6VeJYiVfcTU.6"; // 
+    var access_token = "00Dc0000003w6AY!ARcAQN3wMiQj4s6QLgTZE2Fn6PCBCbox_x8zba7EVmWSZ.EZir9u69h7srF4R7t.9rl_4.87V2xu9Fnw1GUVwbcYaOBrgczZ"; // 
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
@@ -816,13 +816,13 @@
         var i = Number(clicked_id.slice(9));
         // set the selected site variable equal to the salesforce id of the clicked site
         selected_site = locations[i].id;
-        // add 1 so the marker numbers don't start at 0 like the marker array identifiers
 
-        // init plugin.
+        // init the jQuery plugin that exposes the AddOrUpdateSite function
         var test = $('node').plugin();
-
+        // now update the Application with the new or changed site
         test.AddOrUpdateSite();
 
+        // add 1 so the marker numbers don't start at 0 like the marker array identifiers
         var a = i + 1;
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
