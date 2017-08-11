@@ -457,6 +457,9 @@
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
+                        // parse the eligibility data back into a json object because that's what we need
+                        // to pass into the API
+                        eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
                             // if callback failedsurvey = false, execute the following:
