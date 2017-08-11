@@ -355,7 +355,7 @@
 
             }
 
-            // get the Application Plugin data necessary to initialize the Plugin
+            // create a new application
             function CreateNewApplication() {
                 var new_application_data = new Object();
                 new_application_data.survey = PluginData.survey;
@@ -379,10 +379,7 @@
                     url: api_base_url + "ApplicationPlugin",
                     headers:{'Authorization':'Bearer ' + access_token,
                              'Content-Type': 'application/json'},
-                    //headers:{'Authorization':'Bearer ' + access_token},
                     data: new_application_data,
-                    //jsonp: false,
-                    //dataType: 'json',
                     success: function(json) {
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
@@ -396,6 +393,33 @@
 
             }
 
+            // update or complete the eligibility survey results for an existing application
+            function UpdateOrCompleteEligibilitySurvey() {
+                var new_application_data = new Object();
+                new_application_data.survey = PluginData.survey;
+                new_application_data.application = application_id;
+                new_application_data.type = "eligibility";
+                new_application_data.answers = eligibilityData;
+                new_application_data = JSON.stringify(new_application_data);
+                console.log(new_application_data);
+
+                return $.ajax({
+                    type:'POST',
+                    url: api_base_url + "ApplicationPlugin",
+                    headers:{'Authorization':'Bearer ' + access_token,
+                             'Content-Type': 'application/json'},
+                    data: new_application_data,
+                    success: function(json) {
+                        eligibility_survey_status = json.eligibilitysurveystatus;
+                        console.log(eligibility_survey_status);
+                    },
+                    error: function(data, status, xhr) {
+                    },
+                    complete: function(jqXHR, textStatus) {
+                    }
+                });
+
+            }
 
 
 
@@ -451,10 +475,10 @@
                             // if the application record hasn't been created yet, create it
                             if (application_id == "") {
                                 CreateNewApplication();
+                            } else {
+                                // update the existing application with new or changed results data
+                                UpdateOrCompleteEligibilitySurvey();
                             }
-                            // otherwise, update the existing application
-                            console.log("update existing application");
-                            // send result data to API
                         }
                     });
 
