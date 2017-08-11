@@ -46,7 +46,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var api_base_url = "https://cs14.force.com/services/apexrest/";
-    var access_token = "00Dc0000003w6AY!ARcAQLJdQV2VesaojnzIIfaA_wgvq1me78mhmhkrVSVsuxsaWzKpP4mZUq0wv0H1bkoPljGCl9vKVK5OKKoo1Y4YJRkIEi9S"; // 
+    var access_token = "00Dc0000003w6AY!ARcAQAoRkUvnB79WnIXWMewcZU18z5GBhs8U5vTFxs15lumi5cbfqfN.aGB_pfueD16sVLE1P38ua83_IsHaGgQO9.cYwI.A"; // 
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
@@ -362,7 +362,6 @@
                 new_application_data.studycountry = PluginData.studyCountry;
                 new_application_data.application = "";
                 new_application_data.type = "eligibility";
-                new_application_data.answers = eligibilityData;
                 new_application_data.utmsource = utm_source;
                 new_application_data.utmcontent = utm_content;
                 new_application_data.utmterm = utm_term;
@@ -371,6 +370,7 @@
                 new_application_data.country = PluginData.country;
                 new_application_data.language = PluginData.language;
                 new_application_data.site = selected_site;
+                new_application_data.answers = eligibilityData;
                 new_application_data = JSON.stringify(new_application_data);
                 console.log(new_application_data);
 
