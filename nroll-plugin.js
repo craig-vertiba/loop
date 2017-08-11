@@ -380,8 +380,8 @@
                     headers:{'Authorization':'Bearer ' + access_token,
                              'Content-Type': 'application/json'},
                     data: new_application_data,
-                    jsonp: false,
-                    //dataType: 'json',
+                    //jsonp: false,
+                    dataType: 'json',
                     success: function(json) {
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
