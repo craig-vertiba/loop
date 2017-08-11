@@ -460,8 +460,29 @@
                 $.when( getPluginData()).done(function(a) {
                     // parse the sites and add them to the locations array
                     locations = JSON.parse(PluginData.sites);
-                    if (!PluginData.yourNearestStudyCenter) {
-                        console.log("null")
+                    if (PluginData.yourNearestStudyCenter) {
+                        $("#your-nearest-study-center").html(PluginData.yourNearestStudyCenter);
+                    }
+                    if (PluginData.siteFinderHeader) {
+                        $("#site-finder-header").html(PluginData.siteFinderHeader);
+                    }
+                    if (PluginData.siteFinderBody) {
+                        $("#site-finder-body").html(PluginData.siteFinderBody);
+                    }
+                    if (PluginData.postalCodePlaceholder) {
+                        $("#address").attr("placeholder", PluginData.postalCodePlaceholder);
+                    }
+                    if (PluginData.successHeader) {
+                        $("#success-header").html(PluginData.successHeader);
+                    }
+                    if (PluginData.successBody) {
+                        $("#success-body").html(PluginData.successBody);
+                    }
+                    if (!PluginData.changeButtonLabel) {
+                        PluginData.changeButtonLabel = "Change";
+                    }
+                    if (!PluginData.selectButtonLabel) {
+                        PluginData.selectButtonLabel = "Select";
                     }
 
                     // check to see if the appId cookie is set and if it is get the appId
@@ -789,7 +810,7 @@
         // add new html to display the list of sites, and add event listeners to all the select buttons
         for (i = 0; i < locations.length; i++) {
             a = i + 1;
-            d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">Select</button></div></div>');
+            d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">'+PluginData.selectButtonLabel+'</button></div></div>');
             document.getElementById('location-' + i).addEventListener('click', function() {
                 siteSelected(resultsMap,this.id);
             });
@@ -832,7 +853,7 @@
         // delete any html already attached to that element (like a previously selected site)
         d1.innerHTML="";
         // add new html to display the selected site
-        d1.insertAdjacentHTML('beforeend', '<div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div id="selected-site-name" style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">Change</button></div></div><hr/>');
+        d1.insertAdjacentHTML('beforeend', '<div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div id="selected-site-name" style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">'+PluginData.changeButtonLabel+'</button></div></div><hr/>');
         // add an event listener to the change button
         document.getElementById('change-location').addEventListener('click', function() {
             changeSite(resultsMap);
