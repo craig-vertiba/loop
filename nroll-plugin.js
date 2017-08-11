@@ -458,8 +458,11 @@
                 div.append(a);
                 // get the Application Plugin data load from the API and return it as PluginData
                 $.when( getPluginData()).done(function(a) {
-                    // parse the sites and add them to locations
+                    // parse the sites and add them to the locations array
                     locations = JSON.parse(PluginData.sites);
+                    if (!PluginData.yourNearestStudyCenter) {
+                        console.log("null")
+                    }
 
                     // check to see if the appId cookie is set and if it is get the appId
                     // make plugin initiation call to API and include appId if available
