@@ -377,8 +377,11 @@
                 return $.ajax({
                     type:'POST',
                     url: api_base_url + "ApplicationPlugin",
-                    headers:{'Authorization':'Bearer ' + access_token},
+                    headers:{'Authorization':'Bearer ' + access_token,
+                             'Content-Type': 'application/json'},
                     data: new_application_data,
+                    crossDomain: true,
+                    dataType: 'json',
                     success: function(json) {
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
