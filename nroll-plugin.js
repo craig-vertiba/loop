@@ -591,9 +591,6 @@
                 }
             };
 
-            // init plugin.
-            var test = $('node').plugin();
-
             function RemoveNullResults(a) {
                 // Upon completion of a survey, SurveyJS adds null results for comment fields to
                 // the result data, even if comments is disabled for all of the survey questions.  These must be
@@ -820,8 +817,12 @@
         // set the selected site variable equal to the salesforce id of the clicked site
         selected_site = locations[i].id;
         // add 1 so the marker numbers don't start at 0 like the marker array identifiers
+
+        // init plugin.
+        var test = $('node').plugin();
+
         test.helloWorld();
-        
+
         var a = i + 1;
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
