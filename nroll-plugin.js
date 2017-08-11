@@ -371,6 +371,7 @@
                 new_application_data.language = PluginData.language;
                 new_application_data.site = selected_site;
                 new_application_data.answers = eligibilityData;
+                // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
                 console.log(new_application_data);
 
@@ -396,10 +397,11 @@
             // update or complete the eligibility survey results for an existing application
             function UpdateOrCompleteEligibilitySurvey() {
                 var new_application_data = new Object();
-                new_application_data.survey = PluginData.survey;
+                //new_application_data.survey = PluginData.survey;
                 new_application_data.application = application_id;
                 new_application_data.type = "eligibility";
                 new_application_data.answers = eligibilityData;
+                // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
                 console.log(new_application_data);
 
@@ -412,6 +414,33 @@
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
                         console.log(eligibility_survey_status);
+                    },
+                    error: function(data, status, xhr) {
+                    },
+                    complete: function(jqXHR, textStatus) {
+                    }
+                });
+            }
+
+            // add or update a site for an existing application
+            function AddOrUpdateSite() {
+                var new_application_data = new Object();
+                new_application_data.site = selected_site;
+                new_application_data.type = "site";
+                new_application_data.application = application_id;
+                // stringify the data object
+                new_application_data = JSON.stringify(new_application_data);
+                console.log(new_application_data);
+
+                return $.ajax({
+                    type:'POST',
+                    url: api_base_url + "ApplicationPlugin",
+                    headers:{'Authorization':'Bearer ' + access_token,
+                             'Content-Type': 'application/json'},
+                    data: new_application_data,
+                    success: function(json) {
+                        eligibility_survey_status = json.eligibilitySurveyStatus;
+                        console.log(json);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -553,6 +582,17 @@
                     return this.get(0).scrollHeight > this.height();
                 }
             })(jQuery);
+
+            $.fn.plugin = function() {
+                return {
+                    helloWorld: function() {
+                        console.log('Hello World!');
+                    }
+                }
+            };
+
+            // init plugin.
+            var test = $('node').plugin();
 
             function RemoveNullResults(a) {
                 // Upon completion of a survey, SurveyJS adds null results for comment fields to
@@ -780,6 +820,8 @@
         // set the selected site variable equal to the salesforce id of the clicked site
         selected_site = locations[i].id;
         // add 1 so the marker numbers don't start at 0 like the marker array identifiers
+        test.helloWorld();
+        
         var a = i + 1;
         // get the page element to which we need to add the selected site
         var d1 = document.getElementById('selected-site');
