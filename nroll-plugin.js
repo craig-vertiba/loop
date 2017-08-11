@@ -585,8 +585,8 @@
 
             $.fn.plugin = function() {
                 return {
-                    helloWorld: function() {
-                        console.log('Hello World!');
+                    AddOrUpdateSite: function() {
+                        AddOrUpdateSite();
                     }
                 }
             };
@@ -821,7 +821,7 @@
         // init plugin.
         var test = $('node').plugin();
 
-        test.helloWorld();
+        test.AddOrUpdateSite();
 
         var a = i + 1;
         // get the page element to which we need to add the selected site
