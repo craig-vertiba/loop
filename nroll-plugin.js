@@ -410,7 +410,7 @@
                              'Content-Type': 'application/json'},
                     data: new_application_data,
                     success: function(json) {
-                        eligibility_survey_status = json.eligibilitysurveystatus;
+                        eligibility_survey_status = json.eligibilitySurveyStatus;
                         console.log(eligibility_survey_status);
                     },
                     error: function(data, status, xhr) {
@@ -457,14 +457,15 @@
                         eligibilityData = JSON.stringify(eligibilityData);
                         // remove null results from the results data
                         eligibilityData = RemoveNullResults(eligibilityData);
-
                         // send results to API
+                        $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                            // if callback failedsurvey = false, execute the following:
+                            Hide( "#plugin-eligibility" ); 
+                            Show( "#plugin-map" ); 
+                            initMap();
+                            // if callback failedsurvey= true, display the ineligible message/survey
+                        });
 
-                        // if callback failedsurvey = false, execute the following:
-                        Hide( "#plugin-eligibility" ); 
-                        Show( "#plugin-map" ); 
-                        initMap();
-                        // if callback failedsurvey= true, display the ineligible message/survey
                     });
 
                     
