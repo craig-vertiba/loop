@@ -521,10 +521,13 @@
                                     Hide( "#plugin-eligibility" ); 
                                     Show( "#plugin-map" ); 
                                     initMap();
+                                    break;
                                 case "failed":
                                     Hide( "#eligibility" ); 
-                                    Show( "#ineligible" ); 
-                                case "incomplete":
+                                    Show( "#ineligible" );
+                                    break; 
+                                default:
+                                    // "incomplete" - the only other possible value
                                     Hide( "#eligibility" ); 
                                     Show( "#incomplete" ); 
                             }
