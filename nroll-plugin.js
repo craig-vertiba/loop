@@ -515,11 +515,19 @@
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
-                            // if callback failedsurvey = false, execute the following:
-                            Hide( "#plugin-eligibility" ); 
-                            Show( "#plugin-map" ); 
-                            initMap();
-                            // if callback failedsurvey= true, display the ineligible message/survey
+                            // if eligibility_survey_status = passed, execute the following:
+                            switch (eligibility_survey_status) {
+                                case "passed":
+                                    Hide( "#plugin-eligibility" ); 
+                                    Show( "#plugin-map" ); 
+                                    initMap();
+                                case "failed":
+                                    Hide( "#eligibility" ); 
+                                    Show( "#ineligible" ); 
+                                case "incomplete":
+                                    Hide( "#eligibility" ); 
+                                    Show( "#incomplete" ); 
+                            }
                         });
 
                     });
