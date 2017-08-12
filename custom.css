@@ -95,7 +95,7 @@ div#details div#sq_page.panel-body div div:nth-of-type(5) h5 {
   height: 100%;
 }
 
-#site-finder-container, #eligibility, #details, #success {
+#site-finder-container, #eligibility, #details, #success, #ineligible, #incomplete {
   position:relative;
   height: auto;
 }
