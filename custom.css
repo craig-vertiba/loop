@@ -100,6 +100,10 @@ div#details div#sq_page.panel-body div div:nth-of-type(5) h5 {
   height: auto;
 }
 
+#ineligible, #incomplete {
+  text-align: center;
+}
+
 .center-vertically {
   top: 50%;
   transform: translateY(-50%);
