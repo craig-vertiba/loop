@@ -46,7 +46,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var api_base_url = "https://cs14.force.com/services/apexrest/";
-    var access_token = "00Dc0000003w6AY!ARcAQN3wMiQj4s6QLgTZE2Fn6PCBCbox_x8zba7EVmWSZ.EZir9u69h7srF4R7t.9rl_4.87V2xu9Fnw1GUVwbcYaOBrgczZ"; // 
+    var access_token = "00Dc0000003w6AY!ARcAQHqmAos6_TKQI_pcS0ByfYLwnVV8nbvNDBePE6dgwTQJyjjuR0FhNj8Eb9QLjH2DMxUyIH5ruf5B3A.c52I.NRddt_ue"; // 
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
