@@ -46,7 +46,7 @@
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var api_base_url = "https://cs14.force.com/services/apexrest/";
-    var access_token = "00Dc0000003w6AY!ARcAQLR_zfxwk9BmTj7ymOVeX4dyYPSgufNWMy3R8U3PlS80CMEtkrcj.l9i1qZiRyQC1Zk80fP__DNWaM5hyOv1HLfChHmr"; // 
+    var access_token = "00Dc0000003w6AY!ARcAQM5Gfp2H4YD1oNQKRktUrr2mK12P4B6tXYhW6K6KIK81NyydnW6Qu8UEEWt0zDTFTn3FRvE8bN6pQ7RrM2zohvaN4s5K"; // 
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
@@ -342,8 +342,11 @@
             function getPluginData() {
                 return $.ajax({
                     type:'GET',
-                    url: api_base_url + "InitiatePlugin?studyId=" + study_id + "&langCountryCode=" + langCountryCode,
-                    headers:{'Authorization':'Bearer ' + access_token},
+//                    url: api_base_url + "InitiatePlugin?studyId=" + study_id + "&langCountryCode=" + langCountryCode,
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode,  // new
+//                    headers:{'Authorization':'Bearer ' + access_token},
+                    crossDomain: true, //new
+                    dataType: 'json', //new
                     success: function(json) {
                         PluginData = json;
                     },
