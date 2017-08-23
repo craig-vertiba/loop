@@ -436,7 +436,35 @@
             }
 
 
-            // update or complete the eligibility survey results for an existing application
+            // // update or complete the eligibility survey results for an existing application
+            // function UpdateOrCompleteEligibilitySurvey() {
+            //     var new_application_data = new Object();
+            //     //new_application_data.survey = PluginData.survey;
+            //     new_application_data.application = application_id;
+            //     new_application_data.type = "eligibility";
+            //     new_application_data.answers = eligibilityData;
+            //     // stringify the data object
+            //     new_application_data = JSON.stringify(new_application_data);
+            //     console.log(new_application_data);
+
+            //     return $.ajax({
+            //         type:'POST',
+            //         url: api_base_url + "ApplicationPlugin",
+            //         headers:{'Authorization':'Bearer ' + access_token,
+            //                  'Content-Type': 'application/json'},
+            //         data: new_application_data,
+            //         success: function(json) {
+            //             eligibility_survey_status = json.eligibilitySurveyStatus;
+            //             console.log(eligibility_survey_status);
+            //         },
+            //         error: function(data, status, xhr) {
+            //         },
+            //         complete: function(jqXHR, textStatus) {
+            //         }
+            //     });
+            // }
+
+                        // update or complete the eligibility survey results for an existing application
             function UpdateOrCompleteEligibilitySurvey() {
                 var new_application_data = new Object();
                 //new_application_data.survey = PluginData.survey;
@@ -448,11 +476,10 @@
                 console.log(new_application_data);
 
                 return $.ajax({
-                    type:'POST',
-                    url: api_base_url + "ApplicationPlugin",
-                    headers:{'Authorization':'Bearer ' + access_token,
-                             'Content-Type': 'application/json'},
-                    data: new_application_data,
+                    type:'GET',
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    crossDomain: true,
+                    dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
                         console.log(eligibility_survey_status);
@@ -463,6 +490,35 @@
                     }
                 });
             }
+
+
+            // // add or update a site for an existing application
+            // function AddOrUpdateSite() {
+            //     var new_application_data = new Object();
+            //     new_application_data.site = selected_site;
+            //     new_application_data.type = "site";
+            //     new_application_data.application = application_id;
+            //     // stringify the data object
+            //     new_application_data = JSON.stringify(new_application_data);
+            //     console.log(new_application_data);
+
+            //     return $.ajax({
+            //         type:'POST',
+            //         url: api_base_url + "ApplicationPlugin",
+            //         headers:{'Authorization':'Bearer ' + access_token,
+            //                  'Content-Type': 'application/json'},
+            //         data: new_application_data,
+            //         success: function(json) {
+            //             eligibility_survey_status = json.eligibilitySurveyStatus;
+            //             console.log(json);
+            //         },
+            //         error: function(data, status, xhr) {
+            //         },
+            //         complete: function(jqXHR, textStatus) {
+            //         }
+            //     });
+
+            // }
 
             // add or update a site for an existing application
             function AddOrUpdateSite() {
@@ -475,11 +531,10 @@
                 console.log(new_application_data);
 
                 return $.ajax({
-                    type:'POST',
-                    url: api_base_url + "ApplicationPlugin",
-                    headers:{'Authorization':'Bearer ' + access_token,
-                             'Content-Type': 'application/json'},
-                    data: new_application_data,
+                    type:'GET',
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    crossDomain: true,
+                    dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
                         console.log(json);
@@ -491,7 +546,6 @@
                 });
 
             }
-
 
 
             // Load the html content from the html content file (typically content.html) into the selected page element
