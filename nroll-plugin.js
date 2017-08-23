@@ -343,7 +343,7 @@
                 return $.ajax({
                     type:'GET',
 //                    url: api_base_url + "InitiatePlugin?studyId=" + study_id + "&langCountryCode=" + langCountryCode,
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode,  // new
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode + "&method_type=GET",  // new
 //                    headers:{'Authorization':'Bearer ' + access_token},
                     crossDomain: true, //new
                     dataType: 'json', //new
