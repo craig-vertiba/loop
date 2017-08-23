@@ -358,6 +358,45 @@
 
             }
 
+            // // create a new application
+            // function CreateNewApplication() {
+            //     var new_application_data = new Object();
+            //     new_application_data.survey = PluginData.survey;
+            //     new_application_data.studycountry = PluginData.studyCountry;
+            //     new_application_data.application = "";
+            //     new_application_data.type = "eligibility";
+            //     new_application_data.utmsource = utm_source;
+            //     new_application_data.utmcontent = utm_content;
+            //     new_application_data.utmterm = utm_term;
+            //     new_application_data.utmcampaign = utm_campaign;
+            //     new_application_data.utmmedium = utm_medium;
+            //     new_application_data.country = PluginData.country;
+            //     new_application_data.language = PluginData.language;
+            //     new_application_data.site = selected_site;
+            //     new_application_data.answers = eligibilityData;
+            //     // stringify the data object
+            //     new_application_data = JSON.stringify(new_application_data);
+            //     console.log(new_application_data);
+
+            //     return $.ajax({
+            //         type:'POST',
+            //         url: api_base_url + "ApplicationPlugin",
+            //         headers:{'Authorization':'Bearer ' + access_token,
+            //                  'Content-Type': 'application/json'},
+            //         data: new_application_data,
+            //         success: function(json) {
+            //             CreateApplicationResponse = json;
+            //             application_id = CreateApplicationResponse.application;
+            //             console.log(application_id);
+            //         },
+            //         error: function(data, status, xhr) {
+            //         },
+            //         complete: function(jqXHR, textStatus) {
+            //         }
+            //     });
+
+            // }
+
             // create a new application
             function CreateNewApplication() {
                 var new_application_data = new Object();
@@ -379,11 +418,10 @@
                 console.log(new_application_data);
 
                 return $.ajax({
-                    type:'POST',
-                    url: api_base_url + "ApplicationPlugin",
-                    headers:{'Authorization':'Bearer ' + access_token,
-                             'Content-Type': 'application/json'},
-                    data: new_application_data,
+                    type:'GET',
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    crossDomain: true,
+                    dataType: 'json',
                     success: function(json) {
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
@@ -396,6 +434,7 @@
                 });
 
             }
+
 
             // update or complete the eligibility survey results for an existing application
             function UpdateOrCompleteEligibilitySurvey() {
