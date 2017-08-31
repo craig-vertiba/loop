@@ -547,6 +547,32 @@
 
             }
 
+            // update details on an existing application
+            function UpdateApplicationDetails() {
+                var new_application_data = new Object();
+                new_application_data.application = application_id;
+                new_application_data.type = "details";
+                new_application_data.answers = detailsData;
+                // stringify the data object
+                new_application_data = JSON.stringify(new_application_data);
+                console.log(new_application_data);
+
+                return $.ajax({
+                    type:'GET',
+                    url: "https://guarded-tor-53502.herokuapp.com?api_type=update_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    crossDomain: true,
+                    dataType: 'json',
+                    success: function(json) {
+                        console.log(json);
+                    },
+                    error: function(data, status, xhr) {
+                    },
+                    complete: function(jqXHR, textStatus) {
+                    }
+                });
+
+            }
+
 
             // Load the html content from the html content file (typically content.html) into the selected page element
 //            div.load(html_content_url, function() {
@@ -594,6 +620,7 @@
                     var survey = new Survey.Model(PluginData.eligibility);
                     // sets the language for localization of survey messages.  Will apply to all surveys.
                     if (language_code == "zh") {
+                        // if language is Chinese, use the Chinese language code that is recognized by SurveyJS
                         survey.locale = "zh-cn";
                     }
                     else {
@@ -647,15 +674,19 @@
                     });
 
                     detailsSurvey.onComplete.add(function(result) {
+                        // hide the details survey
                         Hide( "#details-container" );
+                        // show the success page
                         Show( "#success-container" ); 
-
-                        // stringify the results data before removing null results
+                        // stringify the details results data before removing null results
                         detailsData = JSON.stringify(detailsData);
-                        // remove null results from the results data
+                        // remove null results from the details results data
                         detailsData = RemoveNullResults(detailsData);
-
-
+                        // parse the details results data back into a json object because that's what we need
+                        // to pass into the API
+                        detailsData = JSON.parse(detailsData);
+                        // send results to API
+                        UpdateApplicationDetails();
                     });
 
                     $("#eligibility").Survey({
