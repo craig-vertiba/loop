@@ -58,6 +58,10 @@ div#details #sq_111 .checkbox span:nth-of-type(2) {
     display: none;
 }
 
+div#details #sq_112 {
+    font-size: .7em !important;
+}
+
 /* following hides the Question titles of all of the questions in the details survey 
  * then unhides the title for the fourth question which is in the fifth div element of its type on the page 
  */
