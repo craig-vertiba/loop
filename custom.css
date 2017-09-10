@@ -51,7 +51,7 @@ div#details #sq_110 .form-inline {
 }
 
 div#details #sq_111 {
-    width: 4%;
+    width: 4% !important;
 }
 
 div#details #sq_111 .checkbox span:nth-of-type(2) {
