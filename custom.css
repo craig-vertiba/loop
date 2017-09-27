@@ -45,7 +45,7 @@ div#details .form-control {
     margin-bottom: 20px;
 }
 
-div#details div#sq_page div div:nth-of-type(8) div:nth-of-type(1) .form-inline {
+div#details div#sq_page div div:nth-of-type(5) div:nth-of-type(1) .form-inline, div#details div#sq_page div div:nth-of-type(8) div:nth-of-type(1) .form-inline {
     padding-top: 5px;
     width: 30%;
 }
