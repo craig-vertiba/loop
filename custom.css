@@ -71,6 +71,9 @@ div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(2) div {
     width: 100% !important;
 }
 
+div#details div#sq_page div div:nth-of-type(11) {
+    padding-top: 20px;
+}
 
 /* following hides the Question titles of all of the questions in the details survey 
  * then unhides the title for the fourth question which is in the fifth div element of its type on the page 
