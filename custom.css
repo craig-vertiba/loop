@@ -54,21 +54,18 @@ div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) {
     width: 4% !important;
 }
 
-div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) div {
-    width: 100% !important;
+div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) span:nth-of-type(2) {
+    display: none;
+}
+
+div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(2) {
+    font-size: .7em !important;
 }
 
 div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(2) div {
     width: 100% !important;
 }
 
-div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) span:nth-of-type(2) {
-    display: none;
-}
-
-div#details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) {
-    font-size: .7em !important;
-}
 
 /* following hides the Question titles of all of the questions in the details survey 
  * then unhides the title for the fourth question which is in the fifth div element of its type on the page 
