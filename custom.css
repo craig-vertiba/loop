@@ -45,20 +45,20 @@ div#details .form-control {
     margin-bottom: 20px;
 }
 
-div#details #sq_110 .form-inline {
+div#details #sq_113 .form-inline {
     padding-top: 5px;
     width: 30%;
 }
 
-div#details #sq_111 {
+div#details #sq_114 {
     width: 4% !important;
 }
 
-div#details #sq_111 .checkbox span:nth-of-type(2) {
+div#details #sq_114 .checkbox span:nth-of-type(2) {
     display: none;
 }
 
-div#details #sq_112 {
+div#details #sq_115 {
     font-size: .7em !important;
 }
 
@@ -70,7 +70,7 @@ div#details h5 {
     display:none;
 }
 
-div#details div#sq_page.panel-body div div:nth-of-type(5) h5 {
+div#details div#sq_page.panel-body div div:nth-of-type(8) h5 {
     display:inline;
 }
 
