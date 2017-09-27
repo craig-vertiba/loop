@@ -615,6 +615,7 @@
                     // need to remember users location (zip/postal code/address)? probably not
 
                     Survey.Survey.cssType = "bootstrap";
+                    var detailsSurvey = new Survey.Model(PluginData.details);
                     // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
                     // when there is a survey named this way.
                     var survey = new Survey.Model(PluginData.eligibility);
@@ -627,7 +628,7 @@
                         survey.locale = language_code;
                     }
                     
-                    var detailsSurvey = new Survey.Model(PluginData.details);
+                    // var detailsSurvey = new Survey.Model(PluginData.details);
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
