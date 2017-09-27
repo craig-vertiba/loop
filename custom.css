@@ -50,7 +50,11 @@ div#details #sq_113 .form-inline {
     width: 30%;
 }
 
-div#details #sq_114 {
+/*div#details #sq_114 {
+    width: 4% !important;
+}*/
+
+div#details div#sq_page div div:nth-of-type(10) div {
     width: 4% !important;
 }
 
