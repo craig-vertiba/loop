@@ -641,7 +641,16 @@
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
-                        console.log(create_or_update_calls - create_or_update_responses);
+                        while (create_or_update_calls != create_or_update_responses) {
+                            tries += 1;
+                            if (create_or_update_calls == create_or_update_responses) {
+                                break;
+                            }
+                            if tries == 500 {
+                                break;
+                            }
+                        }
+                        console.log(create_or_update_calls - create_or_update_responses,tries);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
                             // if eligibility_survey_status = passed, execute the following:
                             switch (eligibility_survey_status) {
