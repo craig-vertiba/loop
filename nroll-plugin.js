@@ -657,7 +657,46 @@
                                 default:
                                     // "incomplete" - the only other possible value
                                     // Hide( "#eligibility" ); 
-                                    // Show( "#incomplete" ); 
+                                    // Show( "#incomplete" );
+                                    $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                                        // if eligibility_survey_status = passed, execute the following:
+                                        switch (eligibility_survey_status) {
+                                            case "passed":
+                                                Hide( "#plugin-eligibility" ); 
+                                                Show( "#plugin-map" ); 
+                                                initMap();
+                                                break;
+                                            case "failed":
+                                                Hide( "#eligibility" ); 
+                                                Show( "#ineligible" );
+                                                break; 
+                                            default:
+                                                // "incomplete" - the only other possible value
+                                                // Hide( "#eligibility" ); 
+                                                // Show( "#incomplete" ); 
+                                                $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                                                    // if eligibility_survey_status = passed, execute the following:
+                                                    switch (eligibility_survey_status) {
+                                                        case "passed":
+                                                            Hide( "#plugin-eligibility" ); 
+                                                            Show( "#plugin-map" ); 
+                                                            initMap();
+                                                            break;
+                                                        case "failed":
+                                                            Hide( "#eligibility" ); 
+                                                            Show( "#ineligible" );
+                                                            break; 
+                                                        default:
+                                                            // "incomplete" - the only other possible value
+                                                            Hide( "#eligibility" ); 
+                                                            Show( "#incomplete" ); 
+                                                    }
+                                                });
+
+
+                                        }
+                                    });
+
                             }
                         });
 
