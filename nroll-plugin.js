@@ -662,7 +662,6 @@
                                     // "incomplete" - the only other possible value
                                     Hide( "#eligibility" ); 
                                     Show( "#incomplete" ); 
-                                    survey.completeLastPage;
                             }
                         });
 
