@@ -630,7 +630,16 @@
                     
                     // Initialize the details survey.
                     var detailsSurvey = new Survey.Model(PluginData.details);
-                    
+
+                    function sleep(ms) {
+                      return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+
+                    async function pause() {
+                      await sleep(100);
+                    }
+
+                   
                     // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
@@ -648,9 +657,8 @@
                             if (tries == 50) {
                                 break;
                             }
-                            setTimeout(function(){
-                                tries += 1;
-                            }, 100);
+                            pause();
+                            tries += 1;
                         }
                         console.log(create_or_update_calls - create_or_update_responses,tries);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
