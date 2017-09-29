@@ -642,13 +642,15 @@
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
                         while (create_or_update_calls != create_or_update_responses) {
-                            tries += 1;
                             if (create_or_update_calls == create_or_update_responses) {
                                 break;
                             }
-                            if (tries == 10000000) {
+                            if (tries == 50) {
                                 break;
                             }
+                            setTimeout(function(){
+                                tries += 1;
+                            }, 100);
                         }
                         console.log(create_or_update_calls - create_or_update_responses,tries);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
