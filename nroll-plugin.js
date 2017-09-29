@@ -47,6 +47,9 @@
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var api_base_url = "https://cs14.force.com/services/apexrest/";
     var access_token = "00Dc0000003w6AY!ARcAQH1Sp8NKI5RG7zaAej8UMMOb.uS5MXLglj.ndF1z0SGusIeeq73sPBpwvKsWhV_gc5AOoXK9rXzzKyRxTVrvD7dY9xZG"; // 
+    var create_or_update_calls = 0; // this is a counter that counts the number of times the eligibility create or update API has been called
+    var create_or_update_responses = 0; // this is a counter that counts the number of times the eligibility create or update API has responded
+    var tries = 0; // this is the number of times the while loop has compared create_or_update_calls to create_or_update_responses
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
@@ -426,10 +429,13 @@
                         CreateApplicationResponse = json;
                         application_id = CreateApplicationResponse.application;
                         console.log(application_id);
+                        create_or_update_responses += 1;
                     },
                     error: function(data, status, xhr) {
+                        create_or_update_responses += 1;
                     },
                     complete: function(jqXHR, textStatus) {
+                        create_or_update_responses += 1;
                     }
                 });
 
@@ -483,10 +489,13 @@
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
                         console.log(eligibility_survey_status);
+                        create_or_update_responses += 1;
                     },
                     error: function(data, status, xhr) {
+                        create_or_update_responses += 1;
                     },
                     complete: function(jqXHR, textStatus) {
+                        create_or_update_responses += 1;
                     }
                 });
             }
@@ -636,6 +645,7 @@
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
+                        console.log(create_or_update_calls - create_or_update_responses);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
                             // if eligibility_survey_status = passed, execute the following:
                             switch (eligibility_survey_status) {
@@ -665,9 +675,11 @@
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
                             // if the application record hasn't been created yet, create it
                             if (application_id == "") {
+                                create_or_update_calls += 1;
                                 CreateNewApplication();
                             } else {
                                 // update the existing application with new or changed results data
+                                create_or_update_calls += 1;
                                 UpdateOrCompleteEligibilitySurvey();
                             }
                         }
