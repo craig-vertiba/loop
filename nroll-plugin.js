@@ -607,18 +607,13 @@
                         PluginData.selectButtonLabel = "Select";
                     }
 
-                    // check to see if the appId cookie is set and if it is get the appId
-                    // make plugin initiation call to API and include appId if available
-                    // get all survey JSON
-                    // get answer data if available
-                    // show eligibility survey
-                    // need to remember users location (zip/postal code/address)? probably not
-
+                    // assign Bootstrap as the default style
                     Survey.Survey.cssType = "bootstrap";
-                    var detailsSurvey = new Survey.Model(PluginData.details);
-                    // This is the eligibility survey.  Do not change the variable name from "survey" as localization only works
+
+                    // Initialize the eligibility survey.  Do not change the variable name from "survey" as localization only works
                     // when there is a survey named this way.
                     var survey = new Survey.Model(PluginData.eligibility);
+
                     // sets the language for localization of survey messages.  Will apply to all surveys.
                     if (language_code == "zh") {
                         // if language is Chinese, use the Chinese language code that is recognized by SurveyJS
@@ -628,7 +623,10 @@
                         survey.locale = language_code;
                     }
                     
-                    // var detailsSurvey = new Survey.Model(PluginData.details);
+                    // Initialize the details survey.
+                    var detailsSurvey = new Survey.Model(PluginData.details);
+                    
+                    // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
@@ -654,6 +652,7 @@
                                     // "incomplete" - the only other possible value
                                     Hide( "#eligibility" ); 
                                     Show( "#incomplete" ); 
+                                    survey.completeLastPage;
                             }
                         });
 
