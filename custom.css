@@ -10,24 +10,15 @@
  * which is the same as the survey type in the Survey record detail.
  * Survey id prefixes are:
  * div#eligibility - for the eligibility survey
- * div#details
- * div#contact-info
- * div#ineligible-message
- * div#site-finder - for the survey that displays in the left panel when the Map opens
+ * div#details - for the details survey displayed after passing the eligibility survey
+ * div#ineligible-details - for the details survey displayed after failing the eligibility survey
  */
 
-div#site-finder .panel-body, div#eligibility .panel-body {
-    text-align: center;
-}
+/* ELIGIBILITY SURVEY STYLES */
 
 div#eligibility .panel-body {
     width: 70%;
     padding-left: 30%;
-}
-
-div#details .panel-body {
-    width: 80%;
-    padding-left: 20%;
 }
 
 div#eligibility .panel-body h5 {
@@ -39,6 +30,13 @@ div#eligibility .form-inline {
     padding-left: 30%;
     font-size: 20px;
     padding-top: 20px;
+}
+
+/* DETAILS SURVEY STYLES */
+
+div#details .panel-body {
+    width: 80%;
+    padding-left: 20%;
 }
 
 div#details .form-control {
@@ -88,7 +86,65 @@ div#details div#sq_page.panel-body div div:nth-of-type(8) h5 {
     display:inline;
 }
 
+/* INELIGIBLE-DETAILS SURVEY STYLES */
+
+div#ineligible-details .panel-body {
+    width: 80%;
+    padding-left: 20%;
+}
+
+div#ineligible-details .form-control {
+    margin-bottom: 20px;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(5) div:nth-of-type(1) .form-inline {
+    padding-bottom: 20px;
+    width: 30%;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(8) div:nth-of-type(1) .form-inline {
+    padding-top: 5px;
+    padding-bottom: 20px;
+    width: 30%;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) {
+    width: 4% !important;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(10) div:nth-of-type(1) span:nth-of-type(2) {
+    display: none;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(10) div:nth-of-type(2) {
+    font-size: .7em !important;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(10) div:nth-of-type(2) div {
+    width: 100% !important;
+}
+
+div#ineligible-details div#sq_page div div:nth-of-type(11) {
+    padding-top: 20px;
+}
+
+/* following hides the Question titles of all of the questions in the details survey 
+ * then unhides the title for the fourth question which is in the fifth div element of its type on the page 
+ */
+
+div#ineligible-details h5 {
+    display:none;
+}
+
+div#ineligible-details div#sq_page.panel-body div div:nth-of-type(8) h5 {
+    display:inline;
+}
+
 /* General custom styles go here */ 
+
+div#site-finder .panel-body, div#eligibility .panel-body {
+    text-align: center;
+}
 
 .hide {
     display:none;
