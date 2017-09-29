@@ -636,7 +636,16 @@
                     }
 
                     async function pause() {
-                      await sleep(100);
+                        while (create_or_update_calls != create_or_update_responses) {
+                            if (create_or_update_calls == create_or_update_responses) {
+                                break;
+                            }
+                            if (tries == 50) {
+                                break;
+                            }
+                            await sleep(100);
+                            tries += 1;
+                        }
                     }
 
                    
@@ -650,16 +659,7 @@
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
-                        while (create_or_update_calls != create_or_update_responses) {
-                            if (create_or_update_calls == create_or_update_responses) {
-                                break;
-                            }
-                            if (tries == 50) {
-                                break;
-                            }
-                            pause();
-                            tries += 1;
-                        }
+                        pause();
                         console.log(create_or_update_calls - create_or_update_responses,tries);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
                             // if eligibility_survey_status = passed, execute the following:
