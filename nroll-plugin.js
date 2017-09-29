@@ -631,24 +631,6 @@
                     // Initialize the details survey.
                     var detailsSurvey = new Survey.Model(PluginData.details);
 
-                    function sleep(ms) {
-                      return new Promise(resolve => setTimeout(resolve, ms));
-                    }
-
-                    async function pause() {
-                        while (create_or_update_calls != create_or_update_responses) {
-                            if (create_or_update_calls == create_or_update_responses) {
-                                break;
-                            }
-                            if (tries == 50) {
-                                break;
-                            }
-                            await sleep(100);
-                            tries += 1;
-                        }
-                    }
-
-                   
                     // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
@@ -659,7 +641,6 @@
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
                         // send results to API
-                        pause();
                         console.log(create_or_update_calls - create_or_update_responses,tries);
                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
                             // if eligibility_survey_status = passed, execute the following:
@@ -675,8 +656,8 @@
                                     break; 
                                 default:
                                     // "incomplete" - the only other possible value
-                                    Hide( "#eligibility" ); 
-                                    Show( "#incomplete" ); 
+                                    // Hide( "#eligibility" ); 
+                                    // Show( "#incomplete" ); 
                             }
                         });
 
