@@ -432,10 +432,8 @@
                         create_or_update_responses += 1;
                     },
                     error: function(data, status, xhr) {
-                        create_or_update_responses += 1;
                     },
                     complete: function(jqXHR, textStatus) {
-                        create_or_update_responses += 1;
                     }
                 });
 
@@ -492,10 +490,8 @@
                         create_or_update_responses += 1;
                     },
                     error: function(data, status, xhr) {
-                        create_or_update_responses += 1;
                     },
                     complete: function(jqXHR, textStatus) {
-                        create_or_update_responses += 1;
                     }
                 });
             }
