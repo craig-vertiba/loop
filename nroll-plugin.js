@@ -34,6 +34,7 @@
     var utm_content = "";
     var eligibilityData = {}; // holds the eligibility survey results data
     var detailsData = {}; // holds the details survey results data
+    var ineligibleDetailsData = {}; // holds the ineligible details survey results data
     var application_id = ""; // salesforce id number of the current application
     var selected_site = ""; // salesforce id number of the selected site
     var language_code; // Extracted from Study website. Must be lowercase to access SurveyJS localizations.
@@ -322,29 +323,11 @@
             // This is the id value of the div to which the entire plugin will be appended.
             var div = $("#nroll-plugin");
 
-            // // First, asynchronously load and append the HTML content to the Plugin element and get the Salesforce
-            // // access token
-            // $.when(loadHTMLContent(),getToken()).done(function(a,b) {
-            //     // now that we have the token we can retrieve the data necessary to initialize the Plugin
-            //     $.when(getPluginData()).done(function(a) {
-
-            //     }
-            // }
-            // // load the HTML content to a content variable
-            // function loadHTMLContent() {
-            //     // ajax call, assign content to variable in callback
-            // }
-            // // get the Salesforce access token and assign to a variable
-            // function getToken() {
-            //     // ajax call, assign token to variable in callback
-            // }
             // get the Application Plugin data necessary to initialize the Plugin
             function getPluginData() {
                 return $.ajax({
                     type:'GET',
-//                    url: api_base_url + "InitiatePlugin?studyId=" + study_id + "&langCountryCode=" + langCountryCode,
                     url: "https://guarded-tor-53502.herokuapp.com?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode + "&method_type=GET",  // new
-//                    headers:{'Authorization':'Bearer ' + access_token},
                     crossDomain: true, //new
                     dataType: 'json', //new
                     success: function(json) {
@@ -357,45 +340,6 @@
                 });
 
             }
-
-            // // create a new application
-            // function CreateNewApplication() {
-            //     var new_application_data = new Object();
-            //     new_application_data.survey = PluginData.survey;
-            //     new_application_data.studycountry = PluginData.studyCountry;
-            //     new_application_data.application = "";
-            //     new_application_data.type = "eligibility";
-            //     new_application_data.utmsource = utm_source;
-            //     new_application_data.utmcontent = utm_content;
-            //     new_application_data.utmterm = utm_term;
-            //     new_application_data.utmcampaign = utm_campaign;
-            //     new_application_data.utmmedium = utm_medium;
-            //     new_application_data.country = PluginData.country;
-            //     new_application_data.language = PluginData.language;
-            //     new_application_data.site = selected_site;
-            //     new_application_data.answers = eligibilityData;
-            //     // stringify the data object
-            //     new_application_data = JSON.stringify(new_application_data);
-            //     console.log(new_application_data);
-
-            //     return $.ajax({
-            //         type:'POST',
-            //         url: api_base_url + "ApplicationPlugin",
-            //         headers:{'Authorization':'Bearer ' + access_token,
-            //                  'Content-Type': 'application/json'},
-            //         data: new_application_data,
-            //         success: function(json) {
-            //             CreateApplicationResponse = json;
-            //             application_id = CreateApplicationResponse.application;
-            //             console.log(application_id);
-            //         },
-            //         error: function(data, status, xhr) {
-            //         },
-            //         complete: function(jqXHR, textStatus) {
-            //         }
-            //     });
-
-            // }
 
             // create a new application
             function CreateNewApplication() {
@@ -435,36 +379,7 @@
 
             }
 
-
-            // // update or complete the eligibility survey results for an existing application
-            // function UpdateOrCompleteEligibilitySurvey() {
-            //     var new_application_data = new Object();
-            //     //new_application_data.survey = PluginData.survey;
-            //     new_application_data.application = application_id;
-            //     new_application_data.type = "eligibility";
-            //     new_application_data.answers = eligibilityData;
-            //     // stringify the data object
-            //     new_application_data = JSON.stringify(new_application_data);
-            //     console.log(new_application_data);
-
-            //     return $.ajax({
-            //         type:'POST',
-            //         url: api_base_url + "ApplicationPlugin",
-            //         headers:{'Authorization':'Bearer ' + access_token,
-            //                  'Content-Type': 'application/json'},
-            //         data: new_application_data,
-            //         success: function(json) {
-            //             eligibility_survey_status = json.eligibilitySurveyStatus;
-            //             console.log(eligibility_survey_status);
-            //         },
-            //         error: function(data, status, xhr) {
-            //         },
-            //         complete: function(jqXHR, textStatus) {
-            //         }
-            //     });
-            // }
-
-                        // update or complete the eligibility survey results for an existing application
+            // update or complete the eligibility survey results for an existing application
             function UpdateOrCompleteEligibilitySurvey() {
                 var new_application_data = new Object();
                 //new_application_data.survey = PluginData.survey;
@@ -490,35 +405,6 @@
                     }
                 });
             }
-
-
-            // // add or update a site for an existing application
-            // function AddOrUpdateSite() {
-            //     var new_application_data = new Object();
-            //     new_application_data.site = selected_site;
-            //     new_application_data.type = "site";
-            //     new_application_data.application = application_id;
-            //     // stringify the data object
-            //     new_application_data = JSON.stringify(new_application_data);
-            //     console.log(new_application_data);
-
-            //     return $.ajax({
-            //         type:'POST',
-            //         url: api_base_url + "ApplicationPlugin",
-            //         headers:{'Authorization':'Bearer ' + access_token,
-            //                  'Content-Type': 'application/json'},
-            //         data: new_application_data,
-            //         success: function(json) {
-            //             eligibility_survey_status = json.eligibilitySurveyStatus;
-            //             console.log(json);
-            //         },
-            //         error: function(data, status, xhr) {
-            //         },
-            //         complete: function(jqXHR, textStatus) {
-            //         }
-            //     });
-
-            // }
 
             // add or update a site for an existing application
             function AddOrUpdateSite() {
@@ -626,6 +512,9 @@
                     // Initialize the details survey.
                     var detailsSurvey = new Survey.Model(PluginData.details);
 
+                    // // Initialize the ineligible details survey.
+                    // var ineligibleDetailsSurvey = new Survey.Model(PluginData.ineligibleDetails);
+
                     // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
@@ -732,6 +621,11 @@
                         model: detailsSurvey,
                         data: detailsData
                     });
+
+                    // $("#ineligibleDetails").Survey({
+                    //     model: ineligibleDetailsSurvey,
+                    //     data: ineligibleDetailsData
+                    // });
 
                 }); // end of getPluginData block
 
