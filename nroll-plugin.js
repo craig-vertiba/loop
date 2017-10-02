@@ -563,7 +563,7 @@
                                                             break;
                                                         case "failed":
                                                             Hide( "#eligibility" ); 
-                                                            Show( "#ineligible" );
+                                                            Show( "#ineligibleDetails" );
                                                             break; 
                                                         default:
                                                             // "incomplete" - the only other possible value
