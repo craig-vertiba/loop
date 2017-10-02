@@ -612,6 +612,22 @@
                         UpdateApplicationDetails();
                     });
 
+                    ineligibleDetailsSurvey.onComplete.add(function(result) {
+                        // hide the details survey
+                        Hide( "#ineligible-details" );
+                        // show the success page
+                        Show( "#ineligible-details-success-container" ); 
+                        // stringify the details results data before removing null results
+                        detailsData = JSON.stringify(detailsData);
+                        // remove null results from the details results data
+                        detailsData = RemoveNullResults(detailsData);
+                        // parse the details results data back into a json object because that's what we need
+                        // to pass into the API
+                        detailsData = JSON.parse(detailsData);
+                        // send results to API
+                        UpdateApplicationDetails();
+                    });
+
                     $("#eligibility").Survey({
                         model: survey,
                         data: eligibilityData
@@ -624,7 +640,7 @@
 
                     $("#ineligible-details").Survey({
                         model: ineligibleDetailsSurvey,
-                        data: ineligibleDetailsData
+                        data: detailsData // note that the details and the ineligibleDetails surveys use the same result data object
                     });
 
                 }); // end of getPluginData block
