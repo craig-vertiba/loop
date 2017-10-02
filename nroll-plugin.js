@@ -512,8 +512,8 @@
                     // Initialize the details survey.
                     var detailsSurvey = new Survey.Model(PluginData.details);
 
-                    // // Initialize the ineligible details survey.
-                    // var ineligibleDetailsSurvey = new Survey.Model(PluginData.ineligibleDetails);
+                    // Initialize the ineligible details survey.
+                    var ineligibleDetailsSurvey = new Survey.Model(PluginData.ineligibleDetails);
 
                     // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
                     survey.onComplete.add(function(result) {
@@ -622,10 +622,10 @@
                         data: detailsData
                     });
 
-                    // $("#ineligibleDetails").Survey({
-                    //     model: ineligibleDetailsSurvey,
-                    //     data: ineligibleDetailsData
-                    // });
+                    $("#ineligibleDetails").Survey({
+                        model: ineligibleDetailsSurvey,
+                        data: ineligibleDetailsData
+                    });
 
                 }); // end of getPluginData block
 
