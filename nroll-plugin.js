@@ -486,6 +486,12 @@
                     if (PluginData.successBody) {
                         $("#success-body").html(PluginData.successBody);
                     }
+                    if (PluginData.futureStudySuccessHeader) {
+                        $("#ineligible-details-success-header").html(PluginData.futureStudySuccessHeader);
+                    }
+                    if (PluginData.futureStudySuccessBody) {
+                        $("#ineligible-details-success-body").html(PluginData.futureStudySuccessBody);
+                    }
                     if (!PluginData.changeButtonLabel) {
                         PluginData.changeButtonLabel = "Change";
                     }
