@@ -19,6 +19,7 @@
 div#eligibility .panel-body {
     width: 70%;
     padding-left: 30%;
+    text-align: center;
 }
 
 div#eligibility .panel-body h5 {
@@ -160,10 +161,6 @@ div#ineligible-details div#sq_page.panel-body div div:nth-of-type(8) h5 {
 
 /* General custom styles go here */ 
 
-div#site-finder .panel-body, div#eligibility .panel-body {
-    text-align: center;
-}
-
 .hide {
     display:none;
 }
@@ -191,16 +188,16 @@ div#site-finder .panel-body, div#eligibility .panel-body {
   overflow:auto;
 }
 
-#plugin-eligibility, #site-finder-container, #details-container, #ineligible-details-container, #success-container {
+#plugin-eligibility, #site-finder-container, #details-container, #ineligible-details-container, #success-container, #ineligible-details-success-container {
   height: 100%;
 }
 
-#site-finder-container, #eligibility, #details, #success, #ineligible, #incomplete {
+#site-finder-container, #eligibility, #details, #success, #ineligible, #incomplete, #ineligible-details-success {
   position:relative;
   height: auto;
 }
 
-#ineligible, #incomplete {
+#ineligible-details-success-container, #incomplete {
   text-align: center;
 }
 
@@ -226,7 +223,7 @@ div#site-finder .panel-body, div#eligibility .panel-body {
     padding: 2vw 0 2vw;
 }
 
-#success-header, #site-finder-header {
+#success-header, #ineligible-details-success-header, #site-finder-header {
     font-size: 2vw;
     padding-bottom: 2vw;
 }
