@@ -535,7 +535,7 @@
                                     break;
                                 case "failed":
                                     Hide( "#eligibility" ); 
-                                    Show( "#ineligible-details" );
+                                    Show( "#ineligible-details-container" );
                                     break; 
                                 default:
                                     // "incomplete" - the only other possible value
@@ -549,7 +549,7 @@
                                                 break;
                                             case "failed":
                                                 Hide( "#eligibility" ); 
-                                                Show( "#ineligible-details" );
+                                                Show( "#ineligible-details-container" );
                                                 break; 
                                             default:
                                                 // "incomplete" - the only other possible value
@@ -563,7 +563,7 @@
                                                             break;
                                                         case "failed":
                                                             Hide( "#eligibility" ); 
-                                                            Show( "#ineligible-details" );
+                                                            Show( "#ineligible-details-container" );
                                                             break; 
                                                         default:
                                                             // "incomplete" - the only other possible value
