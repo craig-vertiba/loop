@@ -173,7 +173,7 @@ div#site-finder .panel-body, div#eligibility .panel-body {
   overflow:auto;
 }
 
-#plugin-eligibility, #site-finder-container, #details-container, #success-container {
+#plugin-eligibility, #site-finder-container, #details-container, #ineligible-details-container, #success-container {
   height: 100%;
 }
 
@@ -195,7 +195,7 @@ div#site-finder .panel-body, div#eligibility .panel-body {
   -o-transform: translateY(-50%);
 }
 
-#details-container {
+#details-container, #ineligible-details-container  {
     text-align:left;
 }
 
