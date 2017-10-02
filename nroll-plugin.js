@@ -535,7 +535,7 @@
                                     break;
                                 case "failed":
                                     Hide( "#eligibility" ); 
-                                    Show( "#ineligibleDetails" );
+                                    Show( "#ineligible-details" );
                                     break; 
                                 default:
                                     // "incomplete" - the only other possible value
@@ -549,7 +549,7 @@
                                                 break;
                                             case "failed":
                                                 Hide( "#eligibility" ); 
-                                                Show( "#ineligibleDetails" );
+                                                Show( "#ineligible-details" );
                                                 break; 
                                             default:
                                                 // "incomplete" - the only other possible value
@@ -563,7 +563,7 @@
                                                             break;
                                                         case "failed":
                                                             Hide( "#eligibility" ); 
-                                                            Show( "#ineligibleDetails" );
+                                                            Show( "#ineligible-details" );
                                                             break; 
                                                         default:
                                                             // "incomplete" - the only other possible value
@@ -622,7 +622,7 @@
                         data: detailsData
                     });
 
-                    $("#ineligibleDetails").Survey({
+                    $("#ineligible-details").Survey({
                         model: ineligibleDetailsSurvey,
                         data: ineligibleDetailsData
                     });
