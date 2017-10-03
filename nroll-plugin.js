@@ -369,7 +369,7 @@
                     success: function(json) {
                         application_id = json.application;
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log("Application ID: " + application_id + "; Eligibility Survey Status: " + eligibilitySurveyStatus);
+                        console.log("Application ID: " + application_id + "; Eligibility Survey Status: " + eligibility_survey_status);
                     },
                     error: function(data, status, xhr) {
                     },
