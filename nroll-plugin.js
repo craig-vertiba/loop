@@ -397,7 +397,7 @@
                     dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log("Eligibility Survey Status: " + eligibilitySurveyStatus);
+                        console.log("Eligibility Survey Status: " + eligibility_survey_status);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -522,17 +522,38 @@
                     var ineligibleDetailsSurvey = new Survey.Model(PluginData.ineligibleDetails);
 
                     // Add onComplete behaviors to the eligibility survey. This occurs when the Complete button is clicked.
+                    // If this is a one page survey or if sendResultOnPageNext is False, we need to CreateNewApplication
+                    // because an Application won't yet exist for these Survey results. If sendResultOnPageNext is True, we
+                    // may get a status of incomplete if the prior update hasn't finished processing, so we try to 
+                    // complete the survey up to three times.
                     survey.onComplete.add(function(result) {
                         // stringify the results data before removing null results
                         eligibilityData = JSON.stringify(eligibilityData);
-                        // remove null results from the results data
+                        // remove null results from the results data.  This only needs to be done when the
+                        // survey is complete because SurveyJS adds null comment fields on survey completion.
                         eligibilityData = RemoveNullResults(eligibilityData);
                         // parse the eligibility data back into a json object because that's what we need
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
+                        // check to see if an Application record does not yet exist.  If so, call CreateNewApplication
+                        if (application_id == "") {
+                            execute_this_function = "CreateNewApplication";
+                        else
+                            execute_this_function = "UpdateOrCompleteEligibilitySurvey";
+                        }
                         // send results to API
-                        $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
-                            // if eligibility_survey_status = passed, execute the following:
+                        $.when( eval(execute_this_function + "()")).done(function(a) {
+                            // check to see if the survey is incomplete, indicating a prior update hasn't
+                            // finished processing.  If so, try the update again.
+                            if (eligibility_survey_status == "incomplete") {
+                                $.when( eval(execute_this_function + "()")).done(function(a) {
+                                    // check to see if the survey is incomplete, indicating a prior update hasn't    
+                                    // finished processing.  If so, try the update again.
+                                    if (eligibility_survey_status == "incomplete") {
+                                        $.when( eval(execute_this_function + "()")).done(function(a) {});
+                                    }
+                                });
+                            }
                             switch (eligibility_survey_status) {
                                 case "passed":
                                     Hide( "#plugin-eligibility" ); 
@@ -545,45 +566,68 @@
                                     break; 
                                 default:
                                     // "incomplete" - the only other possible value
-                                    $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
-                                        // if eligibility_survey_status = passed, execute the following:
-                                        switch (eligibility_survey_status) {
-                                            case "passed":
-                                                Hide( "#plugin-eligibility" ); 
-                                                Show( "#plugin-map" ); 
-                                                initMap();
-                                                break;
-                                            case "failed":
-                                                Hide( "#eligibility" ); 
-                                                Show( "#ineligible-details-container" );
-                                                break; 
-                                            default:
-                                                // "incomplete" - the only other possible value
-                                                $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
-                                                    // if eligibility_survey_status = passed, execute the following:
-                                                    switch (eligibility_survey_status) {
-                                                        case "passed":
-                                                            Hide( "#plugin-eligibility" ); 
-                                                            Show( "#plugin-map" ); 
-                                                            initMap();
-                                                            break;
-                                                        case "failed":
-                                                            Hide( "#eligibility" ); 
-                                                            Show( "#ineligible-details-container" );
-                                                            break; 
-                                                        default:
-                                                            // "incomplete" - the only other possible value
-                                                            Hide( "#eligibility" ); 
-                                                            Show( "#incomplete" ); 
-                                                    }
-                                                });
-
-
-                                        }
-                                    });
-
+                                    Hide( "#eligibility" ); 
+                                    Show( "#incomplete" ); 
                             }
                         });
+
+
+                        //     $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                        //         // check to see if the survey is incomplete, indicating a prior update hasn't    
+                        //         // finished processing.  If so, try the update again.
+                        //         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                        //     // if eligibility_survey_status = passed, execute the following:
+                        //     switch (eligibility_survey_status) {
+                        //         case "passed":
+                        //             Hide( "#plugin-eligibility" ); 
+                        //             Show( "#plugin-map" ); 
+                        //             initMap();
+                        //             break;
+                        //         case "failed":
+                        //             Hide( "#eligibility" ); 
+                        //             Show( "#ineligible-details-container" );
+                        //             break; 
+                        //         default:
+                        //             // "incomplete" - the only other possible value
+                        //             $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                        //                 // if eligibility_survey_status = passed, execute the following:
+                        //                 switch (eligibility_survey_status) {
+                        //                     case "passed":
+                        //                         Hide( "#plugin-eligibility" ); 
+                        //                         Show( "#plugin-map" ); 
+                        //                         initMap();
+                        //                         break;
+                        //                     case "failed":
+                        //                         Hide( "#eligibility" ); 
+                        //                         Show( "#ineligible-details-container" );
+                        //                         break; 
+                        //                     default:
+                        //                         // "incomplete" - the only other possible value
+                        //                         $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
+                        //                             // if eligibility_survey_status = passed, execute the following:
+                        //                             switch (eligibility_survey_status) {
+                        //                                 case "passed":
+                        //                                     Hide( "#plugin-eligibility" ); 
+                        //                                     Show( "#plugin-map" ); 
+                        //                                     initMap();
+                        //                                     break;
+                        //                                 case "failed":
+                        //                                     Hide( "#eligibility" ); 
+                        //                                     Show( "#ineligible-details-container" );
+                        //                                     break; 
+                        //                                 default:
+                        //                                     // "incomplete" - the only other possible value
+                        //                                     Hide( "#eligibility" ); 
+                        //                                     Show( "#incomplete" ); 
+                        //                             }
+                        //                         });
+
+
+                        //                 }
+                        //             });
+
+                        //     }
+                        // });
 
                     });
 
