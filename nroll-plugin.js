@@ -535,13 +535,15 @@
                         // parse the eligibility data back into a json object because that's what we need
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
-                        // check to see if an Application record does not yet exist.  If so, call CreateNewApplication
+                        // check to see if an Application record does not yet exist.  If so, we need to call 
+                        // CreateNewApplication. Otherwise, we need to call UpdateOrCompleteEligibilitySurvey.
+                        // Set the execute_this_function variable to the correct function name.
                         if (application_id == "") {
                             execute_this_function = "CreateNewApplication";
                         } else {
                             execute_this_function = "UpdateOrCompleteEligibilitySurvey";
                         }
-                        // send results to API
+                        // send results to API by calling the correct function
                         $.when( eval(execute_this_function + "()")).done(function(a) {
                             // check to see if the survey is incomplete, indicating a prior update hasn't
                             // finished processing.  If so, try the update again.
@@ -565,7 +567,8 @@
                                     Show( "#ineligible-details-container" );
                                     break; 
                                 default:
-                                    // "incomplete" - the only other possible value
+                                    // "incomplete" - the only other possible value.  This should never happen,
+                                    // but if it does there is an incomplete page that will be shown.
                                     Hide( "#eligibility" ); 
                                     Show( "#incomplete" ); 
                             }
