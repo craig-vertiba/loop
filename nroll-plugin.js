@@ -367,9 +367,9 @@
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
-                        CreateApplicationResponse = json;
-                        application_id = CreateApplicationResponse.application;
-                        console.log(application_id);
+                        application_id = json.application;
+                        eligibility_survey_status = json.eligibilitySurveyStatus;
+                        console.log("Application ID: " + application_id + "; Eligibility Survey Status: " + eligibilitySurveyStatus);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -397,7 +397,7 @@
                     dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log(eligibility_survey_status);
+                        console.log("Eligibility Survey Status: " + eligibilitySurveyStatus);
                     },
                     error: function(data, status, xhr) {
                     },
