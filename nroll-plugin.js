@@ -538,7 +538,7 @@
                         // check to see if an Application record does not yet exist.  If so, call CreateNewApplication
                         if (application_id == "") {
                             execute_this_function = "CreateNewApplication";
-                        else
+                        } else {
                             execute_this_function = "UpdateOrCompleteEligibilitySurvey";
                         }
                         // send results to API
