@@ -32,6 +32,7 @@
     var utm_campaign = "";
     var utm_term = "";
     var utm_content = "";
+    var new_application_requested = false; // indicates whether the CreateNewApplication api has been called or not
     var eligibilityData = {}; // holds the eligibility survey results data
     var detailsData = {}; // holds the details survey results data
     var ineligibleDetailsData = {}; // holds the ineligible details survey results data
@@ -343,6 +344,8 @@
 
             // create a new application
             function CreateNewApplication() {
+                // change the new_application_requested varible to true to indicate that this api has been called
+                new_application_requested = true;
                 var new_application_data = new Object();
                 new_application_data.survey = PluginData.survey;
                 new_application_data.studycountry = PluginData.studyCountry;
@@ -603,14 +606,26 @@
                     
                     survey.onCurrentPageChanged.add(function(result) {
                         // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
-                        // and if the string is not empty, send the partial result to the API.  If not, skip this.
+                        // and if the string is not empty, send the partial result to the API, either by creating a new
+                        // application or by updating or completing an existing eligibility survey.
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
-                            // if the application record hasn't been created yet, create it
-                            if (application_id == "") {
-                                CreateNewApplication();
-                            } else {
+                            // Three cases below: 
+                            // 1. If the application_id exists, update the existing eligibility survey
+                            // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
+                            //    call the CreateNewApplication api and create the new application.
+                            // 3. Implicit: the application record hasn't been created yet but the CreateNewApplication api has been called.
+                            //    This may occur when the second question of an eligibility survey is answered before the response
+                            //    from the CreateNewApplication api call is received by the Application Plugin.  In this case, do nothing.
+                            //    We cannot update the application because we don't have the application_id yet, and we can't call
+                            //    CreateNewApplication again because it will create a duplicate record.  This is not the
+                            //    last question on the survey, and the last question's api call is synchronous which will ensure
+                            //    that all the answers get recorded to the database.
+                            if (application_id != "") {
                                 // update the existing application with new or changed results data
                                 UpdateOrCompleteEligibilitySurvey();
+                            } else if (application_id == "" && !new_application_requested) {
+                                // update the existing application with new or changed results data
+                                CreateNewApplication();
                             }
                         }
                     });
