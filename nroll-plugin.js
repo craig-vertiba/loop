@@ -547,11 +547,11 @@
                         $.when( eval(execute_this_function + "()")).done(function(a) {
                             // check to see if the survey is incomplete, indicating a prior update hasn't
                             // finished processing.  If so, try the update again.
-                            if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "null") {
+                            if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "") {
                                 $.when( eval(execute_this_function + "()")).done(function(a) {
                                     // check to see if the survey is incomplete, indicating a prior update hasn't    
                                     // finished processing.  If so, try the update again.
-                                    if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "null") {
+                                    if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "") {
                                         $.when( eval(execute_this_function + "()")).done(function(a) {});
                                     }
                                 });
