@@ -547,15 +547,6 @@
                         $.when( eval(execute_this_function + "()")).done(function(a) {
                             // check to see if the survey is incomplete, indicating a prior update hasn't
                             // finished processing.  If so, try the update again.
-                            if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "") {
-                                $.when( eval(execute_this_function + "()")).done(function(a) {
-                                    // check to see if the survey is incomplete, indicating a prior update hasn't    
-                                    // finished processing.  If so, try the update again.
-                                    if (eligibility_survey_status == "incomplete" || eligibility_survey_status == "") {
-                                        $.when( eval(execute_this_function + "()")).done(function(a) {});
-                                    }
-                                });
-                            }
                             switch (eligibility_survey_status) {
                                 case "passed":
                                     Hide( "#plugin-eligibility" ); 
@@ -569,10 +560,73 @@
                                 default:
                                     // "incomplete" - the only other possible value.  This should never happen,
                                     // but if it does there is an incomplete page that will be shown.
-                                    Hide( "#eligibility" ); 
-                                    Show( "#incomplete" ); 
+                                    $.when( eval(execute_this_function + "()")).done(function(a) {
+                                        // check to see if the survey is incomplete, indicating a prior update hasn't    
+                                        // finished processing.  If so, try the update again.
+                                        switch (eligibility_survey_status) {
+                                            case "passed":
+                                                Hide( "#plugin-eligibility" ); 
+                                                Show( "#plugin-map" ); 
+                                                initMap();
+                                                break;
+                                            case "failed":
+                                                Hide( "#eligibility" ); 
+                                                Show( "#ineligible-details-container" );
+                                                break; 
+                                            default:
+                                                // "incomplete" - the only other possible value.  This should never happen,
+                                                // but if it does there is an incomplete page that will be shown.
+                                                $.when( eval(execute_this_function + "()")).done(function(a) {
+                                                    // check to see if the survey is incomplete, indicating a prior update hasn't    
+                                                    // finished processing.  If so, try the update again.
+                                                    switch (eligibility_survey_status) {
+                                                        case "passed":
+                                                            Hide( "#plugin-eligibility" ); 
+                                                            Show( "#plugin-map" ); 
+                                                            initMap();
+                                                            break;
+                                                        case "failed":
+                                                            Hide( "#eligibility" ); 
+                                                            Show( "#ineligible-details-container" );
+                                                            break; 
+                                                        default:
+                                                            // "incomplete" - the only other possible value
+                                                            Hide( "#eligibility" ); 
+                                                            Show( "#incomplete" ); 
+                                                    }
+                                                });
+                                        }
+                                    });
                             }
                         });
+
+
+
+                        //                 if (eligibility_survey_status != "passed" && eligibility_survey_status != "failed") {
+                        //                     $.when( eval(execute_this_function + "()")).done(function(a) {
+
+                        //                     });
+                        //                 }
+                        //             });
+                        //     }
+
+                        //     switch (eligibility_survey_status) {
+                        //         case "passed":
+                        //             Hide( "#plugin-eligibility" ); 
+                        //             Show( "#plugin-map" ); 
+                        //             initMap();
+                        //             break;
+                        //         case "failed":
+                        //             Hide( "#eligibility" ); 
+                        //             Show( "#ineligible-details-container" );
+                        //             break; 
+                        //         default:
+                        //             // "incomplete" - the only other possible value.  This should never happen,
+                        //             // but if it does there is an incomplete page that will be shown.
+                        //             Hide( "#eligibility" ); 
+                        //             Show( "#incomplete" ); 
+                        //     }
+                        // });
 
 
                         //     $.when( UpdateOrCompleteEligibilitySurvey()).done(function(a) {
