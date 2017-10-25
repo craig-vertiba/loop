@@ -804,17 +804,21 @@
                 //
                 // Note that the input string 'a' must already be stringified JSON
 
-                // Split the prior results data into segments on all commas
+                // Split the new results data and the prior results data into segments on all commas
+                a_segments = a.split(',');
                 b_segments = b.split(',');
                 // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
+                a_segments[0] = a_segments[0].substring(1);
+                console.log(a_segments[0]);
+                a_segments[a_segments.length-1] = a_segments[a_segments.length-1].substring(0,a_segments[a_segments.length-1].length-1);
+                console.log(a_segments[a_segments.length-1]);
                 b_segments[0] = b_segments[0].substring(1);
                 console.log(b_segments[0]);
                 b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
                 console.log(b_segments[b_segments.length-1]);
                 // create variable to hold the new result JSON.
-                var new_a = "";
+                var new_a = "{";
                 // split the new results data into segments on all commas
-                a_segments = a.split(',');
                 // iterate through all the a segments
                 for (var i=0; i < a_segments.length; i++) {
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
@@ -824,30 +828,18 @@
                             // the segments match, so exit the loop and move to the next a segment
                             break;
                         }
-                        // if we made it to here, there is not a segment match.  We need to add the a segment to the new_a string.
-                        // check to see if this is not the first segment in the new results.
-                        if (i > 0) {
-                            // add a comma if there is already content in the new results string
-                            if (new_a != "") {
-                                new_a += ",";
-                            // otherwise, add a '{'.     
-                            } else {
-                                new_a += "{";
-                            }
-                        }
+                        // if we made it to here, there is not a segment match.  We need to add this segment to the new_a string.
+                        // check to see if this is not the first segment added to the new results.  If it's not, add a comma.
+                        if (new_a != "{") {
+                            new_a += ",";
+                        } 
                         // add this segment to the new results string.
                         new_a += a_segments[i];
                         console.log(new_a);
                     }
                 }
-                // If the new_a results string is blank, add a '{'
-                if (new_a == "") {
-                    new_a += "{";
-                }
-                console.log(new_a);
-                // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
-                // segment added was not the last segment of the new results string
-                if (new_a.indexOf('}') < 0) {new_a += "}"};
+                // Now add a '}'.
+                new_a += "}";
                 console.log(new_a);
                 // return the new results string
                 return new_a;
