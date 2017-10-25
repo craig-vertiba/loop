@@ -546,7 +546,8 @@
                             eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         }
                         // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted
-                        eligibilityDataLast = eligibilityData;
+                        eligibilityDataLast = JSON.stringify(eligibilityData);
+                        eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         // parse the eligibility data back into a json object because that's what we need
                         // to pass into the API
                         eligibilityDataAPI = JSON.parse(eligibilityDataAPI);
@@ -632,7 +633,8 @@
                                 eligibilityDataLast = JSON.parse(eligibilityDataLast);
                             }
                             // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted
-                            eligibilityDataLast = eligibilityData;
+                            eligibilityDataLast = JSON.stringify(eligibilityData);
+                            eligibilityDataLast = JSON.parse(eligibilityDataLast);
                             // Three cases below: 
                             // 1. If the application_id exists, update the existing eligibility survey
                             // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
