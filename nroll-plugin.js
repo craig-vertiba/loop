@@ -619,7 +619,7 @@
                         // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
                         // and if the string is not empty, send the partial result to the API, either by creating a new
                         // application or by updating or completing an existing eligibility survey.
-                        console.log(JSON.stringify(eligibilityDataAPI));
+                        console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityDataAPI) != "{}") {
                             // First, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged from the last results string that was submitted to the API.
