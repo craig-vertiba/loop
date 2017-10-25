@@ -618,7 +618,7 @@
                             // First, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged from the last results string that was submitted to the API.
                             console.log(eligibilityDataLast.length,eligibilityDataLast);
-                            if (eligibilityDataLast.length > 0) {
+                            if (eligibilityDataLast != "{}") {
                                 eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
                             }
                             // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
