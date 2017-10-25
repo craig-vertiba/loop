@@ -842,8 +842,9 @@
                     new_a += "{";
                 }
                 console.log(new_a);
-                // Add a '}' to the end of the new_a results string.
-                new_a += "}";
+                // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
+                // segment added was not the last segment of the new results string
+                if (new_a.indexOf('}') < 0) {new_a += "}"};
                 console.log(new_a);
                 // return the new results string
                 return new_a;
