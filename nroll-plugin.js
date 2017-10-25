@@ -619,7 +619,7 @@
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
                             // First, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged from the last results string that was submitted to the API.
-                            console.log(JSON.stringify(eligibilityDataLast);
+                            console.log(JSON.stringify(eligibilityDataLast));
                             if (JSON.stringify(eligibilityDataLast) != "{}") {
                                 eligibilityData = JSON.stringify(eligibilityData);
                                 eligibilityDataLast = JSON.stringify(eligibilityDataLast);
