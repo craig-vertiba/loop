@@ -538,7 +538,7 @@
                         eligibilityData = RemoveNullResults(eligibilityData);
                         // If results have already been submitted, remove any question:answer pairs that are unchanged from the
                         // last results string that was submitted to the API (or the Data that was received from the database).
-                        if (eligibilityDataLast != {}) {
+                        if (JSON.stringify(eligibilityDataLast) != "{}") {
                             eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                             eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
                             eligibilityDataLast = JSON.parse(eligibilityDataLast);
@@ -619,8 +619,8 @@
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
                             // First, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged from the last results string that was submitted to the API.
-                            console.log(eligibilityDataLast);
-                            if (eligibilityDataLast != {}) {
+                            console.log(JSON.stringify(eligibilityDataLast);
+                            if (JSON.stringify(eligibilityDataLast) != "{}") {
                                 eligibilityData = JSON.stringify(eligibilityData);
                                 eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                                 eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
