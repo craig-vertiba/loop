@@ -34,6 +34,7 @@
     var utm_content = "";
     var new_application_requested = false; // indicates whether the CreateNewApplication api has been called or not
     var eligibilityData = {}; // holds the eligibility survey results data
+    var eligibilityDataLast = {}; // holds the eligibility survey results data from the last submission to the API
     var detailsData = {}; // holds the details survey results data
     var ineligibleDetailsData = {}; // holds the ineligible details survey results data
     var application_id = ""; // salesforce id number of the current application
@@ -535,6 +536,13 @@
                         // remove null results from the results data.  This only needs to be done when the
                         // survey is complete because SurveyJS adds null comment fields on survey completion.
                         eligibilityData = RemoveNullResults(eligibilityData);
+                        // If results have already been submitted, remove any question:answer pairs that are unchanged from the
+                        // last results string that was submitted to the API (or the Data that was received from the database).
+                        if (eligibilityDataLast.length > 0) {
+                            eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
+                        }
+                        // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
+                        eligibilityDataLast = eligibilityData;
                         // parse the eligibility data back into a json object because that's what we need
                         // to pass into the API
                         eligibilityData = JSON.parse(eligibilityData);
@@ -548,8 +556,8 @@
                         }
                         // send results to API by calling the correct function
                         $.when( eval(execute_this_function + "()")).done(function(a) {
-                            // check to see if the survey is incomplete, indicating a prior update hasn't
-                            // finished processing.  If so, try the update again.
+                            // check to see if the survey status is "passed" or "failed", then show the appropriate page.
+                            // If neither (the default case), try the update again.
                             switch (eligibility_survey_status) {
                                 case "passed":
                                     Hide( "#plugin-eligibility" ); 
@@ -561,11 +569,10 @@
                                     Show( "#ineligible-details-container" );
                                     break; 
                                 default:
-                                    // "incomplete" - the only other possible value.  This should never happen,
-                                    // but if it does there is an incomplete page that will be shown.
+                                    // "incomplete" - the only other possible value.  
                                     $.when( eval(execute_this_function + "()")).done(function(a) {
-                                        // check to see if the survey is incomplete, indicating a prior update hasn't    
-                                        // finished processing.  If so, try the update again.
+                                        // check to see if the survey status is "passed" or "failed", then show the appropriate page.
+                                        // If neither (the default case), try the update again.
                                         switch (eligibility_survey_status) {
                                             case "passed":
                                                 Hide( "#plugin-eligibility" ); 
@@ -577,11 +584,10 @@
                                                 Show( "#ineligible-details-container" );
                                                 break; 
                                             default:
-                                                // "incomplete" - the only other possible value.  This should never happen,
-                                                // but if it does there is an incomplete page that will be shown.
+                                                // "incomplete" - the only other possible value.  
                                                 $.when( eval(execute_this_function + "()")).done(function(a) {
-                                                    // check to see if the survey is incomplete, indicating a prior update hasn't    
-                                                    // finished processing.  If so, try the update again.
+                                                    // check to see if the survey status is "passed", "failed", or neither, 
+                                                    // then show the appropriate page.
                                                     switch (eligibility_survey_status) {
                                                         case "passed":
                                                             Hide( "#plugin-eligibility" ); 
@@ -609,6 +615,13 @@
                         // and if the string is not empty, send the partial result to the API, either by creating a new
                         // application or by updating or completing an existing eligibility survey.
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityData) != "{}") {
+                            // First, check to see if results have already been submitted. If they have, remove any question:answer
+                            // pairs that are unchanged from the last results string that was submitted to the API.
+                            if (eligibilityDataLast.length > 0) {
+                                eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
+                            }
+                            // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
+                            eligibilityDataLast = eligibilityData;
                             // Three cases below: 
                             // 1. If the application_id exists, update the existing eligibility survey
                             // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
@@ -773,6 +786,51 @@
                 // check to see if the new results string includes a '}'.  If not, add one.  This will be necessary if the last
                 // segment in the results data contains a null value.
                 if (new_a.indexOf('}') < 0) {new_a += "}"};
+                // return the new results string
+                return new_a;
+            }
+
+            function RemoveUnchangedResults(a,b) {
+                // Before submitting a results string, remove any question:answer pairs that are unchanged from the
+                // last results string that was submitted to the API (or the Data that was received from the database).
+                // This prevents the database from unnecessarily processing unchanged data.
+                //
+                // Note that the input string 'a' must already be stringified JSON
+
+                // Split the prior results data into segments on all commas
+                b_segments = b.split(',');
+                // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
+                b_segments[0] = b_segments[0].substring(1);
+                b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
+                // create variable to hold the new result JSON.
+                var new_a = "";
+                // split the new results data into segments on all commas
+                a_segments = a.split(',');
+                // iterate through all the a segments
+                for (var i=0; i < a_segments.length; i++) {
+                    // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
+                    for (var j=0; j < b_segments.length; j++) {
+                        if (a_segments[i] == b_segments[j]) {
+                            // the segments match, so exit the loop and move to the next a segment
+                            break;
+                        }
+                        // if we made it to here, there is not a segment match.  We need to add the a segment to the new_a string.
+                        // check to see if this is not the first segment in the new results.
+                        if (i > 0) {
+                            // add a comma if there is already content in the new results string
+                            if (new_a != "") {
+                                new_a += ",";
+                            // otherwise, add a '{'.     
+                            } else {
+                                new_a += "{";
+                            }
+                        }
+                        // add this segment to the new results string.
+                        new_a += a_segments[i];
+                    }
+                }
+                // Add a '}' to the end of the new_a results string.
+                new_a += "}";
                 // return the new results string
                 return new_a;
             }
