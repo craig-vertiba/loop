@@ -546,6 +546,7 @@
                             eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         }
                         // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted
+                        // this is probably unnecessary because it shouldn't be possible to update the survey once completed
                         eligibilityDataLast = JSON.stringify(eligibilityData);
                         eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         // parse the eligibility data back into a json object because that's what we need
@@ -616,25 +617,28 @@
                     });
                     
                     survey.onCurrentPageChanged.add(function(result) {
+                        // set elibitilityDataAPI equal to eligibilityData.  We will be manipulating the data and don't want to manipulate
+                        // the array used by SurveyJS.
                         eligibilityDataAPI = eligibilityData;
+                        console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
+                        // Now, check to see if results have already been submitted. If they have, remove any question:answer
+                        // pairs that are unchanged from the last results string that was submitted to the API.
+                        console.log(JSON.stringify(eligibilityDataLast));
+                        if (JSON.stringify(eligibilityDataLast) != "{}") {
+                            eligibilityDataAPI = JSON.stringify(eligibilityDataAPI);
+                            eligibilityDataLast = JSON.stringify(eligibilityDataLast);
+                            eligibilityDataAPI = RemoveUnchangedResults(eligibilityDataAPI,eligibilityDataLast);
+                            eligibilityDataAPI = JSON.parse(eligibilityDataAPI);
+                            eligibilityDataLast = JSON.parse(eligibilityDataLast);
+                        }
+                        // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted.
+                        eligibilityDataLast = JSON.stringify(eligibilityData);
+                        eligibilityDataLast = JSON.parse(eligibilityDataLast);
+
                         // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
                         // and if the string is not empty, send the partial result to the API, either by creating a new
                         // application or by updating or completing an existing eligibility survey.
-                        console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
                         if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityDataAPI) != "{}") {
-                            // First, check to see if results have already been submitted. If they have, remove any question:answer
-                            // pairs that are unchanged from the last results string that was submitted to the API.
-                            console.log(JSON.stringify(eligibilityDataLast));
-                            if (JSON.stringify(eligibilityDataLast) != "{}") {
-                                eligibilityDataAPI = JSON.stringify(eligibilityDataAPI);
-                                eligibilityDataLast = JSON.stringify(eligibilityDataLast);
-                                eligibilityDataAPI = RemoveUnchangedResults(eligibilityDataAPI,eligibilityDataLast);
-                                eligibilityDataAPI = JSON.parse(eligibilityDataAPI);
-                                eligibilityDataLast = JSON.parse(eligibilityDataLast);
-                            }
-                            // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted
-                            eligibilityDataLast = JSON.stringify(eligibilityData);
-                            eligibilityDataLast = JSON.parse(eligibilityDataLast);
                             // Three cases below: 
                             // 1. If the application_id exists, update the existing eligibility survey
                             // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
