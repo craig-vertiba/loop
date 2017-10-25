@@ -538,8 +538,10 @@
                         eligibilityData = RemoveNullResults(eligibilityData);
                         // If results have already been submitted, remove any question:answer pairs that are unchanged from the
                         // last results string that was submitted to the API (or the Data that was received from the database).
-                        if (eligibilityDataLast.length > 0) {
+                        if (eligibilityDataLast != "{}") {
+                            eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                             eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
+                            eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         }
                         // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
                         eligibilityDataLast = eligibilityData;
@@ -619,7 +621,9 @@
                             // pairs that are unchanged from the last results string that was submitted to the API.
                             console.log(eligibilityDataLast);
                             if (eligibilityDataLast != "{}") {
+                                eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                                 eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
+                                eligibilityDataLast = JSON.parse(eligibilityDataLast);
                             }
                             // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
                             eligibilityDataLast = eligibilityData;
