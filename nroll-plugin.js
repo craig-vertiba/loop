@@ -828,23 +828,27 @@
                 // iterate through all the a segments
                 for (var i=0; i < a_segments.length; i++) {
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
+                    var matches = false;
                     for (var j=0; j < b_segments.length; j++) {
                         console.log(a_segments[i],b_segments[j]);
                         if (a_segments[i] == b_segments[j]) {
                             // the segments match, so exit the loop and move to the next a segment
+                            matches = true;
                             break;
                         }
-                        // if we made it to here, there is not a segment match.  We need to add this segment to the new_a string.
+                    }
+                    // If matches = false, there is not a segment match and we need to add this segment to the new_a string.
+                    if (matches == false) {
                         // check to see if this is not the first segment added to the new results.  If it's not, add a comma.
                         if (new_a != "{") {
                             new_a += ",";
                         } 
-                        // add this segment to the new results string.
+                        // now add this segment to the new results string.
                         new_a += a_segments[i];
                         console.log(new_a);
                     }
                 }
-                // Now add a '}'.
+                // Now add a '}' to close the array.
                 new_a += "}";
                 console.log(new_a);
                 // return the new results string
