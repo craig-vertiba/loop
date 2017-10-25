@@ -834,14 +834,17 @@
                         }
                         // add this segment to the new results string.
                         new_a += a_segments[i];
+                        console.log(new_a);
                     }
                 }
                 // If the new_a results string is blank, add a '{'
                 if (new_a == "") {
                     new_a += "{";
                 }
+                console.log(new_a);
                 // Add a '}' to the end of the new_a results string.
                 new_a += "}";
+                console.log(new_a);
                 // return the new results string
                 return new_a;
             }
