@@ -621,8 +621,10 @@
                             // pairs that are unchanged from the last results string that was submitted to the API.
                             console.log(eligibilityDataLast);
                             if (eligibilityDataLast != "{}") {
+                                eligibilityData = JSON.stringify(eligibilityData);
                                 eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                                 eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
+                                eligibilityData = JSON.parse(eligibilityData);
                                 eligibilityDataLast = JSON.parse(eligibilityDataLast);
                             }
                             // now set the new eligibilityData equal to eligibilityDataLast in case another update is submitted
