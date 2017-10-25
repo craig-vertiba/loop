@@ -538,7 +538,7 @@
                         eligibilityData = RemoveNullResults(eligibilityData);
                         // If results have already been submitted, remove any question:answer pairs that are unchanged from the
                         // last results string that was submitted to the API (or the Data that was received from the database).
-                        if (eligibilityDataLast != "{}") {
+                        if (eligibilityDataLast != {}) {
                             eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                             eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
                             eligibilityDataLast = JSON.parse(eligibilityDataLast);
@@ -620,7 +620,7 @@
                             // First, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged from the last results string that was submitted to the API.
                             console.log(eligibilityDataLast);
-                            if (eligibilityDataLast != "{}") {
+                            if (eligibilityDataLast != {}) {
                                 eligibilityData = JSON.stringify(eligibilityData);
                                 eligibilityDataLast = JSON.stringify(eligibilityDataLast);
                                 eligibilityData = RemoveUnchangedResults(eligibilityData,eligibilityDataLast);
@@ -835,6 +835,10 @@
                         // add this segment to the new results string.
                         new_a += a_segments[i];
                     }
+                }
+                // If the new_a results string is blank, add a '{'
+                if (new_a == "") {
+                    new_a += "{";
                 }
                 // Add a '}' to the end of the new_a results string.
                 new_a += "}";
