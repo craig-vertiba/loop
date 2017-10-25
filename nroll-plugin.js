@@ -808,7 +808,9 @@
                 b_segments = b.split(',');
                 // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
                 b_segments[0] = b_segments[0].substring(1);
+                console.log(b_segments[0]);
                 b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
+                console.log(b_segments[b_segments.length-1]);
                 // create variable to hold the new result JSON.
                 var new_a = "";
                 // split the new results data into segments on all commas
@@ -817,6 +819,7 @@
                 for (var i=0; i < a_segments.length; i++) {
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
                     for (var j=0; j < b_segments.length; j++) {
+                        console.log(a_segments[i],b_segments[j]);
                         if (a_segments[i] == b_segments[j]) {
                             // the segments match, so exit the loop and move to the next a segment
                             break;
