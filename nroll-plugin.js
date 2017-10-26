@@ -823,8 +823,8 @@
                 a = a.split(',');
                 b = b.split(',');
 
-                a_segments = [];
-                b_segments = [];
+                a_segments = {};
+                b_segments = {};
 
                 // Build the new segmented arrays
                 var current_segment = "";
@@ -838,7 +838,9 @@
                     // array, and clear the variable
                     else if (a[i].indexOf(']') !== -1) {
                         current_segment += ","+a[i];
-                        a_segments.push(current_segment);
+                        current_segment = current_segment.split(':');
+                        a_segments(current_segment[0]) = current_segment[1];
+                        //a_segments.push(current_segment);
                         current_segment = "";
                     }
                     // if the segment does not contain a ':', add a comma and append it to the variable.  we'll 
@@ -848,9 +850,11 @@
                     } 
                     // this segment can be pushed to the new array immediately
                     else {
-                        a_segments.push(a[i]);
+                        a_current = a[i].split(':');
+                        a_segments(a_current[0]) = a_current[1];
+                        //a_segments.push(a[i]);
                     }
-                    console.log(JSON.parse(a_segments));
+                    console.log(a_segments);
                 }
 
                 // Build the new segmented arrays
@@ -865,7 +869,9 @@
                     // array, and clear the variable
                     else if (b[i].indexOf(']') !== -1) {
                         current_segment += ","+b[i];
-                        b_segments.push(current_segment);
+                        current_segment = current_segment.split(':');
+                        b_segments(current_segment[0]) = current_segment[1];
+                        //b_segments.push(current_segment);
                         current_segment = "";
                     }
                     // if the segment does not contain a ':', add a comma and append it to the variable.  we'll 
@@ -875,9 +881,11 @@
                     } 
                     // this segment can be pushed to the new array immediately
                     else {
-                        b_segments.push(b[i]);
+                        b_current = b[i].split(':');
+                        b_segments(b_current[0]) = b_current[1];
+                        //b_segments.push(b[i]);
                     }
-                    console.log(JSON.parse(b_segments));
+                    console.log(b_segments);
                 }
 
 
