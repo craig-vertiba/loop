@@ -938,12 +938,13 @@
                             new_a += ",";
                         } 
                         // now add this segment to the new results string.
-                        new_a += a[i];
+                        new_a += a[i].slice(1,-1);
                     }
                 }
                 // Now add a '}' to close the array.
                 new_a += "}";
                 // return the new results string
+                console.log(new_a);
                 return new_a;
             }
 
