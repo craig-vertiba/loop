@@ -835,11 +835,11 @@
                 for (var i=0; i < a.length; i++) {
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
                     // be appending at least one segment to this one.
-                    if (a[i].indexOf('[') !== -1 && a[i].indexOf(']') === -1) {
+                    if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
                         current_subarray_start = current_array_position;
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
-                    else if (a[i].indexOf(']') !== -1) {
+                    else if (a[i].indexOf(']') > -1) {
                         a[current_subarray_start] += "," + a[i];
                         current_array_position += 1;
                         //a_segments += current_segment;
@@ -851,7 +851,7 @@
                     // if the segment does not contain a ':', this is an interior element in the current subarray.
                     // add a comma and append it to the variable.  we'll 
                     // be appending one or more additional segments to it before pushing it to the new array
-                    else if (a[i].indexOf(':') === -1) {
+                    else if (a[i].indexOf(':') == -1) {
                         a[current_subarray_start] += "," + a[i];
                     } 
                     // this segment can be pushed to the new array immediately
@@ -879,11 +879,11 @@
                 for (var i=0; i < b.length; i++) {
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
                     // be appending at least one segment to this one.
-                    if (b[i].indexOf('[') !== -1 && b[i].indexOf(']') === -1) {
+                    if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
                         current_subarray_start = current_array_position;
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
-                    else if (b[i].indexOf(']') !== -1) {
+                    else if (b[i].indexOf(']') > -1) {
                         b[current_subarray_start] += "," + b[i];
                         current_array_position += 1;
                         //a_segments += current_segment;
@@ -895,7 +895,7 @@
                     // if the segment does not contain a ':', this is an interior element in the current subarray.
                     // add a comma and append it to the variable.  we'll 
                     // be appending one or more additional segments to it before pushing it to the new array
-                    else if (b[i].indexOf(':') === -1) {
+                    else if (b[i].indexOf(':') == -1) {
                         b[current_subarray_start] += "," + b[i];
                     } 
                     // this segment can be pushed to the new array immediately
@@ -925,6 +925,7 @@
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
                     var matches = false;
                     for (var j=0; j < b.length; j++) {
+                        console.log(a[i],b[j]);
                         if (a[i] == b[j]) {
                             // the segments match, so exit the loop and move to the next a segment
                             matches = true;
