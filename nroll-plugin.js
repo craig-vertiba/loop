@@ -839,14 +839,14 @@
                     // be appending at least one segment to this one.  Move it to the current array position and
                     // remove the extra " at the end of this segment
                     if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
-                        a[current_array_position] = a[i].slice(0,-1);
+                        a[current_array_position] = a[i];
                         current_subarray_start = current_array_position;
                         console.log(a[current_subarray_start]);
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
                     // remove the extra " from the beginning of the segment
                     else if (a[i].indexOf(']') > -1) {
-                        a[current_subarray_start] += "," + a[i].slice(1);
+                        a[current_subarray_start] += "," + a[i];
                         current_array_position += 1;
                         console.log(a[current_subarray_start]);
                         //a_segments += current_segment;
@@ -859,7 +859,7 @@
                     // add a comma, remove the extra " " and append it to the variable.  we'll 
                     // be appending one or more additional segments to it before pushing it to the new array
                     else if (a[i].indexOf(':') == -1) {
-                        a[current_subarray_start] += "," + a[i].slice(1,-1);
+                        a[current_subarray_start] += "," + a[i];
                         console.log(a[current_subarray_start]);
                     } 
                     // this segment can be pushed to the new array immediately
