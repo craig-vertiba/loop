@@ -540,10 +540,13 @@
                         eligibilityDataAPI = RemoveNullResults(eligibilityDataAPI);
                         // If results have already been submitted, remove any question:answer pairs that are unchanged from the
                         // last results string that was submitted to the API (or the Data that was received from the database).
+                        // If the array holding the last results is empty, this can be skipped.
                         if (JSON.stringify(eligibilityDataLast) != "{}") {
+                            // stringify the last result arrays
                             eligibilityDataLast = JSON.stringify(eligibilityDataLast);
+                            // call the function to remove unchanged results
                             eligibilityDataAPI = RemoveUnchangedResults(eligibilityDataAPI,eligibilityDataLast);
-                            eligibilityDataLast = JSON.parse(eligibilityDataLast);
+                            // eligibilityDataLast = JSON.parse(eligibilityDataLast);
                         }
                         // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted
                         // this is probably unnecessary because it shouldn't be possible to update the survey once completed
@@ -617,45 +620,52 @@
                     });
                     
                     survey.onCurrentPageChanged.add(function(result) {
-                        // set elibitilityDataAPI equal to eligibilityData.  We will be manipulating the data and don't want to manipulate
-                        // the array used by SurveyJS.
-                        eligibilityDataAPI = eligibilityData;
-                        console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
-                        // Now, check to see if results have already been submitted. If they have, remove any question:answer
-                        // pairs that are unchanged from the last results string that was submitted to the API.
-                        console.log(JSON.stringify(eligibilityDataLast));
-                        if (JSON.stringify(eligibilityDataLast) != "{}") {
-                            eligibilityDataAPI = JSON.stringify(eligibilityDataAPI);
-                            eligibilityDataLast = JSON.stringify(eligibilityDataLast);
-                            eligibilityDataAPI = RemoveUnchangedResults(eligibilityDataAPI,eligibilityDataLast);
-                            eligibilityDataAPI = JSON.parse(eligibilityDataAPI);
+                        // if sendResultOnPageNext is true (this is a survey setting in Salesforce), create the modified
+                        // new result string
+                        if (JSON.parse(PluginData.eligibility).sendResultOnPageNext) {
+                            // set eligibilityDataAPI equal to eligibilityData.  We will be manipulating the result data
+                            // and don't want to change the array used by SurveyJS.
+                            eligibilityDataAPI = eligibilityData;
+                            console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
+                            // Now, check to see if results have already been submitted. If they have, remove any question:answer
+                            // pairs that are unchanged since the last results were submitted to the API.  If the array holding the last
+                            // results is empty, this can be skipped.
+                            if (JSON.stringify(eligibilityDataLast) != "{}") {
+                                // stringify the current and last result arrays
+                                eligibilityDataAPI = JSON.stringify(eligibilityDataAPI);
+                                eligibilityDataLast = JSON.stringify(eligibilityDataLast);
+                                // call the function to remove unchanged results
+                                eligibilityDataAPI = RemoveUnchangedResults(eligibilityDataAPI,eligibilityDataLast);
+                                // parse the eligibility data back into a json object because that's what we need
+                                // to pass into the API
+                                eligibilityDataAPI = JSON.parse(eligibilityDataAPI);
+                                // eligibilityDataLast = JSON.parse(eligibilityDataLast);
+                            }
+                            // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted.
+                            eligibilityDataLast = JSON.stringify(eligibilityData);
                             eligibilityDataLast = JSON.parse(eligibilityDataLast);
-                        }
-                        // now set eligibilityDataLast equal to the new eligibilityData in case another update is submitted.
-                        eligibilityDataLast = JSON.stringify(eligibilityData);
-                        eligibilityDataLast = JSON.parse(eligibilityDataLast);
 
-                        // if sendResultOnPageNext is true (this is a survey setting in Salesforce),
-                        // and if the string is not empty, send the partial result to the API, either by creating a new
-                        // application or by updating or completing an existing eligibility survey.
-                        if (JSON.parse(PluginData.eligibility).sendResultOnPageNext && JSON.stringify(eligibilityDataAPI) != "{}") {
-                            // Three cases below: 
-                            // 1. If the application_id exists, update the existing eligibility survey
-                            // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
-                            //    call the CreateNewApplication api and create the new application.
-                            // 3. Implicit: the application record hasn't been created yet but the CreateNewApplication api has been called.
-                            //    This may occur when the second question of an eligibility survey is answered before the response
-                            //    from the CreateNewApplication api call is received by the Application Plugin.  In this case, do nothing.
-                            //    We cannot update the application because we don't have the application_id yet, and we can't call
-                            //    CreateNewApplication again because it will create a duplicate record.  This is not the
-                            //    last question on the survey, and the last question's api call is synchronous which will ensure
-                            //    that all the answers get recorded to the database.
-                            if (application_id != "") {
-                                // update the existing application with new or changed results data
-                                UpdateOrCompleteEligibilitySurvey();
-                            } else if (application_id == "" && !new_application_requested) {
-                                // update the existing application with new or changed results data
-                                CreateNewApplication();
+                            // if the modified new result string is not empty, send the partial result to the API, either by creating a new
+                            // application or by updating or completing an existing eligibility survey.
+                            if (JSON.stringify(eligibilityDataAPI) != "{}") {
+                                // Three cases below: 
+                                // 1. If the application_id exists, update the existing eligibility survey
+                                // 2. If the application record hasn't been created yet and the CreateNewApplication api has not been called,
+                                //    call the CreateNewApplication api and create the new application.
+                                // 3. Implicit: the application record hasn't been created yet but the CreateNewApplication api has been called.
+                                //    This may occur when the second question of an eligibility survey is answered before the response
+                                //    from the CreateNewApplication api call is received by the Application Plugin.  In this case, do nothing.
+                                //    We cannot update the application because we don't have the application_id yet, and we can't call
+                                //    CreateNewApplication again because it will create a duplicate record.  This is not the
+                                //    last question on the survey, and the last question's api call is synchronous which will ensure
+                                //    that all the answers get recorded to the database.
+                                if (application_id != "") {
+                                    // update the existing application with new or changed results data
+                                    UpdateOrCompleteEligibilitySurvey();
+                                } else if (application_id == "" && !new_application_requested) {
+                                    // update the existing application with new or changed results data
+                                    CreateNewApplication();
+                                }
                             }
                         }
                     });
