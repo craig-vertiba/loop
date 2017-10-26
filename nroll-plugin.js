@@ -827,8 +827,41 @@
                 b = b.split(',');
                 console.log(b);
 
-                var a_segments = "";
-                var b_segments = "";
+                // Build the new segmented arrays
+                // var current_segment = "";
+                var current_array_position = 0;
+                var current_subarray_start = 0;
+                for (var i=0; i < a.length; i++) {
+                    // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
+                    // be appending at least one segment to this one.  Move it to the current array position.
+                    if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
+                        a[current_array_position] = a[i];
+                        current_subarray_start = current_array_position;
+                        console.log(a[current_subarray_start]);
+                    } 
+                    // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
+                    else if (a[i].indexOf(']') > -1) {
+                        a[current_subarray_start] += "," + a[i];
+                        current_array_position += 1;
+                        console.log(a[current_subarray_start]);
+                    }
+                    // if the segment does not contain a ':', this is an interior element in the current subarray.
+                    // add a comma and append it to the current array position.
+                    else if (a[i].indexOf(':') == -1) {
+                        a[current_subarray_start] += "," + a[i];
+                        console.log(a[current_subarray_start]);
+                    } 
+                    // this segment is not part of a subarray and can be moved to the current array position immediately
+                    else {
+                        a[current_array_position] = a[i];
+                        current_array_position += 1;
+                    }
+                }
+
+                if (current_array_position < a.length ) {
+                    a.splice(current_array_position - 1);
+                }
+
 
                 // Build the new segmented arrays
                 // var current_segment = "";
@@ -836,92 +869,34 @@
                 var current_subarray_start = 0;
                 for (var i=0; i < a.length; i++) {
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
-                    // be appending at least one segment to this one.  Move it to the current array position and
-                    // remove the extra " at the end of this segment
-                    if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
-                        a[current_array_position] = a[i];
-                        current_subarray_start = current_array_position;
-                        console.log(a[current_subarray_start]);
-                    } 
-                    // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
-                    // remove the extra " from the beginning of the segment
-                    else if (a[i].indexOf(']') > -1) {
-                        a[current_subarray_start] += "," + a[i];
-                        current_array_position += 1;
-                        console.log(a[current_subarray_start]);
-                        //a_segments += current_segment;
-                        //current_segment = current_segment.split(':');
-                        //a_segments[current_segment[0]] = current_segment[1];
-                        //a_segments.push(current_segment);
-                        //current_segment = "";
-                    }
-                    // if the segment does not contain a ':', this is an interior element in the current subarray.
-                    // add a comma, remove the extra " " and append it to the variable.  we'll 
-                    // be appending one or more additional segments to it before pushing it to the new array
-                    else if (a[i].indexOf(':') == -1) {
-                        a[current_subarray_start] += "," + a[i];
-                        console.log(a[current_subarray_start]);
-                    } 
-                    // this segment can be pushed to the new array immediately
-                    else {
-                        a[current_array_position] = a[i];
-                        current_array_position += 1;
-                        //a_current = a[i].split(':');
-                        //a_segments[a_current[0]] = a_current[1];
-                        //a_segments.push(a[i]);
-                    }
-                    console.log(a);
-                }
-
-                if (current_array_position < a.length ) {
-                    a.splice(current_array_position - 1);
-                }
-
-                console.log(a,a.length);
-
-
-                // Build the new segmented arrays
-                // var current_segment = "";
-                var current_array_position = 0;
-                var current_subarray_start = 0;
-                for (var i=0; i < b.length; i++) {
-                    // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
-                    // be appending at least one segment to this one.
+                    // be appending at least one segment to this one.  Move it to the current array position.
                     if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
+                        b[current_array_position] = b[i];
                         current_subarray_start = current_array_position;
+                        console.log(b[current_subarray_start]);
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
                     else if (b[i].indexOf(']') > -1) {
                         b[current_subarray_start] += "," + b[i];
                         current_array_position += 1;
-                        //a_segments += current_segment;
-                        //current_segment = current_segment.split(':');
-                        //a_segments[current_segment[0]] = current_segment[1];
-                        //a_segments.push(current_segment);
-                        //current_segment = "";
+                        console.log(b[current_subarray_start]);
                     }
                     // if the segment does not contain a ':', this is an interior element in the current subarray.
-                    // add a comma and append it to the variable.  we'll 
-                    // be appending one or more additional segments to it before pushing it to the new array
+                    // add a comma and append it to the current array position.
                     else if (b[i].indexOf(':') == -1) {
                         b[current_subarray_start] += "," + b[i];
+                        console.log(b[current_subarray_start]);
                     } 
-                    // this segment can be pushed to the new array immediately
+                    // this segment is not part of a subarray and can be moved to the current array position immediately
                     else {
                         b[current_array_position] = b[i];
                         current_array_position += 1;
-                        //a_current = a[i].split(':');
-                        //a_segments[a_current[0]] = a_current[1];
-                        //a_segments.push(a[i]);
                     }
-                    console.log(b);
                 }
 
                 if (current_array_position < b.length ) {
                     b.splice(current_array_position - 1);
                 }
-
-                console.log(b,b.length);
 
 
 
