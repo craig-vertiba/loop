@@ -859,7 +859,7 @@
                 }
 
                 if (current_array_position < a.length ) {
-                    a.splice(current_array_position - 1);
+                    a.splice(current_array_position);
                 }
 
 
@@ -895,7 +895,7 @@
                 }
 
                 if (current_array_position < b.length ) {
-                    b.splice(current_array_position - 1);
+                    b.splice(current_array_position);
                 }
 
 
