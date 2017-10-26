@@ -823,8 +823,8 @@
                 a = a.split(',');
                 b = b.split(',');
 
-                a_segments = {};
-                b_segments = {};
+                var a_segments = {};
+                var b_segments = {};
 
                 // Build the new segmented arrays
                 var current_segment = "";
