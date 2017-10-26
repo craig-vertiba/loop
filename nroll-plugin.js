@@ -364,7 +364,6 @@
                 new_application_data.answers = eligibilityDataAPI;
                 // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
-                console.log(new_application_data);
 
                 return $.ajax({
                     type:'GET',
@@ -374,7 +373,6 @@
                     success: function(json) {
                         application_id = json.application;
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log("Application ID: " + application_id + "; Eligibility Survey Status: " + eligibility_survey_status);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -393,7 +391,6 @@
                 new_application_data.answers = eligibilityDataAPI;
                 // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
-                console.log(new_application_data);
 
                 return $.ajax({
                     type:'GET',
@@ -402,7 +399,6 @@
                     dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log("Eligibility Survey Status: " + eligibility_survey_status);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -419,7 +415,6 @@
                 new_application_data.application = application_id;
                 // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
-                console.log(new_application_data);
 
                 return $.ajax({
                     type:'GET',
@@ -428,7 +423,6 @@
                     dataType: 'json',
                     success: function(json) {
                         eligibility_survey_status = json.eligibilitySurveyStatus;
-                        console.log(json);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -446,7 +440,6 @@
                 new_application_data.answers = detailsData;
                 // stringify the data object
                 new_application_data = JSON.stringify(new_application_data);
-                console.log(new_application_data);
 
                 return $.ajax({
                     type:'GET',
@@ -454,7 +447,6 @@
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
-                        console.log(json);
                     },
                     error: function(data, status, xhr) {
                     },
@@ -626,7 +618,6 @@
                             // set eligibilityDataAPI equal to eligibilityData.  We will be manipulating the result data
                             // and don't want to change the array used by SurveyJS.
                             eligibilityDataAPI = eligibilityData;
-                            console.log("data: "+JSON.stringify(eligibilityData)+" API: "+JSON.stringify(eligibilityDataAPI)+" last: "+JSON.stringify(eligibilityDataLast));
                             // Now, check to see if results have already been submitted. If they have, remove any question:answer
                             // pairs that are unchanged since the last results were submitted to the API.  If the array holding the last
                             // results is empty, this can be skipped.
@@ -829,13 +820,9 @@
                 b_segments = b.split(',');
                 // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
                 a_segments[0] = a_segments[0].substring(1);
-                console.log(a_segments[0]);
                 a_segments[a_segments.length-1] = a_segments[a_segments.length-1].substring(0,a_segments[a_segments.length-1].length-1);
-                console.log(a_segments[a_segments.length-1]);
                 b_segments[0] = b_segments[0].substring(1);
-                console.log(b_segments[0]);
                 b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
-                console.log(b_segments[b_segments.length-1]);
                 // create variable to hold the new result JSON.
                 var new_a = "{";
                 // split the new results data into segments on all commas
@@ -844,7 +831,6 @@
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
                     var matches = false;
                     for (var j=0; j < b_segments.length; j++) {
-                        console.log(a_segments[i],b_segments[j]);
                         if (a_segments[i] == b_segments[j]) {
                             // the segments match, so exit the loop and move to the next a segment
                             matches = true;
@@ -859,12 +845,10 @@
                         } 
                         // now add this segment to the new results string.
                         new_a += a_segments[i];
-                        console.log(new_a);
                     }
                 }
                 // Now add a '}' to close the array.
                 new_a += "}";
-                console.log(new_a);
                 // return the new results string
                 return new_a;
             }
