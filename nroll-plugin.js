@@ -813,22 +813,17 @@
                 // last results string that was submitted to the API (or the Data that was received from the database).
                 // This prevents the database from unnecessarily processing unchanged data.
                 //
-                // Note that the input string 'a' must already be stringified JSON
+                // Note that the input strings 'a' and 'b' must already be stringified JSON
 
-                // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
+                // Remove the '{' at the beginning and '}' at the end of the input strings
                 a = a.slice(1,-1);
                 b = b.slice(1,-1);
 
                 // Split the new results data and the prior results data into segments on all commas
-                console.log(a);
                 a = a.split(',');
-                console.log(a);
-                console.log(b);
                 b = b.split(',');
-                console.log(b);
 
-                // Build the new segmented arrays
-                // var current_segment = "";
+                // merge subarrays in the a array that were split on commas back together
                 var current_array_position = 0;
                 var current_subarray_start = 0;
                 for (var i=0; i < a.length; i++) {
@@ -837,19 +832,16 @@
                     if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
                         a[current_array_position] = a[i];
                         current_subarray_start = current_array_position;
-                        console.log(a[current_subarray_start]);
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
                     else if (a[i].indexOf(']') > -1) {
                         a[current_subarray_start] += "," + a[i];
                         current_array_position += 1;
-                        console.log(a[current_subarray_start]);
                     }
                     // if the segment does not contain a ':', this is an interior element in the current subarray.
                     // add a comma and append it to the current array position.
                     else if (a[i].indexOf(':') == -1) {
                         a[current_subarray_start] += "," + a[i];
-                        console.log(a[current_subarray_start]);
                     } 
                     // this segment is not part of a subarray and can be moved to the current array position immediately
                     else {
@@ -858,13 +850,13 @@
                     }
                 }
 
+                // remove extra elements from the end of the a array
                 if (current_array_position < a.length ) {
                     a.splice(current_array_position);
                 }
 
 
-                // Build the new segmented arrays
-                // var current_segment = "";
+                // merge subarrays in the b array that were split on commas back together
                 var current_array_position = 0;
                 var current_subarray_start = 0;
                 for (var i=0; i < b.length; i++) {
@@ -873,19 +865,16 @@
                     if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
                         b[current_array_position] = b[i];
                         current_subarray_start = current_array_position;
-                        console.log(b[current_subarray_start]);
                     } 
                     // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
                     else if (b[i].indexOf(']') > -1) {
                         b[current_subarray_start] += "," + b[i];
                         current_array_position += 1;
-                        console.log(b[current_subarray_start]);
                     }
                     // if the segment does not contain a ':', this is an interior element in the current subarray.
                     // add a comma and append it to the current array position.
                     else if (b[i].indexOf(':') == -1) {
                         b[current_subarray_start] += "," + b[i];
-                        console.log(b[current_subarray_start]);
                     } 
                     // this segment is not part of a subarray and can be moved to the current array position immediately
                     else {
@@ -894,11 +883,10 @@
                     }
                 }
 
+                // remove extra elements from the end of the b array
                 if (current_array_position < b.length ) {
                     b.splice(current_array_position);
                 }
-
-
 
                 // create variable to hold the new result JSON.
                 var new_a = "{";
@@ -908,7 +896,6 @@
                     // check to see if the segment matches a segment in b.  If not, it can be added to the new result string.
                     var matches = false;
                     for (var j=0; j < b.length; j++) {
-                        console.log(a[i],b[j]);
                         if (a[i] == b[j]) {
                             // the segments match, so exit the loop and move to the next a segment
                             matches = true;
