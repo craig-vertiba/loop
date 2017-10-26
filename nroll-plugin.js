@@ -820,8 +820,10 @@
                 b = b.slice(1,-1);
 
                 // Split the new results data and the prior results data into segments on all commas
+                console.log(a);
                 a = a.split(',');
                 console.log(a);
+                console.log(b);
                 b = b.split(',');
                 console.log(b);
 
