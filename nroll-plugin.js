@@ -815,14 +815,18 @@
                 //
                 // Note that the input string 'a' must already be stringified JSON
 
+                a = a.slice(1,-1);
+                b = b.slice(1,-1);
+                console.log(a,b);
+
                 // Split the new results data and the prior results data into segments on all commas
                 a_segments = a.split(',');
                 b_segments = b.split(',');
                 // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
-                a_segments[0] = a_segments[0].substring(1);
-                a_segments[a_segments.length-1] = a_segments[a_segments.length-1].substring(0,a_segments[a_segments.length-1].length-1);
-                b_segments[0] = b_segments[0].substring(1);
-                b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
+                // a_segments[0] = a_segments[0].substring(1);
+                // a_segments[a_segments.length-1] = a_segments[a_segments.length-1].substring(0,a_segments[a_segments.length-1].length-1);
+                // b_segments[0] = b_segments[0].substring(1);
+                // b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
                 // create variable to hold the new result JSON.
                 var new_a = "{";
                 // split the new results data into segments on all commas
