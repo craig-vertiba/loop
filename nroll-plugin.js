@@ -815,18 +815,72 @@
                 //
                 // Note that the input string 'a' must already be stringified JSON
 
+                // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
                 a = a.slice(1,-1);
                 b = b.slice(1,-1);
-                console.log(a,b);
 
                 // Split the new results data and the prior results data into segments on all commas
-                a_segments = a.split(',');
-                b_segments = b.split(',');
-                // Remove '{' at the beginning of the first segment and '}' at the end of the last segment
-                // a_segments[0] = a_segments[0].substring(1);
-                // a_segments[a_segments.length-1] = a_segments[a_segments.length-1].substring(0,a_segments[a_segments.length-1].length-1);
-                // b_segments[0] = b_segments[0].substring(1);
-                // b_segments[b_segments.length-1] = b_segments[b_segments.length-1].substring(0,b_segments[b_segments.length-1].length-1);
+                a = a.split(',');
+                b = b.split(',');
+
+                a_segments = [];
+                b_segments = [];
+
+                // Build the new segmented arrays
+                var current_segment = "";
+                for (var i=0; i < a.length; i++) {
+                    // if the segment contains a '[' but not a ']', save it to a variable because we'll 
+                    // be appending one or more additional segments to it before pushing it to the new array
+                    if (a[i].indexOf('[') !== -1 && a[i].indexOf(']') === -1) {
+                        current_segment = a[i];
+                    } 
+                    // if the segment contains a ']', add a comma, append it to the variable, push it to the new
+                    // array, and clear the variable
+                    else if (a[i].indexOf(']') !== -1) {
+                        current_segment += ","+a[i];
+                        a_segments.push(current_segment);
+                        current_segment = "";
+                    }
+                    // if the segment does not contain a ':', add a comma and append it to the variable.  we'll 
+                    // be appending one or more additional segments to it before pushing it to the new array
+                    else if (a[i].indexOf(':') === -1) {
+                        current_segment += ","+a[i];
+                    } 
+                    // this segment can be pushed to the new array immediately
+                    else {
+                        a_segments.push(a[i]);
+                    }
+                    console.log(a_segments);
+                }
+
+                // Build the new segmented arrays
+                var current_segment = "";
+                for (var i=0; i < b.length; i++) {
+                    // if the segment contains a '[' but not a ']', save it to a variable because we'll 
+                    // be appending one or more additional segments to it before pushing it to the new array
+                    if (b[i].indexOf('[') !== -1 && b[i].indexOf(']') === -1) {
+                        current_segment = b[i];
+                    } 
+                    // if the segment contains a ']', add a comma, append it to the variable, push it to the new
+                    // array, and clear the variable
+                    else if (b[i].indexOf(']') !== -1) {
+                        current_segment += ","+b[i];
+                        b_segments.push(current_segment);
+                        current_segment = "";
+                    }
+                    // if the segment does not contain a ':', add a comma and append it to the variable.  we'll 
+                    // be appending one or more additional segments to it before pushing it to the new array
+                    else if (b[i].indexOf(':') === -1) {
+                        current_segment += ","+b[i];
+                    } 
+                    // this segment can be pushed to the new array immediately
+                    else {
+                        b_segments.push(b[i]);
+                    }
+                    console.log(b_segments);
+                }
+
+
                 // create variable to hold the new result JSON.
                 var new_a = "{";
                 // split the new results data into segments on all commas
