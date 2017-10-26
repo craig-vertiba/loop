@@ -869,7 +869,7 @@
                     a.splice(current_array_position - 1);
                 }
 
-                console.log(a);
+                console.log(a,a.length);
 
 
                 // Build the new segmented arrays
@@ -913,7 +913,7 @@
                     a.splice(current_array_position - 1);
                 }
 
-                console.log(b);
+                console.log(b,b.length);
 
 
 
