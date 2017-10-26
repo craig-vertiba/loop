@@ -939,7 +939,7 @@
                             new_a += ",";
                         } 
                         // now add this segment to the new results string.
-                        new_a += a[i].slice(1,-1);
+                        new_a += a[i];
                     }
                 }
                 // Now add a '}' to close the array.
