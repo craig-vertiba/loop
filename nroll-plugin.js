@@ -867,7 +867,7 @@
                 // var current_segment = "";
                 var current_array_position = 0;
                 var current_subarray_start = 0;
-                for (var i=0; i < a.length; i++) {
+                for (var i=0; i < b.length; i++) {
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
                     // be appending at least one segment to this one.  Move it to the current array position.
                     if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
