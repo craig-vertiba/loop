@@ -827,23 +827,31 @@
                 var current_array_position = 0;
                 var current_subarray_start = 0;
                 for (var i=0; i < a.length; i++) {
+                    // if the segment contains both a '[' and a ']', this is a single element subarray and
+                    // it can be moved to the current array position
+                    if ((a[i].indexOf('[') > -1) && (a[i].indexOf(']') > -1)) {
+                        a[current_array_position] = a[i];
+                        current_array_position += 1;
+                    } 
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
                     // be appending at least one segment to this one.  Move it to the current array position.
-                    if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
+                    else if (a[i].indexOf('[') > -1 && a[i].indexOf(']') == -1) {
                         a[current_array_position] = a[i];
                         current_subarray_start = current_array_position;
                     } 
-                    // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
-                    else if (a[i].indexOf(']') > -1) {
+                    // if the segment contains a ']' but not a '[', this is the end of a subarray. Add a comma 
+                    // and append it to the current subarray.
+                    else if (a[i].indexOf(']') > -1 && a[i].indexOf('[') == -1) {
                         a[current_subarray_start] += "," + a[i];
                         current_array_position += 1;
                     }
-                    // if the segment does not contain a ':', this is an interior element in the current subarray.
+                    // if the segment does not contain ':' this is an interior element in the current subarray.
                     // add a comma and append it to the current array position.
                     else if (a[i].indexOf(':') == -1) {
                         a[current_subarray_start] += "," + a[i];
                     } 
-                    // this segment is not part of a subarray and can be moved to the current array position immediately
+                    // this segment is either a subarray with a single element or not part of a subarray
+                    // and can be moved to the current array position immediately
                     else {
                         a[current_array_position] = a[i];
                         current_array_position += 1;
@@ -855,28 +863,35 @@
                     a.splice(current_array_position);
                 }
 
-
                 // merge subarrays in the b array that were split on commas back together
                 var current_array_position = 0;
                 var current_subarray_start = 0;
                 for (var i=0; i < b.length; i++) {
+                    // if the segment contains both a '[' and a ']', this is a single element subarray and
+                    // it can be moved to the current array position
+                    if ((b[i].indexOf('[') > -1) && (b[i].indexOf(']') > -1)) {
+                        b[current_array_position] = b[i];
+                        current_array_position += 1;
+                    } 
                     // if the segment contains a '[' but not a ']', this is the start of a subarray - we'll
                     // be appending at least one segment to this one.  Move it to the current array position.
-                    if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
+                    else if (b[i].indexOf('[') > -1 && b[i].indexOf(']') == -1) {
                         b[current_array_position] = b[i];
                         current_subarray_start = current_array_position;
                     } 
-                    // if the segment contains a ']', this is the end of a subarray. Add a comma and append it to the current subarray.
-                    else if (b[i].indexOf(']') > -1) {
+                    // if the segment contains a ']' but not a '[', this is the end of a subarray. Add a comma 
+                    // and append it to the current subarray.
+                    else if (b[i].indexOf(']') > -1 && b[i].indexOf('[') == -1) {
                         b[current_subarray_start] += "," + b[i];
                         current_array_position += 1;
                     }
-                    // if the segment does not contain a ':', this is an interior element in the current subarray.
+                    // if the segment does not contain ':' this is an interior element in the current subarray.
                     // add a comma and append it to the current array position.
                     else if (b[i].indexOf(':') == -1) {
                         b[current_subarray_start] += "," + b[i];
                     } 
-                    // this segment is not part of a subarray and can be moved to the current array position immediately
+                    // this segment is either a subarray with a single element or not part of a subarray
+                    // and can be moved to the current array position immediately
                     else {
                         b[current_array_position] = b[i];
                         current_array_position += 1;
