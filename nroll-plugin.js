@@ -854,7 +854,7 @@
                     } 
                     // this segment can be pushed to the new array immediately
                     else {
-                        a[current_array_position] += a[i];
+                        a[current_array_position] = a[i];
                         current_array_position += 1;
                         //a_current = a[i].split(':');
                         //a_segments[a_current[0]] = a_current[1];
@@ -898,7 +898,7 @@
                     } 
                     // this segment can be pushed to the new array immediately
                     else {
-                        b[current_array_position] += b[i];
+                        b[current_array_position] = b[i];
                         current_array_position += 1;
                         //a_current = a[i].split(':');
                         //a_segments[a_current[0]] = a_current[1];
