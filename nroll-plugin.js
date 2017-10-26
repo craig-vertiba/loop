@@ -850,7 +850,7 @@
                     else {
                         a_segments.push(a[i]);
                     }
-                    console.log(a_segments);
+                    console.log(JSON.parse(a_segments));
                 }
 
                 // Build the new segmented arrays
@@ -877,7 +877,7 @@
                     else {
                         b_segments.push(b[i]);
                     }
-                    console.log(b_segments);
+                    console.log(JSON.parse(b_segments));
                 }
 
 
