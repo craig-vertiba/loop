@@ -821,7 +821,9 @@
 
                 // Split the new results data and the prior results data into segments on all commas
                 a = a.split(',');
+                console.log(a);
                 b = b.split(',');
+                console.log(b);
 
                 var a_segments = "";
                 var b_segments = "";
