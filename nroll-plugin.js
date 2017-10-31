@@ -2,18 +2,21 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var a = ''; // Study ID. Mandatory. From the "Study ID" field in the Study Detail record.
-            var b = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.19/survey.jquery.js"
-            var c = ''; // HTML content url. Required. No default. Plugin will fail without this file.
-            var d = ''; // nRoll Plugin custom CSS url. Optional.
-            var e = ''; // nRoll Plugin custom javascript. Optional.
-            var f = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
-            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f;
+            var a,b,c,d,e,f,g;
+            a = ''; // Study ID. Mandatory. From the "Study ID" field in the Study Detail record.
+            b = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js"
+            c = ''; // HTML content url. Required. No default. Plugin will fail without this file.
+            d = ''; // nRoll Plugin custom CSS url. Optional.
+            e = ''; // nRoll Plugin custom javascript. Optional.
+            f = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
+            g = ''; // URL location of Proxy. Required. No Default. Plugin will fail without this URL.
+            var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f+'&g='+g;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
             js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
         }) ();
     </script>
+    <div id="nroll-plugin"> <!-- This is where the Plugin will load and render and must be included in the body of the page -->
  **/
 /*
  * nRoll plugin Scripts
@@ -44,18 +47,15 @@
     var country_code; // Extracted from Study website url.
     var region_code; // Used in Google Maps Geocoding to limit scope of search results.
     var study_id; // ID of the study, from the "Study ID" in the Study Detail record.  Passed in as nroll-plugin parameter.
+    var proxy_url; // URL of the proxy to which all API calls will be directed.  Passed in as an nroll-plugin parameter.
     var langCountryCode; // language plus country code extracted from Study website url.
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter with default.
     var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
     var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
     var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
-    var api_base_url = "https://cs14.force.com/services/apexrest/";
-    var access_token = "00Dc0000003w6AY!ARcAQH1Sp8NKI5RG7zaAej8UMMOb.uS5MXLglj.ndF1z0SGusIeeq73sPBpwvKsWhV_gc5AOoXK9rXzzKyRxTVrvD7dY9xZG"; // 
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
-    // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Alpha marker labels
-    // var labelIndex = 0; // used with Alpha marker labels
     var markers = []; // array of all site markers
     var bounds; // boundary coordinates to enclose all site markers
     var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
@@ -72,7 +72,7 @@
     }
 
     // Following parses the param string of script_url and assigns values to
-    // study_id, surveyjs_url, html_content_url, customCSS_url, customJS_url and study_website_status.
+    // study_id, surveyjs_url, html_content_url, customCSS_url, customJS_url, proxy_url, and study_website_status.
     var hashes = script_url.slice(script_url.indexOf('?') + 1).split('&');
     for (var i=0; i < hashes.length; i++) {
         hash = hashes[i].split('=');
@@ -97,6 +97,9 @@
                 break;
             case 'f':
                 study_website_status = hash[1];
+                break;
+            case 'g':
+                proxy_url = hash[1];
                 break;
         }
     }
@@ -330,7 +333,7 @@
             function getPluginData() {
                 return $.ajax({
                     type:'GET',
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode + "&method_type=GET",  // new
+                    url: proxy_url + "?api_type=initiate_plugin&studyId=" + study_id + "&langCountryCode=" + langCountryCode + "&method_type=GET",  // new
                     crossDomain: true, //new
                     dataType: 'json', //new
                     success: function(json) {
@@ -367,7 +370,7 @@
 
                 return $.ajax({
                     type:'GET',
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    url: proxy_url + "?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
@@ -394,7 +397,7 @@
 
                 return $.ajax({
                     type:'GET',
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    url: proxy_url + "?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
@@ -418,7 +421,7 @@
 
                 return $.ajax({
                     type:'GET',
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    url: proxy_url + "?api_type=create_application&method_type=POST&postData="+encodeURI(new_application_data),
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
@@ -443,7 +446,7 @@
 
                 return $.ajax({
                     type:'GET',
-                    url: "https://guarded-tor-53502.herokuapp.com?api_type=update_application&method_type=POST&postData="+encodeURI(new_application_data),
+                    url: proxy_url + "?api_type=update_application&method_type=POST&postData="+encodeURI(new_application_data),
                     crossDomain: true,
                     dataType: 'json',
                     success: function(json) {
