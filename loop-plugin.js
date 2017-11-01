@@ -2,17 +2,18 @@
  * Here is the script that gets added to the body of the page calling this plugin:
     <script>
         (function() {
-            var a,b,c,d,e,f,g;
+            var a,b,c,d,e,f,g,h;
             a = ''; // Study ID. Mandatory. From the "Study ID" field in the Study Detail record.
             b = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js"
             c = ''; // HTML content url. Required. No default. Plugin will fail without this file.
-            d = ''; // loop Plugin custom CSS url. Optional.
-            e = ''; // loop Plugin custom javascript. Optional.
+            d = ''; // loop Plugin custom CSS file url. Optional.
+            e = ''; // loop Plugin custom javascript file url. Optional.
             f = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
             g = ''; // URL location of Proxy. Required. No Default. Plugin will fail without this URL.
+            h = ''; // URL location of Plugin javascript file. Required. No Default. Plugin will vail without this URL.
             var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f+'&g='+g;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-            js.src = 'https://craig-vertiba.github.io/loop/loop-script.js' + params; js.id = 'loop-plugin';
+            js.src = h + params; js.id = 'loop-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
         }) ();
     </script>
