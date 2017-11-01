@@ -6,22 +6,22 @@
             a = ''; // Study ID. Mandatory. From the "Study ID" field in the Study Detail record.
             b = ''; // SurveyJS url. Optional. Will default to "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js"
             c = ''; // HTML content url. Required. No default. Plugin will fail without this file.
-            d = ''; // nRoll Plugin custom CSS url. Optional.
-            e = ''; // nRoll Plugin custom javascript. Optional.
+            d = ''; // loop Plugin custom CSS url. Optional.
+            e = ''; // loop Plugin custom javascript. Optional.
             f = ''; // Study website status. Options: 'preview', 'live'. Optional. Will default to 'live'.
             g = ''; // URL location of Proxy. Required. No Default. Plugin will fail without this URL.
             var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f+'&g='+g;
             var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-            js.src = 'https://craig-vertiba.github.io/nroll/nroll-script.js' + params; js.id = 'nroll-plugin';
+            js.src = 'https://craig-vertiba.github.io/loop/loop-script.js' + params; js.id = 'loop-plugin';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
         }) ();
     </script>
-    <div id="nroll-plugin"> <!-- This is where the Plugin will load and render and must be included in the body of the page -->
+    <div id="loop-plugin"> <!-- This is where the Plugin will load and render and must be included in the body of the page -->
  **/
 /*
- * nRoll plugin Scripts
+ * loop plugin Scripts
  * ---------------------------
- * Scripts here are responsible for loading and controlling the nRoll plugin
+ * Scripts here are responsible for loading and controlling the loop plugin
  * everything needs to be defined within this function to avoid potential conflicts with the host page.
  * It will be called automatically via the () at the end of the function.
  **/
@@ -46,13 +46,13 @@
     var language_code; // Extracted from Study website. Must be lowercase to access SurveyJS localizations.
     var country_code; // Extracted from Study website url.
     var region_code; // Used in Google Maps Geocoding to limit scope of search results.
-    var study_id; // ID of the study, from the "Study ID" in the Study Detail record.  Passed in as nroll-plugin parameter.
-    var proxy_url; // URL of the proxy to which all API calls will be directed.  Passed in as an nroll-plugin parameter.
+    var study_id; // ID of the study, from the "Study ID" in the Study Detail record.  Passed in as loop-plugin parameter.
+    var proxy_url; // URL of the proxy to which all API calls will be directed.  Passed in as an loop-plugin parameter.
     var langCountryCode; // language plus country code extracted from Study website url.
     var surveyjs_url = "https://surveyjs.azureedge.net/0.12.20/survey.jquery.js";  // SurveyJS source url parameter with default.
-    var html_content_url; // nRoll Plugin html content url parameter.  Required. No default.
-    var customCSS_url; // nRoll Plugin custom javascript url parameter. No Default.
-    var customJS_url; // nRoll Plugin custom javascript url parameter. No Default.
+    var html_content_url; // loop Plugin html content url parameter.  Required. No default.
+    var customCSS_url; // loop Plugin custom javascript url parameter. No Default.
+    var customJS_url; // loop Plugin custom javascript url parameter. No Default.
     // the following variables are used to display sites on the map:
     var locations; // json of sites
     var lastmarker; // user's location marker
@@ -61,12 +61,12 @@
     var map_center; // these are the coordinates of the center of the Map when the map opens.  They are passed in with the intiializiation JSON.
 
     /*
-     * Iterate through the loaded scripts looking for this one (must specify "nroll-script" on the id tag for this to work)
+     * Iterate through the loaded scripts looking for this one (must specify "loop-script" on the id tag for this to work)
      * We need the script url to retrieve the parameters that were included in the url.
     **/
 
     for (var i=0; i < all_scripts.length; i++) {
-        if (all_scripts[i].id == "nroll-script") {
+        if (all_scripts[i].id == "loop-script") {
             script_url = all_scripts[i].src;
         }
     }
@@ -228,7 +228,7 @@
 
         script_tag.setAttribute("type", "text/javascript");
         script_tag.setAttribute("src", src);
-        script_tag.setAttribute("nroll-id", name);
+        script_tag.setAttribute("loop-id", name);
 
         //script_tag.onload = ScriptLoadHandler;
 
@@ -312,7 +312,7 @@
     /* --------------------------------------------------------------------------------------------------------
      * main()
      * --------------------------------------------------------------------------------------------------------
-     * This is the main function that will perform most of the functionality of the nroll plugin.
+     * This is the main function that will perform most of the functionality of the loop plugin.
      * It will *only* be called after the necessary scripts have been loaded in the prescribed order in the
      * main anonymous function. It is called by the script load handler function after the last script is loaded
      * -------------------------------------------------------------------------------------------------------- */
@@ -327,7 +327,7 @@
         jQuery(document).ready(function($) {
 
             // This is the id value of the div to which the entire plugin will be appended.
-            var div = $("#nroll-plugin");
+            var div = $("#loop-plugin");
 
             // get the Application Plugin data necessary to initialize the Plugin
             function getPluginData() {
