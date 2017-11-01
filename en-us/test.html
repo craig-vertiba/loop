@@ -1,22 +1,21 @@
- <body>
+<body>
    <script>
     (function() {
       var a,b,c,d,e,f,g;
       a = 'a09c0000008s2DQ';
       b = 'https://surveyjs.azureedge.net/0.12.30/survey.jquery.min.js';
-      c = 'https://craig-vertiba.github.io/nroll/content.html';
-      d = 'https://craig-vertiba.github.io/nroll/loop-styles-master.css';
-      // e = 'https://craig-vertiba.github.io/nroll/custom.js';
+      c = 'https://craig-vertiba.github.io/loop/content.html';
+      d = 'https://craig-vertiba.github.io/loop/loop-styles-master.css';
+      // e = 'https://craig-vertiba.github.io/loop/custom.js';
       f = '';
       g = 'https://guarded-tor-53502.herokuapp.com';
       var params = '?a='+a+'&b='+b+'&c='+c+'&d='+d+'&e='+e+'&f='+f+'&g='+g;
       var js = document.createElement('script'); js.type = 'application/javascript'; js.async = true;
-      js.src = 'https://craig-vertiba.github.io/nroll/nroll-plugin.js' + params; js.id = 'nroll-script';
+      js.src = 'https://craig-vertiba.github.io/loop/loop-plugin.js' + params; js.id = 'loop-script';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js,s);
     }) ();
   </script>
-  <!-- End load nroll-script -->
-  <div id="nroll-plugin">
+  <!-- End load loop-script -->
+  <div id="loop-plugin">
   </div>
 </body>
-
