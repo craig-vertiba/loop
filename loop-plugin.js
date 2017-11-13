@@ -55,7 +55,15 @@
     var customCSS_url; // loop Plugin custom javascript url parameter. No Default.
     var customJS_url; // loop Plugin custom javascript url parameter. No Default.
     // the following variables are used to display sites on the map:
-    var locations; // json of sites
+    var locations; // json of sites, mapped as follows: 
+    //  a = Site Name
+    //  b = Latitude
+    //  c = Longitude
+    //  d = Site's Record Id in Salesforce
+    //  e = Site's Street Address
+    //  f = Site's City
+    //  g = Site's State or Province
+    //  h = Site's Zip or Postal Code
     var lastmarker; // user's location marker
     var markers = []; // array of all site markers
     var bounds; // boundary coordinates to enclose all site markers
@@ -1062,12 +1070,12 @@
         bounds = new google.maps.LatLngBounds();
         for (i = 0; i < locations.length; i++) {
             marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+                position: new google.maps.LatLng(locations[i].b, locations[i].c),
                 map: map
             });
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(locations[i].name);
+                    infowindow.setContent(locations[i].a);
                     infowindow.open(map, marker);
                 }
             })(marker, i));
@@ -1087,7 +1095,7 @@
         // add new html to display the list of sites, and add event listeners to all the select buttons
         for (i = 0; i < locations.length; i++) {
             a = i + 1;
-            d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].name+'<br/>'+locations[i].street+'<br/>'+locations[i].city+'<br/>'+locations[i].state+', '+locations[i].zip+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">'+PluginData.selectButtonLabel+'</button></div></div>');
+            d1.insertAdjacentHTML('beforeend', '<hr/><div><div style="width:20%;float:left;min-height:1px">'+a+'</div><div style="width:60%;display:inline-block;text-align:left">'+locations[i].a+'<br/>'+locations[i].e+'<br/>'+locations[i].f+'<br/>'+locations[i].g+', '+locations[i].h+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="location-'+i+'" class="site-selector">'+PluginData.selectButtonLabel+'</button></div></div>');
             document.getElementById('location-' + i).addEventListener('click', function() {
                 siteSelected(resultsMap,this.id);
             });
@@ -1116,7 +1124,7 @@
         // clicked_id should always be in the format location-i.  Slice off 'i' and convert to a Number.
         var i = Number(clicked_id.slice(9));
         // set the selected site variable equal to the salesforce id of the clicked site
-        selected_site = locations[i].id;
+        selected_site = locations[i].d;
 
         // init the jQuery plugin that exposes the AddOrUpdateSite function
         var test = $('node').plugin();
@@ -1130,7 +1138,7 @@
         // delete any html already attached to that element (like a previously selected site)
         d1.innerHTML="";
         // add new html to display the selected site
-        d1.insertAdjacentHTML('beforeend', '<div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div id="selected-site-name" style="width:60%;display:inline-block">'+locations[i].name+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">'+PluginData.changeButtonLabel+'</button></div></div><hr/>');
+        d1.insertAdjacentHTML('beforeend', '<div style="text-align:center"><div style="width:20%;float:left;min-height:1px">'+a+'</div><div id="selected-site-name" style="width:60%;display:inline-block">'+locations[i].a+'</div><div style="width:20%;display:inline-block;min-height:1px;text-align:bottom-right"><button id="change-location">'+PluginData.changeButtonLabel+'</button></div></div><hr/>');
         // add an event listener to the change button
         document.getElementById('change-location').addEventListener('click', function() {
             changeSite(resultsMap);
@@ -1146,7 +1154,7 @@
             lastmarker.setVisible(false);
         }
         // recenter the map on the selected site location
-        resultsMap.setCenter(new google.maps.LatLng(locations[i].lat, locations[i].long));
+        resultsMap.setCenter(new google.maps.LatLng(locations[i].b, locations[i].c));
         // reset the map zoom level
         resultsMap.setZoom(8);
     }
@@ -1176,7 +1184,7 @@
                 resultsMap.setCenter(results[0].geometry.location);
                 // iterate through the site locations and calculate the distance from each to the user's new location
                 for (i = 0; i < locations.length; i++) {
-                    var this_location = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    var this_location = new google.maps.LatLng(locations[i].b, locations[i].c);
                     locations[i].distance = google.maps.geometry.spherical.computeDistanceBetween(results[0].geometry.location, this_location);  
                 }
                 // sort the site locations in ascending order of distance from the user's new location
@@ -1194,13 +1202,13 @@
                 for (i = 0; i < locations.length; i++) {
                     a = i + 1;
                     marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+                        position: new google.maps.LatLng(locations[i].b, locations[i].c),
                         label: a.toString(),
                         map: resultsMap
                     });
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
-                            infowindow.setContent(locations[i].name);
+                            infowindow.setContent(locations[i].a);
                             infowindow.open(resultsMap, marker);
                         }
                     })(marker, i));
