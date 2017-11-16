@@ -597,7 +597,21 @@
                                                 Show( "#ineligible-details-container" );
                                                 break; 
                                             default:
-                                                // "incomplete" - the only other possible value.  
+                                                // "incomplete" - the only other possible value.
+                                                // we may be getting "incomplete" as the result of a failed update of a survey
+                                                // question, possibly due to latency. To compensate for this, we will resubmit
+                                                // the entire set of result data, not just the most recently changed or added 
+                                                // data. To do this, we rebuild eligibilityDataAPI for this API call and start
+                                                // by setting it equal to the full result data set.
+                                                eligibilityDataAPI = eligibilityData;
+                                                // stringify the results data before removing null results
+                                                eligibilityDataAPI = JSON.stringify(eligibilityDataAPI);
+                                                // remove null results from the results data.  This only needs to be done when the
+                                                // survey is complete because SurveyJS adds null comment fields on survey completion.
+                                                eligibilityDataAPI = RemoveNullResults(eligibilityDataAPI);
+                                                // parse the eligibility data back into a json object because that's what we need
+                                                // to pass into the API
+                                                eligibilityDataAPI = JSON.parse(eligibilityDataAPI);  
                                                 $.when( eval(execute_this_function + "()")).done(function(a) {
                                                     // check to see if the survey status is "passed", "failed", or neither, 
                                                     // then show the appropriate page.
